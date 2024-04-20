@@ -1,0 +1,70 @@
+@import '../../../custom-palettes.scss';
+
+.cashier-menu-wrapper {
+    @apply top-0  overflow-y-auto left-0 fixed z-[91];
+    transition: ease-in-out 0.4s;
+    width: 15rem;
+    height: 120vh;
+    padding-top: 1rem;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    // @media (min-width: 320px) and (max-width: 1900px) {
+    //     @apply -left-[320px] box-border;
+    // }
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.mat-datepicker-toggle button{
+    position: absolute !important;
+    right: 0 !important;
+    top: -2rem !important;
+  }
+
+.cashier-menu {
+    & ul {
+        & li {
+            & a {
+                @apply text-[15px] font-semibold text-heading w-full px-5 py-4 rounded block;
+                & .mat-icon {
+                    @apply text-right text-heading text-[20px];
+                    @include lineHeightinherit;
+                    width: 13px !important;
+                }
+            }
+            &:hover > a {
+                @apply bg-grayBorder;
+            }
+            &.mm-active > .has-arrow[aria-expanded="true"] {
+                @apply bg-themeBlue text-white;
+                & path,
+                & rect {
+                    @apply fill-white;
+                }
+            }
+            &.mm-active .mm-active > .has-arrow[aria-expanded="true"] {
+                @apply bg-transparent text-heading hover:bg-grayBorder;
+            }
+            & path,
+            & rect {
+                @apply fill-themeBlue;
+            }
+            & svg {
+                @apply w-7 mr-4 h-[18px];
+                margin-top: -4px !important;
+                margin-left: -4px !important; 
+            }
+        }
+    }
+    .has-arrow[aria-expanded="true"] {
+        @apply bg-themeBlue hover:bg-themeBlue;
+      }
+      .mm-active .mm-show {
+          @apply px-2.5;
+      }
+      .mm-active .mm-show .mm-active .mm-show {
+          @apply px-5;
+      }
+}

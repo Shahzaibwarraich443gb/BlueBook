@@ -1,0 +1,115 @@
+@import '../../../custom-palettes.scss';
+
+.mat-dialog-content{
+    min-width: 67vw ;
+    // min-height: 62vh
+}
+.cashier-popup-inner {
+     
+    @apply p-7;
+	@media (min-width: 768px) and (max-width: 991px) {
+        width: 600px;
+    }
+    @media (min-width: 576px) and (max-width: 767px) {
+		width: 440px;
+	}
+    @media (min-width: 450px) and (max-width: 575px) {
+		width: 350px;
+	}
+    @media (max-width: 449px) {
+		width: 100%;
+	}
+}
+
+//popup close btn
+@include cashierPopupClose;
+@include materialPopupBtn;
+
+//popup common style
+@include popupCommonStyle;
+@include cashierInputFieldStyle;
+@include cashierInputFileFieldStyle;
+
+.cashier-input-field-file-label label {
+	@apply hidden;
+}
+.activeTopMargin {
+    margin-top: 35px;
+}
+
+
+.mat-dialog-content{
+    min-width: 67vw ;
+    // min-height: 62vh
+}
+
+.mat-form-field-infix {
+    display: contents !important;
+}
+
+.datePickerMargin{
+    width: 332px !important;
+}
+input#contact-input{
+    margin-left: 20px !important;
+    padding-left: 10px !important;
+}
+input#email-input{
+    margin-left: 20px !important;
+    padding-left: 10px !important;
+}
+
+.tableWidth {
+    width: 1461px;
+} 
+
+.addAddButtonMarginTop{
+    margin-top:36px
+}
+.addressTableFixWidth{
+    width: 1475px !important;
+
+}
+
+.cashier-salereturns-table-dateJ {
+    min-width: 291px;
+   
+    width: 15%;
+}
+
+.cashier-salereturns-table-warehouseJ {
+  
+    width: 23%;
+}
+
+
+.cashier-salereturns-table-warehouseJ {
+    /* min-width: 564px; */
+    width: 23%;
+}
+
+.categoryButtonMargin {
+    margin-top: 15px;
+    margin-left: -18px;
+}
+
+.marginRadioButtons {
+    margin-top: 28px;
+}
+.salePriceMargin {
+     
+    /* margin-right: -74px; */
+    margin-left: 15pc;
+   cursor: pointer;
+}
+
+.productServiceSubmitBtn:disabled{
+    background-color: #ccc !important;
+}
+
+::ng-deep{
+
+	.ps-tooltip {
+		font-size: 0.9rem;
+	}
+}

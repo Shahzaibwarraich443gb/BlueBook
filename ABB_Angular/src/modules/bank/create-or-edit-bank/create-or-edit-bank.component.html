@@ -1,0 +1,271 @@
+<div [@routerTransition] class="model-input-size">
+    <mat-dialog-content>
+        <div class="popup-body">
+            <div class="cashier-popup-inner">
+                <div class="cashier-popup-header relative 1">
+                    <div class="cashier-popup-header-title">
+
+                        <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+
+                            {{data.id>0?"Edit Bank" : "Add Bank"}}
+
+                        </h2>
+                    </div>
+                    <div class="cashier-popup-header-close absolute -top-4 right-0">
+                        <mat-dialog-actions>
+                            <div class="default-light-theme">
+                                <a href="javascript:void(0)" mat-dialog-close>
+                                    <mat-icon>clear</mat-icon>
+                                </a>
+                            </div>
+                        </mat-dialog-actions>
+                    </div>
+                </div>
+                <form autocomplete="off" #bankForm="ngForm" (ngSubmit)="saveBank()"
+                    style="max-width: 78vw;position: static;">
+                    <mat-tab-group style="font-family: 'Nunito Sans', sans-serif';" #allTabs>
+                        <mat-tab label="Info" mat-tab>
+                            <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0  " style="margin-top: 27px">
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Title of Account
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.titleofAccount" type="text"
+                                                    matInput name="titleofAccount" id="titleofAccount" maxlength="50"
+                                                    #titleofAccountEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Bank Name
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.bankName" type="text" matInput
+                                                    name="bankName" id="bankName" maxlength="50" #bankNameEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            IFSC/Swift Code
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.swiftCode" type="text" matInput
+                                                    name="swiftCode" id="swiftCode" maxlength="50" #swiftCodeEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0  ">
+                                <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Account Number
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.accountNumber" type="text"
+                                                    matInput name="accountNumber" id="accountNumber" maxlength="50"
+                                                    #accountNumberEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Routing #
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.routing" type="text" matInput
+                                                    name="routing" id="routing" maxlength="50" #routingEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0  ">
+                                <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Starting Cheque #
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.startingCheque" type="text"
+                                                    matInput name="startingCheque" id="startingCheque" maxlength="50"
+                                                    #startingChequeEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Open Balance
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditbankDto.openBalance" type="text"
+                                                    matInput name="openBalance" id="openBalance" maxlength="50"
+                                                    #openBalanceEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Address" mat-tab>
+                            <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0  " style="    margin-top: 27px;">
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Address
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditBankAddressDto.address" type="text"
+                                                    matInput name="address" id="address" maxlength="50"
+                                                    #addressNameEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            City
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditBankAddressDto.city" type="text"
+                                                    matInput name="city" id="city" maxlength="50" #cityEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            State
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditBankAddressDto.state" type="text"
+                                                    matInput name="state" id="state" maxlength="50" #stateEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0  ">
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Country
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditBankAddressDto.country" type="text"
+                                                    matInput name="country" id="country" maxlength="50"
+                                                    #countryNameEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                    <div class="cashier-select-field  ">
+                                        <h5 class="text-[15px] text-heading font-semibold ">
+                                            Post Code
+                                        </h5>
+                                        <div class="cashier-input-field-style" style="display: flex">
+                                            <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                                [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <input [(ngModel)]="createOrEditBankAddressDto.postCode" type="text"
+                                                    matInput name="postCode" id="postCode" maxlength="50" #postCodeEl />
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+
+                                </div>
+                            </div>
+
+                        </mat-tab>
+
+
+                    </mat-tab-group>
+                    <!-- button -->
+                    <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 "
+                        *ngIf="createOrEditbankDto.id >0 ? true:false">
+                        <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+                            <div class="cashier-select-field mb-3">
+                                <div class="">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input"
+                                            [(ngModel)]="createOrEditbankDto.isActive" name="isActive" id="isActive" />
+                                        <span style="margin-left: 11px"> Active </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-span-12">
+                        <div class="cashier-managesale-top-btn default-light-theme pt-2.5">
+                            <button [disabled]="!bankForm.form.valid" mat-raised-button type="button" color="accent"
+                                icon="pi pi-times">
+                                Cancel
+                            </button>
+                            <button mat-raised-button color="primary">
+                                Submit
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </mat-dialog-content>
+</div>

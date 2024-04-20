@@ -1,0 +1,160 @@
+<div class="cashier-content-area px-7">
+    <div id="demo" class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
+        <span class="close" routerLink="/app/all-expenses/check">X</span>
+        <div class="grid grid-cols-4 gap-8">
+            <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+                <label>Date*</label>
+                <mat-label></mat-label>
+                <input type="text" placeholder="MM/DD/YYYY" [(ngModel)]="checkDateAlt" matInput maxlength="50"
+                    name="filterIssueDate" [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()"
+                    required />
+                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #releasedAtPicker>
+                </mat-datepicker>
+
+            </mat-form-field>
+
+            <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+                <label>Payee*</label>
+                <mat-label></mat-label>
+                <mat-select [value]="0" [(ngModel)]="payeeId">
+                    <mat-option [value]="0" selected disabled>Select Payee</mat-option>
+                    <mat-option *ngFor="let data of payeeArr" [value]="data.id">{{data.payeeName}} ({{data.payeeType}})</mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+            <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+                <label>Bank*</label>
+                <mat-label></mat-label>
+                <mat-select [value]="0" [(ngModel)]="bankId" (ngModelChange)="onChangeBank()">
+                    <mat-option [value]="0" selected disabled>Select Bank</mat-option>
+                    <mat-option *ngFor="let data of bankArr" [value]="data.id">{{data.bankName}}</mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+            <div class="flex items-center">
+                <span>Balance: {{bankBalance}}</span>
+            </div>
+        </div>
+
+        <div [formGroup]="checkForms">
+            <table class="w-full bankDepositTbl" >
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">#</th>
+                        <th style="width: 20%;">Account</th>
+                        <th style="width: 30%;">Description</th>
+                        <th>Amount</th>
+                        <th>Customer</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <ng-container formArrayName="accountDetails">
+                        <ng-container *ngFor="let formData of accountDetailsFormArray.controls; let i = index">
+                            <tr [formGroup]="formData" >
+                                <td style="text-align: center;">{{i + 1}}</td>
+                                <td>
+                                    <mat-select formControlName="account" [ngClass]="{'invalid-select': formData.get('account').invalid && showError}" [value]="coaArr.length > 0 ? coaArr[0].id : 0"
+                                        class="check-select">
+                                        <mat-option *ngFor="let data of coaArr"
+                                            [value]="data.id">{{data.accountDescription}}</mat-option>
+                                    </mat-select>
+                                </td>
+                                <td><input formControlName="description" [ngClass]="{'invalid-input': formData.get('description').invalid && showError}" /></td>
+                                <td><input formControlName="amount" (keyup)="calculateTotalAmount()" [ngClass]="{'invalid-input': formData.get('amount').invalid && showError}" /></td>
+                                <td>
+                                    <mat-select formControlName="customer" [ngClass]="{'invalid-select': formData.get('customer').invalid && showError}" [value]="0" class="check-select">
+                                        <mat-option [value]="0" selected>Select Customer</mat-option>
+                                        <mat-option *ngFor="let data of customerArr"
+                                            [value]="data.id">{{data.name}}</mat-option>
+                                    </mat-select>
+                                </td>
+                                <td style="text-align: center;"><mat-icon class="hover:cursor-pointer"
+                                        (click)="removeAccountDetail(i)">delete_outline</mat-icon></td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 1rem;">
+                <button class="addCheckBtn" (click)="addAccountDetails()">Add Line</button>
+                <button class="addCheckBtn" (click)="clearAccountDetails()">Clear All Lines</button>
+            </div>
+
+
+            <table class="w-full bankDepositTbl mt-4">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">#</th>
+                        <th style="width: 20%;">Product/Service</th>
+                        <th style="width: 30%;">Description</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+                        <th>Sale Tax</th>
+                        <th>Amount</th>
+                        <th>Customer</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <ng-container formArrayName="productDetails">
+                        <ng-container *ngFor="let formData of productDetailsFormArray.controls; let i = index">
+                            <tr [formGroup]="formData">
+                                <td style="text-align: center;">{{i + 1}}</td>
+                                <td>
+                                    <mat-select  [ngClass]="{'invalid-select': formData.get('product_service').invalid && showError}" formControlName="product_service" (selectionChange)="getproductSaleTax(i)" [value]="0" class="check-select">
+                                        <mat-option [value]="0" selected>Select Product</mat-option>
+                                        <mat-option *ngFor="let data of productArr"
+                                            [value]="data.id">{{data.name}}</mat-option>
+                                    </mat-select>
+                                </td>
+                                <td><input formControlName="description" [ngClass]="{'invalid-input': formData.get('description').invalid && showError}" /></td>
+                                <td><input formControlName="qty" [ngClass]="{'invalid-input': formData.get('qty').invalid && showError}" (keyup)="calculateTotalAmount()"/></td>
+                                <td><input formControlName="rate" [ngClass]="{'invalid-input': formData.get('rate').invalid && showError}" (keyup)="calculateTotalAmount()"/></td>
+                                <td><input formControlName="saleTax" [ngClass]="{'invalid-input': formData.get('saleTax').invalid && showError}" readonly/></td>
+                                <td><input formControlName="amount" [ngClass]="{'invalid-input': formData.get('amount').invalid && showError}"  readonly/></td>
+                                <td>
+                                    <mat-select formControlName="customer" [ngClass]="{'invalid-select': formData.get('customer').invalid && showError}" [value]="0" class="check-select">
+                                        <mat-option [value]="0" selected>Select Customer</mat-option>
+                                        <mat-option *ngFor="let data of customerArr"
+                                            [value]="data.id">{{data.name}}</mat-option>
+                                    </mat-select>
+                                </td>
+                                <td style="text-align: center;"><mat-icon class="hover:cursor-pointer"
+                                        (click)="removeProductDetail(i)">delete_outline</mat-icon></td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <div class="flex items-center" style="margin-top: 1rem;">
+                <button class="addCheckBtn" (click)="addProductDetails()">Add Line</button>
+                <button class="addCheckBtn" (click)="clearProductDetails()">Clear All Lines</button>
+                <div class="font-bold ml-auto text-xl">Total: ${{total.toFixed(2)}}</div>
+            </div>
+
+
+        </div>
+
+
+        <div class="flex items-center mt-4 mb-8" style="height: 5rem;">
+            <div style="width: 70%; height: 100%;">
+                <label>Notes</label>
+                <textarea style="border: 1px solid #ccc;" class="w-full h-full p-2" [(ngModel)]="notes"></textarea>
+            </div>
+            <div class="ml-auto" style="margin-top: auto; margin-bottom: auto; transform: translateY(55%);">
+                <button mat-raised-button color="accent" routerLink="/app/check">Cancel</button>
+                <button mat-raised-button color="primary" style="margin-left: 1rem" (click)="saveCheck(true)">Save & Print</button>
+                <button mat-raised-button color="primary" style="margin-left: 1rem" (click)="saveCheck(false)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

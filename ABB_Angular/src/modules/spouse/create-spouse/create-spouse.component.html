@@ -1,0 +1,311 @@
+<div [@routerTransition] class="model-input-size">
+ 
+ <mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner">
+      <div class="cashier-popup-header relative 1">
+        <div class="cashier-popup-header-title">
+          <h4 class="text-[20px] text-heading font-bold">
+            {{ data.id ? "Edit Spouse" : "Add Spouse" }}
+          </h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <form
+        autocomplete="off"
+        #createOrEditSpouseForm="ngForm"
+        (ngSubmit)="save()"
+      >
+        <div class="grid grid-cols-12 gap-x-7 mt-2 maxSm:gap-x-0">
+          <div class="md:col-span-6 sm:col-span-12 ">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">
+                First Name    <span style="color:red">*</span>
+              </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput 
+                    name="firstName"
+                    id="firstName"
+                    required
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    maxlength="32"
+                    [(ngModel)]="createOrEditSpouseDto.firstName"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">Last Name    <span style="color:red">*</span></h5>
+              <div  >
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput 
+                    name="lastName"
+                    [(ngModel)]="createOrEditSpouseDto.lastName"
+                    id="lastName"
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    required
+                    maxlength="32" 
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">
+             SSN   <span style="color:red">*</span>
+              </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput 
+                    name="ssn"
+                    id="ssn"
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    required
+                    maxlength="32"  
+                    [(ngModel)]="createOrEditSpouseDto.ssn"
+
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">Spouse Suffix   <span style="color:red">*</span></h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    [placeholder]="'Spouse Suffix'"
+                    name="spouseSuffix"
+                    id="spouseSuffix"
+                    [(ngModel)]="createOrEditSpouseDto.spouseSuffix"
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    required
+                    maxlength="32" 
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">Spouse Job Description   </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"></mat-label>
+                  <textarea
+                      required
+                      (keypress)="firstSpaceNotAllowed($event)"
+                    matInput
+                    [(ngModel)]="createOrEditSpouseDto.spouseJobDescription"
+                    name="spouseJobDescription"
+                    id="spouseJobDescription"
+                    maxlength="2000" 
+                  ></textarea>
+                </mat-form-field> 
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">Date Of Birth  <span style="color:red">*</span></h5>
+              <div style="
+              margin-top: 18px;
+          "> 
+            
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"></mat-label>
+                  <input   
+                  (keypress)="firstSpaceNotAllowed($event)"
+                  
+                matInput   required id="dateOfBirth" name="dateOfBirth" [(ngModel)]="createOrEditSpouseDto.dateOfBirth"
+                        [matDatepicker]="releasedAtPicker">
+                  <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+
+                  </mat-datepicker-toggle>
+
+                  <mat-datepicker #releasedAtPicker>
+
+                  </mat-datepicker>
+
+              </mat-form-field>
+ 
+              </div>
+            </div>
+          </div>
+      
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">Email   <span style="color:red">*</span></h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    type="email"
+                       (keypress)="firstSpaceNotAllowed($event)"
+                    matInput 
+                    name="email"
+                    id="email"
+                    required
+                    maxlength="32"
+                    [(ngModel)]="createOrEditSpouseDto.email"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Job Titles   <span style="color:red">*</span>
+              </h5>
+              <div class="  " style="display: flex    ">
+
+                <mat-select  
+                [(value)]="createOrEditSpouseDto.jobTitleId"
+                name="createOrEditSpouseDto.jobTitleId"
+               required
+                style="  border-bottom: 1px solid;">
+                <mat-option
+                *ngFor="let  item of jobTitleDto"
+                [value]="item.id"
+                >{{ item.name }}</mat-option
+              >
+            </mat-select>
+
+ 
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Language    <span style="color:red">*</span>
+              </h5>
+              <div class="  " style="display: flex ;  margin-top: 20px;">
+
+                <mat-select 
+                placeholder="Language "
+                [(value)]="createOrEditSpouseDto.languageId"
+                name="createOrEditSpouseDto.languageId"
+               required
+                style="  border-bottom: 1px solid;">
+                <mat-option
+                *ngFor="let  item of languageDto"
+                [value]="item.id"
+                required
+                >{{ item.name }}</mat-option
+              >
+            </mat-select>
+
+          
+       
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field ">
+              <h5 class="text-[15px] text-heading font-semibold">
+                Ethnicity    <span style="color:red">*</span>
+              </h5> 
+              <div class="  " style="display: flex ;  margin-top: 20px;">
+
+                
+                <mat-select 
+                placeholder="Ethnicity "
+                [(value)]="createOrEditSpouseDto.ethnicityId"
+                name="createOrEditSpouseDto.ethnicityId"
+               required
+                style="  border-bottom: 1px solid;">
+                <mat-option
+                    *ngFor="let  item of ethnicityDto"
+                    [value]="item.id"
+                    >{{ item.name }}</mat-option
+                  >
+                </mat-select>
+       
+              
+         
+ 
+
+ 
+       
+              </div>
+            </div>
+          </div> 
+          <div class=" marginTopActiveButton md:col-span-12 sm:col-span-12 " *ngIf="createOrEditSpouseDto.id >0 ? true:false"> 
+            <div class="cashier-select-field ">
+              <div class="">
+                <div
+                  
+                  class="custom-control custom-checkbox"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [(ngModel)]="createOrEditSpouseDto.isActive"
+                    name="isActive"
+                    id="isActive"
+                  />
+                  <span style="margin-left: 11px"> Active </span>
+                </div>
+              </div>
+            </div>
+          </div>  
+
+          <div class="md:col-span-6 mt-5 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button
+                type="button"
+                mat-raised-button
+                color="accent"
+                (click)="hideDialog()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+
+
+
+<!-- //isactive code -->
+         
+
+          <div class="md:col-span-6  mt-5 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button 
+              [disabled]="!createOrEditSpouseForm.form.valid"
+              type="submit" mat-raised-button color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+</div>

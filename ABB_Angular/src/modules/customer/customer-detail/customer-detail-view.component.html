@@ -1,0 +1,223 @@
+<ng-template #serviceModal>
+  <div mat-dialog-title>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Service Types</h2>
+
+      <button mat-mini-fab mat-button mat-dialog-close color="warn" title="close">
+        <i class="fa fa-times" style="color: #fff"></i>
+      </button>
+    </div>
+  </div>
+  <mat-dialog-content>
+    <div class="flex flex-col">
+      <mat-form-field class="w-1/2">
+        <mat-label>Select Service Type</mat-label>
+        <mat-select [(ngModel)]="serviceTypeVal">
+          <mat-option *ngFor="let data of serviceTypes; let i = index" [value]="i + 1">
+            {{data}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button [disabled]="serviceTypeVal == 0" (click)="invokeService()" class=" mb-3 mt-2 ml-auto"
+        style="margin-left: auto;" mat-raised-button color="primary">
+        Save
+      </button>
+    </div>
+  </mat-dialog-content>
+</ng-template>
+<div class="cashier-breadcrumb-area px-7 py-9 bg-white mb-5">
+  <div class="cashier-breadcrumb-area-inner px-0.5">
+    <h5 class="text-[20px] text-heading font-bold mb-3">Customers</h5>
+    <div class="cashier-breadcrumb-area-inner-wrap">
+      <span class="text-[14px] text-gray font-normal inline-block mr-2">Customers</span>
+      <span class="text-[12px] text-bodyText font-normal inline-block mr-2 translate-y-0"><i
+          class="far fa-chevron-right"></i></span>
+      <span class="text-[14px] text-gray font-normal inline-block mr-2">Customers</span>
+    </div>
+  </div>
+</div>
+<div class="cashier-content-area">
+  <div class="cashier-salereturns-area bg-white custom-shadow rounded-lg mb-5" 
+    style="padding-bottom: 8rem; padding: 0.4rem !important; ">
+    <form autocomplete="off">
+      <mat-tab-group color="transparent" (selectedTabChange)="tabChange($event)">
+
+        <mat-tab label="Info">
+          <app-customer-info-view #CustomerInfoViewComponent (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <!-- <mat-tab label="Detail" [disabled]="activeTab=='Info'||!customerId"> -->
+        <mat-tab label="Detail">
+          <app-customer-dtl #CustomerDtlViewComponent [comment]="comment" (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <mat-tab label="Password">
+          <app-customer-passwords-view #customerPassViewComponent [comment]="comment" (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <mat-tab label="License">
+          <app-customer-license-view #customerLicenseViewComponent [comment]="comment" (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <mat-tab label="Contact info">
+          <app-customer-contact-info-view #customerContactInfoViewComponent [comment]="comment" [totalBalance]="totalBalance"
+            (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+        <mat-tab label="Address">
+          <app-customer-address-view #customerAddressViewComponent [comment]="comment" (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+        <mat-tab label="To-do List">
+          <app-customer-todo-list-view #customerTodoListViewComponent [comment]="comment" (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+        <mat-tab label="CRM">
+          <app-customer-crm-view #customerCRMViewComponent (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+        <mat-tab label="Attachments">
+          <app-customer-attachments-view #customerAttachmentViewComponent (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+        <mat-tab label="Diary">
+          <app-customer-diary-view #customerDiaryViewComponent (onSave)="moveNextTab($event)" [totalBalance]="totalBalance"
+            (activeTab)="activeTab=$event" />
+        </mat-tab>
+
+      </mat-tab-group>
+
+      <div class="salesTaxContainer">
+        <div class="customerBtn" (click)="setService($event, 0)" class="active">Statement</div>
+        <div class="customerBtn" (click)="setService($event, 1)" *ngIf="includedServiceArr.indexOf(1) != -1">Corporate Tax</div>
+        <div class="customerBtn" (click)="setService($event, 2)" *ngIf="includedServiceArr.indexOf(2) != -1">Personal Tax</div>
+        <div class="customerBtn" (click)="setService($event, 3)" *ngIf="includedServiceArr.indexOf(3) != -1">Sales Tax</div>
+        <button class="customerBtn" (click)="openServiceModal()" style="display: flex; margin-left: auto; padding: 0.5rem; width: 11rem; justify-content: center; align-items: center;" mat-raised-button
+          color="primary">Add Service</button>
+
+      </div>
+
+      <div *ngIf="serviceTypeKey == 0">
+        <mat-form-field style="float: right; margin-right: 1rem;">
+          <mat-label>Search Transactions</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+        </mat-form-field>
+        <div class="col-span-12 mt-4">
+          <table class="transactionTbl" mat-table matSort matSortDirection="desc"
+            (matSortChange)="sortTransactions($event)" [dataSource]="dataSource" class="mat-elevation-z8"
+            style="width: 100%">
+            <ng-container matColumnDef="Date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Date"
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Date </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.invoiceDateAlt}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Type </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Invoice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Invoice #</th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.invoiceCode}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Product">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Product </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.product}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Description </th>
+              <td style="width: 300px;" (dblclick)="InvoiceDetail(element)" mat-cell *matCellDef="let element">
+                {{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="CSR">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> CSR </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.csr}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Balance">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Balance </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.balance}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Total">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Total </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.total}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"> Status </th>
+              <td mat-cell (dblclick)="InvoiceDetail(element)" *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+              <th mat-header-cell mat-sort-header="action" *matHeaderCellDef
+                style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;text-align: center;" class="actionTh">
+                Action</th>
+              <td mat-cell *matCellDef="let element" class="header-text">
+                <div class="cashier-salereturns-table-actionJ"
+                  style="width: 8rem; display: flex;margin-left: auto; margin-right: auto;">
+                  <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style"
+                    aria-label="Example icon-button with a menu">
+                    Action <mat-icon>arrow_drop_down</mat-icon>
+                  </button>
+                  <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="InvoiceDetail(element)" *ngIf="isDetailEditable(element)">
+                      <img src="../../../../assets/img/icon/search-file.png" alt="icon not found" />
+                      <span>Detail</span>
+                    </button>
+                    <button mat-menu-item (click)="UpdateInvoice(element)" *ngIf="isInvoiceEditable(element)">
+                      <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+                      <span>Edit</span>
+                    </button>
+
+                    <button mat-menu-item *ngIf="isPrintEditable(element)" (click)="invoicePrint(element)">
+                      <img src="../../../../assets/img/icon/printer.png" alt="icon not found" />
+                      <span>Print</span>
+                    </button>
+                    <button mat-menu-item (click)="DeleteInvoice(element)" *ngIf="isDeleteEditable(element)">
+                      <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+                      <span>Delete</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="viewHistoryModal(element)">
+                      <img src="../../../../assets/img/icon/history.png" alt="icon not found" />
+                      <span>History</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator #MatPaginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </form>
+
+
+    <app-sales-tax *ngIf="serviceTypeKey == 3" [customerId]="customerId"></app-sales-tax>
+    <app-personal-tax *ngIf="serviceTypeKey == 2" [customerId]="customerId"></app-personal-tax>
+    <app-corporate-tax *ngIf="serviceTypeKey == 1" [customerId]="customerId"></app-corporate-tax>
+  </div>
+
+</div>

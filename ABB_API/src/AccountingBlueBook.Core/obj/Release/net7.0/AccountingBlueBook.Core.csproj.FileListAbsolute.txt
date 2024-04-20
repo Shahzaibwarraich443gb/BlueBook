@@ -1,0 +1,12 @@
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\bin\Release\net7.0\AccountingBlueBook.Core.deps.json
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\bin\Release\net7.0\AccountingBlueBook.Core.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\bin\Release\net7.0\AccountingBlueBook.Core.pdb
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.csproj.AssemblyReference.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.AssemblyInfoInputs.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.AssemblyInfo.cs
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.csproj.CoreCompileInputs.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\refint\AccountingBlueBook.Core.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\AccountingBlueBook.Core.pdb
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Core\obj\Release\net7.0\ref\AccountingBlueBook.Core.dll

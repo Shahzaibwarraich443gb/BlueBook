@@ -1,0 +1,37 @@
+@import '../../custom-palettes.scss';
+
+.cashier-pagination {
+    ul {
+        @apply inline-flex border border-solid border-grayBorder;
+        li {
+            a {
+                @apply h-10 w-10 text-center text-[14px] font-normal text-bodyText leading-10 inline-block border-r border-solid border-grayBorder;
+                &.active {
+                    @apply bg-themeBlue;
+                    @apply border-themeBlue;
+                    @apply text-white;
+                }
+            }
+            &:last-child {
+                a {
+                    @apply border-r-0;
+                }
+            }
+            .material-icons {
+                @apply text-[15px] leading-10;
+            }
+        }
+    }
+}
+.cashier-pagination-sort {
+    @include cashierSelectFieldStyle;
+    .mat-select-arrow-wrapper {
+        @apply translate-y-[-1px];
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+        @apply pt-[11px];
+    }
+}
+.cashier-pagination-sort .cashier-select-field-style .mat-form-field-flex {
+    @apply bg-white h-10 px-3;
+}

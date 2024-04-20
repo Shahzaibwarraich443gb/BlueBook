@@ -1,0 +1,96 @@
+<div class="cashier-content-area px-7">
+  <div class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
+    <div class="grid grid-rows-3 grid-flow-col gap-4">
+      <div class="row-span-3" style="width: 20vw;">
+        <mat-card class="user-card">
+          <mat-card-content class="user-card-content">
+            <!-- User Logo (Empty div for the sake of layout) -->
+            <div class="user-logo">
+
+
+              <i class="fas fa-user"></i>
+            </div>
+
+            <!-- User Details -->
+            <div class="user-details">
+              <h2 class="user-name">{{ adminUser.userName }}</h2>
+              <p class="user-email">{{ adminUser.emailAddress }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+
+
+        <div class="bg- rounded-md shadow-md p-2 mt-4 grid grid-cols-3 gap-8">
+          <div class="user-box" *ngFor="let user of users"
+            [ngClass]="{ 'user-white': user.logic === 'green', 'user-red': user.logic === 'red' }">
+            <span class="status-circle"
+              [ngClass]="{ 'circle-green': user.logic === 'green', 'circle-red': user.logic === 'red' }"></span>
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col-span-2">
+
+        <div class="grid grid-cols-4 gap-4 cardContainerPersonalInfo">
+          <div [ngStyle]="{background: selected === 'personalInformation' ? '#3f51b5' : 'white'}" class="card"
+            (click)="selectedCard('personalInformation')">
+            <div style="text-align: center">
+              <i style="font-size: 20px" class="fas fa-address-card"
+                [ngStyle]="{color: selected === 'personalInformation' ? 'white' : '#4cb050'}"></i>
+            </div>
+            <div class="p-2" style="text-align: center;  color: white"
+              [ngStyle]="{color: selected === 'personalInformation' ? 'white' : 'black'}">
+              Personal Information
+            </div>
+          </div>
+          <div>
+            <div class="card" [ngStyle]="{background: selected === 'billingInformation' ? '#3f51b5' : 'white'}"
+              (click)="selectedCard('billingInformation')">
+              <div style="text-align: center">
+                <i style="font-size: 20px" class="fas fa-file"
+                  [ngStyle]="{color: selected === 'billingInformation' ? 'white' : 'orange'}"></i>
+              </div>
+              <div style="text-align: center"
+                [ngStyle]="{color: selected === 'billingInformation' ? 'white' : 'black'}">
+                <h5>Contact Details</h5>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" [ngStyle]="{background: selected === 'changePassword' ? '#3f51b5' : 'white'}"
+              (click)="selectedCard('changePassword')">
+              <div style="text-align: center">
+                <i [ngStyle]="{color: selected === 'changePassword' ? 'white' : ' #2196f3'}" style="font-size: 20px"
+                  class="fas fa-user-secret"></i>
+              </div>
+              <div style="text-align: center" [ngStyle]="{color: selected === 'changePassword' ? 'white' : 'black'}">
+                <h5>Change Password</h5>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" [ngStyle]="{background: selected === 'companyDetail' ? '#3f51b5' : 'white'}"
+              (click)="selectedCard('companyDetail')">
+              <div style="text-align: center">
+                <i [ngStyle]="{color: selected === 'companyDetail' ? 'white' : ' #2196f3'}" style="font-size: 20px"
+                  class="fas fa-user-secret"></i>
+              </div>
+              <div style="text-align: center" [ngStyle]="{color: selected === 'companyDetail' ? 'white' : 'black'}">
+                <h5>Company Detail</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-personal-information #personalInformationModel></app-personal-information>
+        <app-billing-information #billingInformationModel></app-billing-information>
+        <app-change-password #changePasswordModal></app-change-password>
+        <app-Company-Details #companyDetailModal></app-Company-Details>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,371 @@
+
+<div [@routerTransition] class="model-input-size">
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner">
+      <div class="cashier-popup-header relative mb-11">
+        <div class="cashier-popup-header-title">
+          <h4 class="text-[20px] text-heading font-bold">
+            {{ data.id ? "Edit Sale Person" : "Add Sale Person" }}
+          </h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <form
+        autocomplete="off"
+        #createOrEditSalePersonForm="ngForm"
+        (ngSubmit)="save()"
+      >
+        <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">
+                Name
+                <!-- <span style="color: red">*</span> -->
+              </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="name"
+                    id="name"
+                    (keypress)="firstSpaceNotAllowed($event)" 
+                    maxlength="32"
+                    [(ngModel)]="createOrEditSalesPersonTypeDto.name"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">Code</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="code"
+                    (keypress)="numberOnly($event)"
+                    id="code" 
+                    maxlength="32"
+                    [(ngModel)]="createOrEditSalesPersonTypeDto.code"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">
+                Address
+              </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="completeAddress"
+                    id="completeAddress" 
+                    (keypress)="firstSpaceNotAllowed($event)" 
+                    maxlength="32"
+                    [(ngModel)]="createOrUpdateAddress.completeAddress"
+
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">Fax</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="fax"
+                    id="fax"
+                    (keypress)="firstSpaceNotAllowed($event)" 
+                    maxlength="32"
+                    [(ngModel)]="createOrUpdateAddress.fax"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">City</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    name="city"
+                    id="city" 
+                    maxlength="32"
+                    [(ngModel)]="createOrUpdateAddress.city"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">State</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="state"
+                    id="fax" 
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    maxlength="32"
+                    [(ngModel)]="createOrUpdateAddress.state"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">Zip</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="zip"
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    id="zip" 
+                    maxlength="32"
+                    [(ngModel)]="
+                      createOrUpdateAddress.postCode
+                    "
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">
+                Phone#<span style="
+                color: red;
+            ">*</span>
+              </h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    matInput
+                    name="phone"
+                    required
+                    (keypress)="numberOnly($event)"
+                    id="phone" 
+                    maxlength="32"
+                    [(ngModel)]="createOrUpdatePhoneDto.number"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold  ">Email</h5>
+              <div class="">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input
+                    type="email"
+                    matInput
+                    (keypress)="firstSpaceNotAllowed($event)"
+                    name="email"
+                    id="email" 
+                    maxlength="32"
+                    [(ngModel)]="createOrEditSalesPersonTypeDto.email"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+    
+          <div class="md:col-span-6 sm:col-span-12" *ngIf="createOrEditSalesPersonTypeDto.id >0 ? true:false">
+            <div class="cashier-select-field  mb-1">
+              <div class="">
+                <div
+                
+                  class="activeTopMargin custom-control custom-checkbox"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    [(ngModel)]="createOrEditSalesPersonTypeDto.isActive"
+                    name="isActive"
+                    id="isActive"
+                  />
+                  <span style="margin-left: 11px"> Active </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12" *ngIf="createOrEditSalesPersonTypeDto.id >0 ? false:true">
+          
+          </div>
+          <!-- <div class="col-span-12">
+          <div class="cashier-popup-btn default-light-theme pt-1.5">
+            <button type="submit" mat-raised-button color="primary">Pay Now</button>
+          </div>
+        </div> -->
+      
+          <div class="md:col-span-6 sm:col-span-12"  >
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button
+                type="button"
+                mat-raised-button
+                color="accent"
+                (click)="hideDialog()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button          [disabled]="!createOrEditSalePersonForm.form.valid" type="submit" mat-raised-button color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+</div>
+<!-- <mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner">
+      <div class="cashier-popup-header relative mb-11">
+        <div class="cashier-popup-header-title">
+          <h4 class="text-[20px] text-heading font-bold"> {{ data.id ? "Edit User": "Add User" }}</h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <form autocomplete="off" #createOrEditUserForm="ngForm" (ngSubmit)="save()">
+        <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Name</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input type="text" matInput name="name" id="name" required maxlength="32" [(ngModel)]="user.name"
+                    #nameModel="ngModel" #nameEl placeholder="Jhon" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Surname</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Surname</mat-label>
+                  <input type="text" matInput name="surname" id="surname" required maxlength="32"
+                    [(ngModel)]="user.surname" #surnameModel="ngModel" #surnameEl placeholder="Doe" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Email</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input type="email" matInput name="emailAddress" id="emailAddress" required maxlength="256"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" [(ngModel)]="user.emailAddress"
+                    #emailAddressModel="ngModel" #emailAddressEl [placeholder]="'info@example.com'" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Password</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" name="password" id="password" required
+                    maxlength="32" validateEqual="confirmPassword" reverse="true"
+                    pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$"
+                    (keyup)="match(user.password, confirmPassword)" [(ngModel)]="user.password" #passwordModel="ngModel"
+                    #passwordEl />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Confirm Password</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" name="confirmPassword"
+                    id="confirmPassword" required (keyup)="match(user.password, confirmPassword)" maxlength="32"
+                    validateEqual="password" reverse="false" ngModel #confirmPasswordModel="ngModel"
+                    #confirmPasswordEl />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-12">
+            <div class="cashier-select-field  mb-1">
+              <h5 class="text-[15px] text-heading font-semibold mb-3"></h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <mat-checkbox class="example-margin">Is Active</mat-checkbox>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button type="button" mat-raised-button color="accent" (click)="hideDialog()">Cancel</button>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button type="submit" mat-raised-button color="primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>  -->

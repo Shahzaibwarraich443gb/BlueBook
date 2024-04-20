@@ -1,0 +1,308 @@
+<form #personalTaxForm="ngForm" class="salesTaxContainer">
+
+    <div>
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Financial Year*</label>
+            <mat-select [(ngModel)]="personalTaxObj.financialYear" (ngModelChange)="reRender()" name="financialYear"
+                required>
+                <mat-option *ngFor="let data of financialYearArr" [value]="data">{{data}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-5 gap-x-4 gap-y-0 w-full">
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Tax Filling Status*</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="personalTaxObj.taxFillingStatus" name="taxFillingStatus" required>
+                <mat-option *ngFor="let data of taxFillingStatus;" [value]="data.value">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Form*</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="personalTaxObj.form" name="form" required>
+                <mat-option *ngFor="let data of formList;" [value]="data">
+                    {{data}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Tenure*</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="personalTaxObj.tenure" name="tenure" required>
+                <mat-option *ngFor="let data of tenureArr;" [value]="data.value">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <div class="flex flex-col p-3 justify-center" style="margin-top: -2rem;">
+            <label style="font-weight: 700;">Start and End Date</label>
+            <div>{{startEndDate}}</div>
+        </div>
+
+        <div class="flex flex-col p-3 justify-center" style="margin-top: -2rem;">
+            <label style="font-weight: 700;">Due Date</label>
+            <div>{{dueDate}}</div>
+        </div>
+
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Filer's Ocupation*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.filerOccupation" name="filerOccupation"
+                maxlength="50" required />
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Spouse's Ocupation</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.spouse.spouseJobDescription" name="spouseOccupation"
+                maxlength="50" required />
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Bank Name*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.bankName" maxlength="100" name="bankName"
+                required />
+        </mat-form-field>
+
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Routing Number*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.routingNumber" maxlength="50" name="routingNumber"
+                required />
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Account Number*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.accountNumber" maxlength="50" name="accountNumber"
+                required />
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Filer's License Number*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.filersLicenseNumber" name="filersLicenseNumber"
+                maxlength="50" required />
+        </mat-form-field>
+
+        <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+            <label>Issue Date*</label>
+            <mat-label></mat-label>
+            <input type="text" placeholder="MM/DD/YYYY" [(ngModel)]="issueDateAlt"
+                (ngModelChange)="onDateChange('issueDate')" matInput maxlength="50" name="filterIssueDate"
+                [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()" required />
+            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #releasedAtPicker>
+            </mat-datepicker>
+
+        </mat-form-field>
+
+        <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+            <label>Expiry Date*</label>
+            <mat-label></mat-label>
+            <input type="text" placeholder="MM/DD/YYYY" [(ngModel)]="expiryDateAlt"
+                (ngModelChange)="onDateChange('expiryDate')" matInput maxlength="50" name="filersExpiryDate"
+                [matDatepicker]="releasedAtPicker1" (focus)="releasedAtPicker1.open()" required />
+            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker1">
+            </mat-datepicker-toggle>
+            <mat-datepicker #releasedAtPicker1>
+            </mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Issue State*</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="personalTaxObj.issueState" name="filersIssueState" required>
+                <mat-option *ngFor="let item of dlStateArr" [value]="item.id">
+                    {{item.stateName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>3-Digit Code*</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.threeDigitCode" name="filersThreeDigitCode"
+                maxlength='3' required />
+        </mat-form-field>
+
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Spouse's License Number</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.spouse.drivingLicense" name="spouseLicenseNumber"
+                maxlength="50" />
+        </mat-form-field>
+
+        <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+            <label>Issue Date</label>
+            <mat-label></mat-label>
+            <input type="text" placeholder="MM/DD/YYYY" [(ngModel)]="spouseIssueDateAlt"
+                (ngModelChange)="onSpouseDateChange('issueDate')" matInput maxlength="50"
+                [matDatepicker]="releasedAtPicker3" (focus)="releasedAtPicker3.open()" name="spouseIssueDate" />
+            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker3">
+            </mat-datepicker-toggle>
+            <mat-datepicker #releasedAtPicker3>
+            </mat-datepicker>
+
+        </mat-form-field>
+
+        <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+            <label>Expiry Date</label>
+            <mat-label></mat-label>
+            <input type="text" placeholder="MM/DD/YYYY" [(ngModel)]="SpouseExpiryDateAlt"
+                (ngModelChange)="onSpouseDateChange('expiryDate')" matInput maxlength="50"
+                [matDatepicker]="releasedAtPicker4" (focus)="releasedAtPicker4.open()" name="spouseExpiryDate" />
+            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker4">
+            </mat-datepicker-toggle>
+            <mat-datepicker #releasedAtPicker4>
+            </mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>Issue State</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="personalTaxObj.spouse.dlState" name="spouseIssueState">
+                <mat-option *ngFor="let item of dlStateArr" [value]="item.id">
+                    {{item.stateName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="true">
+            <label>3-Digit Code</label>
+            <mat-label></mat-label>
+            <input matInput type="text" [(ngModel)]="personalTaxObj.spouse.code" name="spouseThreeDigitCode"
+                maxlength='3' />
+        </mat-form-field>
+
+    </div>
+
+    <div class="mt-4 grid grid-cols-1 gap-4" [formGroup]="tblForms">
+        <table class="bankDepositTbl">
+            <thead>
+                <tr>
+                    <th colspan="5" class="text-center">Dependent's Detail</th>
+                </tr>
+                <tr>
+                    <th>Sr. No</th>
+                    <th>Dependent Name</th>
+                    <th>SSN</th>
+                    <th>Relation</th>
+                    <th>DOB</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container formArrayName="dependendentDetail">
+                    <ng-container *ngFor="let dependentForm of dependent.controls; let i = index">
+                        <tr [formGroup]="dependentForm">
+                            <td>{{i + 1}}</td>
+                            <td><input (keyup)="addDependent(i)" formControlName="dependentName" /></td>
+                            <td><input (keyup)="addDependent(i)" formControlName="ssn" /></td>
+                            <td><input (keyup)="addDependent(i)" formControlName="relation" /></td>
+                            <td>
+                                <div style="width: 100%; height: 100%; display: flex; align-items: center;">
+                                    <mat-form-field appearance="none" style="height: 0px; width: 94%">
+                                        <mat-label></mat-label>
+                                        <input style="margin-top: -1rem; width: 100%" formControlName="dob" type="text"
+                                            placeholder="MM/DD/YYYY" [(ngModel)]="DependentDobDateAlt[i]"
+                                            (ngModelChange)="onDependentDateChange(i)" matInput maxlength="50"
+                                            [matDatepicker]="releasedAtPicker5" (focus)="releasedAtPicker5.open()" />
+                                        <mat-datepicker-toggle class="ptaxDateToggle" matSuffix [for]="releasedAtPicker5">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #releasedAtPicker5>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <table class="bankDepositTbl">
+            <thead>
+                <tr>
+                    <th colspan="5" class="text-center">Income Detail</th>
+                </tr>
+                <tr>
+                    <th>Sr. No</th>
+                    <th>Income Description</th>
+                    <th>Amount</th>
+                    <th>Federal-WH</th>
+                    <th>State-WH</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container formArrayName="incomeDetail">
+                    <ng-container *ngFor="let incomeDetForm of incomeDetails.controls; let i = index">
+                        <tr [formGroup]="incomeDetForm">
+                            <td>{{i + 1}}</td>
+                            <td>
+                                <mat-form-field appearance="none" style="height: 0px; width: 100%">
+                                    <mat-label></mat-label>
+                                    <mat-select formControlName="incomeDescription"
+                                        (selectionChange)="addIncomeDetail(i)" [value]="incomeDescArr[0]"
+                                        style="border: 1px solid #ccc; padding: 0.6rem; top: -0.8rem; position: absolute; width: 100%">
+                                        <mat-option *ngFor="let item of incomeDescArr" [value]="item">
+                                            {{item}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td><input (keyup)="addIncomeDetail(i)" formControlName="amount" /></td>
+                            <td><input (keyup)="addIncomeDetail(i)" formControlName="federalWH" /></td>
+                            <td><input (keyup)="addIncomeDetail(i)" formControlName="stateWH" /></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <table class="bankDepositTbl" *ngIf="showOtherExpense">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Other Expense (In case of rental income)</th>
+                </tr>
+                <tr>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container formArrayName="otherExpense">
+                    <ng-container *ngFor="let otherExpForm of otherExpenses.controls; let i = index">
+                        <tr [formGroup]="otherExpForm">
+                            <td><input formControlName="expenseName" class="otherExpenseName"
+                                    (input)="calculateOtherExpense()" /></td>
+                            <td><input formControlName="expenseAmount" class="otherExpenseAmount"
+                                    (input)="calculateOtherExpense()" /></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-2" *ngIf="showOtherExpense">Total Other Expenses: $ {{totalOtherExpense}}</div>
+    <div class="flex w-full mt-4">
+        <button *ngIf="showOtherExpense" class="mr-auto p-2" (click)="addOtherExpense()" mat-raised-button
+            color="primary">Add Other Expense</button>
+
+        <button [disabled]="!personalTaxForm.valid" id="personalTaxBtn" (click)="savePersonalTax()"
+            style="margin-left: auto" class="bg-green-500 text-white p-2" mat-raised-button>Save Personal Tax</button>
+    </div>
+
+</form>

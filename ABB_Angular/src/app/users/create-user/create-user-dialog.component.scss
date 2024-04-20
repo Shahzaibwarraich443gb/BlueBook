@@ -1,0 +1,41 @@
+@import '../../../custom-palettes.scss';
+
+:host ::ng-deep {
+    .p-dropdown {
+        width: 100% !important;
+    }
+}
+
+.cashier-popup-inner {
+    width: 700px;
+    @apply p-7;
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        width: 600px;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+        width: 440px;
+    }
+
+    @media (min-width: 450px) and (max-width: 575px) {
+        width: 350px;
+    }
+
+    @media (max-width: 449px) {
+        width: 100%;
+    }
+}
+
+//popup close btn
+@include cashierPopupClose;
+@include materialPopupBtn;
+
+//popup common style
+@include popupCommonStyle;
+@include cashierInputFieldStyle;
+@include cashierInputFileFieldStyle;
+
+.cashier-input-field-file-label label {
+    @apply hidden;
+}

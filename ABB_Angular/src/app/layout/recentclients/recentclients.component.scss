@@ -1,0 +1,33 @@
+@import '../../../custom-palettes.scss';
+
+.cashier-dashboard-supplier {
+    .cashier-dashboard-supplier-list-name {
+        @apply h-full flex-col justify-center flex w-[64%] min-w-[180px];
+        @media (min-width: 1401px) and (max-width: 1600px) {
+            min-width: 145px;
+          }
+          @media (min-width: 1201px) and (max-width: 1400px) {
+            @apply w-[145px] min-w-[145px] pl-4;
+          }
+          @media (min-width: 992px) and (max-width: 1200px) {
+            width: 145px;
+            min-width: 145px;
+          }
+          @media (max-width: 767px) {
+            width: 60%;
+            min-width: 160px;
+            @apply pl-2.5;
+          }
+    }
+    .cashier-dashboard-supplier-list-amount {
+        @apply text-left flex justify-center flex-col h-full w-[35%] min-w-[100px];
+        @media (min-width: 1201px) and (max-width: 1400px) {
+          @apply pl-4;
+        }
+        @media (max-width: 767px) {
+            width: 90px;
+            min-width: 90px;
+            @apply pl-2.5;
+          }
+    }
+}

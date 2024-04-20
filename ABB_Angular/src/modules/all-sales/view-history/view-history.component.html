@@ -1,0 +1,70 @@
+<div [@routerTransition] class="model-input-size">
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner">
+        <div class="cashier-popup-header relative">
+          <div class="cashier-popup-header-title">
+            <h2 mat-dialog-title cdkDrag class="" cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+              History Details
+            </h2>
+          </div>
+          <div class="cashier-popup-header-close absolute -top-4 right-0">
+            <mat-dialog-actions>
+              <div class="default-light-theme">
+                <a href="javascript:void(0)" mat-dialog-close>
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </mat-dialog-actions>
+          </div>
+        </div>
+        <form autocomplete="off" #createChartForm="ngForm" (ngSubmit)="save()">
+          <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+            <div class="col-span-12">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">Added By</h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="type" maxlength="30" matInput name="AddedBy" id="AddedBy" required
+                      [(ngModel)]="addedBy" [readonly]="true" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">Added Date</h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="type" maxlength="30" matInput name="addedDate" id="addedDate" required
+                      [(ngModel)]="addedDate" [readonly]="true" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">Last Modified By</h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="type" maxlength="30" matInput name="modifyBy" id="modifyBy" required
+                      [(ngModel)]="modifyBy" [readonly]="true" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">Last Modified Date</h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="type" maxlength="30" matInput name="modifyLate" id="modifyLate" required
+                      [(ngModel)]="modifyLate" [readonly]="true" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

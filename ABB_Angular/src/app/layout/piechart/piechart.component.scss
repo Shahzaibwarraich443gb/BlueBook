@@ -1,0 +1,18 @@
+div.apexcharts-legend.apx-legend-position-right {
+   right: 30px !important;
+   @media (min-width: 1401px) and (max-width: 1600px) {
+		right: 15px !important;
+	}
+}
+.cashier-dashboard-piechart {
+   .apexcharts-legend-series {
+      margin-left: 0px !important;
+   }
+   .apexcharts-legend {
+      @media (max-width: 575px) {
+         left: 35px !important;
+         top: 121px !important;
+         flex-direction: column !important;
+      }
+   }
+}

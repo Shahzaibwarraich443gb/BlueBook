@@ -1,0 +1,405 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div [@routerTransition]>
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner">
+        <div class="cashier-popup-header relative mb-11">
+          <div class="cashier-popup-header-title">
+            <h2 *ngIf="data.id">Edit Chart of account</h2>
+            <h2 *ngIf="!data.id">Create Chart of account</h2>
+          </div>
+          <div class="cashier-popup-header-close absolute -top-4 right-0">
+            <mat-dialog-actions>
+              <div class="default-light-theme">
+                <a href="javascript:void(0)" mat-dialog-close>
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </mat-dialog-actions>
+          </div>
+        </div>
+
+        <form [formGroup]="createCoaForm" autocomplete="off">
+          <div class="grid grid-cols-3 gap-4">
+
+
+            <div class="cashier-select-field">
+              <div class="flex items-center">
+                <h5 class="text-[15px] text-heading font-semibold mb-3">
+                  Nature Of Account
+                </h5>
+                <button type="button" matTooltip="This is nature of account" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="transform: translateY(-50%); font-size: 0.5rem;">?</button>
+              </div>
+              <div class="cashier-input-field-style">
+                <mat-select formControlName="accountNature" placeholder="Nature Of Account"
+                  name="createOrEditChartOfAccountInputDto.accountNature" id="accountNature" class="block"
+                  matNativeControl #accountNatureEl [(value)]="createOrEditChartOfAccountInputDto.accountNature"
+                  required (valueChange)="getAccountType()" style="border-bottom: 1px solid;">
+                  <mat-option [value]="1">Asset</mat-option>
+                  <mat-option *ngIf="!onlyAssets" [value]="2">Liabilities</mat-option>
+                  <mat-option *ngIf="!onlyAssets" [value]="3">Income</mat-option>
+                  <mat-option *ngIf="!onlyAssets" [value]="4">Expenses</mat-option>
+                </mat-select>
+              </div>
+
+            </div>
+
+
+            <div class="cashier-select-field">
+              <div class="flex items-center">
+                <h5 style="position: relative;
+              top: 6px;" class="text-[15px] text-heading font-semibold mb-3">
+                  Account Type
+                </h5>
+                <button type="button" matTooltip="This is type of account" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="font-size: 0.5rem;">?</button>
+              </div>
+              <div class="cashier-input-field-style" style="display: flex">
+
+                <mat-select formControlName="accountType" placeholder="Account Type"
+                  [(ngModel)]="createOrEditChartOfAccountInputDto.accountTypeId"
+                  name="createOrEditChartOfAccountInputDto.accountTypeId" (ngModelChange)="onAccountTypeChange()"
+                  style="  border-bottom: 1px solid;">
+                  <mat-option *ngFor="let accountType of accountTypeDto"
+                    [value]="accountType.id">{{accountType.name}}</mat-option>
+                </mat-select>
+                <ng-container *ngIf="data.mode != 'bank' && data.setAssets != 'fixed'">
+                  <button class="selectAddBtnCoa" *ngIf="!(data.id && data.id > 0)" type="button"
+                    mat-raised-button color="primary" (click)="addAccountType()">
+                    Add
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+
+
+            <div class="cashier-select-field">
+              <div class="flex items-center">
+                <h5 class="text-[15px] text-heading font-semibold mb-3">
+                  Main Head
+                </h5>
+                <button type="button" matTooltip="This is main head" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="transform: translateY(-50%); font-size: 0.5rem;">?</button>
+              </div>
+              <div class="cashier-input-field-style" style="display: flex">
+                <mat-select formControlName="mainHead" placeholder="Main Head"
+                  [(value)]="createOrEditChartOfAccountInputDto.mainHeadId"
+                  name="createOrEditChartOfAccountInputDto.mainHeadId" required style="  border-bottom: 1px solid;">
+                  <mat-option *ngFor="let mainHead of mainHeadDto" [value]="mainHead.id">{{mainHead.name}}</mat-option>
+                </mat-select>
+
+                <button class="selectAddBtnCoa" *ngIf="!(data.id && data.id > 0)" type="button"
+                  mat-raised-button color="primary" (click)="addMainHead()">
+                  Add
+                </button>
+              </div>
+            </div>
+
+
+            <div>
+              <div class="flex items-center">
+                <h5 class="text-[15px] text-heading font-semibold ">
+                  {{ " Sub Head" | localize }}
+                </h5>
+                <button type="button" matTooltip="This is sub head" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="font-size: 0.5rem;">?</button>
+              </div>
+              <div class="flex relative" style="width:100%;">
+                <div style="position: relative;">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input formControlName="subHeadName" type="text" class="w-full" matInput name="accountDescription"
+                      id="accountDescription" placeholder="Sub Head Name" maxlength="50" [(ngModel)]="
+                    createOrEditChartOfAccountInputDto.accountDescription
+                  " #accountDescriptionEl />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <div>
+              <div class="flex items-center">
+                <h5 class="text-[15px] text-heading font-semibold ">
+                  Opening Balance
+                </h5>
+                <button type="button" matTooltip="This is Opening Balance" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="font-size: 0.5rem;">?</button>
+              </div>
+              <div class="flex relative" style="width:100%;">
+                <div style="position: relative;">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <div class="absolute">$</div>
+                    <input formControlName="openingBalance" style="padding-left: 0.7rem;" type="text" class="w-full"
+                      matInput name="accountDescription" id="accountDescription" maxlength="50" #accountDescriptionEl />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div>
+              <div class="flex items-center">
+                <h5 class="text-[15px] text-heading font-semibold ">
+                  Date
+                </h5>
+                <button type="button" matTooltip="This is Date" [matTooltipPosition]="'above'"
+                  matTooltipClass="coa-tooltip"
+                  class="cursor-default ml-2 border border-gray-200 shadow-md px-1 bg-amber-100 font-bold"
+                  style="font-size: 0.5rem;">?</button>
+              </div>
+              <div class="flex relative" style="width:100%;">
+                <div style="position: relative;">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+
+                    <input type="text" placeholder="MM/DD/YYYY" matInput maxlength="50" formControlName="date"
+                      [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()" />
+                    <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #releasedAtPicker>
+                    </mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </form>
+
+
+        <form *ngIf="showBankAdd" [formGroup]="addBankForm"
+          class="bg-gray-50 p-4 rounded-md border-dashed border-2 border-indigo-600 mb-4">
+          <div class="grid grid-cols-4 gap-4">
+            <div class="col-span-4">
+              <div class="text-blue-800 font-bold">Bank Info</div>
+            </div>
+
+            <div class="col-span-2">
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Title Of Account *
+              </h5>
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="accountTitle" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Bank Name *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="bankName" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                IFSC/Swift Code *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="code" type="number" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Account # *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="accountNo" type="number" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Routing # *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="routingNo" type="number" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Starting Cheque # *
+              </h5>
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="startingChequeNo" type="number" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Open Balance *
+              </h5>
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <div class="absolute">$</div>
+                  <input formControlName="openBalance" type="number" style="padding-left: 0.7rem;" class="w-full"
+                    matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+          </div>
+
+
+
+
+          <div class="grid grid-cols-4 gap-4 mt-2">
+            <div class="col-span-4">
+              <div class="text-blue-800 font-bold">Bank Address</div>
+            </div>
+
+            <div class="col-span-2">
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Address *
+              </h5>
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="address" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                City *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="city" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                State *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="state" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Country *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input formControlName="country" type="text" class="w-full" matInput maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+            <div>
+              <h5 class="text-[15px] text-heading font-semibold ">
+                Post Code *
+              </h5>
+
+              <div style="position: relative;">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden"> </mat-label>
+                  <input inputmode="numeric" formControlName="postCode" type="number" class="w-full" matInput
+                    maxlength="50" />
+                </mat-form-field>
+              </div>
+            </div>
+
+
+          </div>
+        </form>
+
+        <div class="flex">
+          <ng-container *ngIf="showBankAdd">
+            <button (click)="save()" style="width: 50%;" [disabled]="checkForm()" mat-raised-button
+              color="primary">Save</button>
+          </ng-container>
+          <ng-container *ngIf="!showBankAdd">
+            <button (click)="save()" style="width: 50%;" [disabled]="!createCoaForm.valid" mat-raised-button
+              color="primary">Save</button>
+          </ng-container>
+          <button mat-raised-button style="width: 50%; margin-left: 1rem;" color="accent"
+            mat-dialog-close>Cancel</button>
+        </div>
+
+
+      </div>
+
+    </div>
+  </mat-dialog-content>
+</div>

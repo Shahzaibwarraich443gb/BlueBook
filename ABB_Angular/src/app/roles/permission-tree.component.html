@@ -1,0 +1,3 @@
+<p-tree [value]="treeData" [(selection)]="selectedPermissions" selectionMode="checkbox"
+    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="onNodeUnselect($event)"
+    [propagateSelectionUp]="false"></p-tree>

@@ -1,0 +1,26 @@
+/* Add any custom styles here to enhance the design */
+
+/* Center the form vertically */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin-top: 8px;
+}
+
+
+
+// .mat-form-field .mat-input-element {
+//   height: 10px;
+//   padding: 0px;
+//   margin-top: 5PX;
+//   /* Adjust the height value as needed */
+// }

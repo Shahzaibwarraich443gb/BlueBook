@@ -1,0 +1,272 @@
+<div class="salesTaxContainer">
+    <div class="flex items-center">
+        <mat-form-field class="mr-auto">
+            <label>Financial Year *</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedFinancialYear" (selectionChange)="getCorporateTax()">
+                <mat-option *ngFor="let data of financialYearArr;" [value]="data">
+                    {{data}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="flex ml-auto items-center">
+            <span>For Sales Tax Registration, Click here</span>
+            <mat-checkbox class="ml-4" [(ngModel)]="showSalesTax" [color]="'primary'"
+                (ngModelChange)="toggleSalesTax()">
+                Sales Tax
+            </mat-checkbox>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-8 w-full">
+        <mat-form-field>
+            <label>Legal Status</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedLegalStatus">
+                <mat-option *ngFor="let data of legalStatus;" [value]="data.id">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label>Tenure(Form) *</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedTenure">
+                <mat-option *ngFor="let data of tenure;" [value]="data.id">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="flex flex-col p-3 justify-center">
+            <label style="font-weight: 700;">Start and End Date</label>
+            <div>{{dateRange}}</div>
+        </div>
+
+        <div class="flex flex-col p-3 justify-center">
+            <label style="font-weight: 700;">Due Date</label>
+            <div>{{dueDate}}</div>
+        </div>
+    </div>
+
+    <div>
+        <table class="bankDepositTbl mr-8" style="display: inline-table;">
+            <thead>
+                <tr>
+                    <th style="font-weight: 600;">Month</th>
+                    <th style="font-weight: 600;">Bank Deposit ($)</th>
+                    <th style="font-weight: 600;">Withdrawals</th>
+                    <th style="font-weight: 600;">Balance</th>
+                    <th style="font-weight: 600;">Bank Charges</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p class="font-bold">Opening Balance</p>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="number" maxlength="100" value="0" [(ngModel)]="balanceAmount"
+                            class="bankDepositInput balancehInput" /></td>
+                    <td></td>
+                </tr>
+                <tr *ngFor="let m of fiscalMonthArr; let i = index">
+
+                    <td>{{m.month}}</td>
+                    <td><input type="number" maxlength="100" value="0" (input)="calculateTotalMonthlyAmount()"
+                            class="bankDepositInput monthInput" [readOnly]="showSalesTax && i > 1" /></td>
+                    <td><input type="number" maxlength="100" value="0" (input)="calculateTotalWithdrawalAmount()"
+                            class="bankDepositInput withdrawalInput" /></td>
+                    <td class="balanceSpecific"></td>
+                    <td><input type="number" maxlength="100" value="0" (input)="calculateTotalBankCharges()"
+                            class="bankDepositInput bankChargesInput" /></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><input type="text" class="bankDepositInput" [(ngModel)]="totalMonthlyAmount" readonly /></td>
+                    <td><input type="text" class="bankDepositInput" [(ngModel)]="totalWithdrawalAmount" readonly /></td>
+                    <td></td>
+                    <td><input type="text" class="bankDepositInput" [(ngModel)]="totalBankCharges" readonly /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display: inline-table;">
+            <table class="bankDepositTbl mt-4" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="padding: 0">
+                            <mat-radio-group [(ngModel)]="taxMode">
+                        <th style="border: none"><mat-radio-button [color]="'primary'" value="Fiscal Year">Fiscal
+                                Year</mat-radio-button></th>
+                        <th style="border: none; border-left: 1px solid #ccc"><mat-radio-button [color]="'primary'"
+                                value="Quaterly">Quaterly</mat-radio-button></th>
+                        </mat-radio-group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th *ngIf="taxMode == 'Fiscal Year'">Annualy</th>
+                        <th *ngIf="taxMode == 'Quaterly'">Quaters</th>
+                        <th>Bank Deposit / Receipt</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="taxMode == 'Fiscal Year'">
+                    <tr>
+                        <td>Annually</td>
+                        <td>{{totalMonthlyAmount}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total</td>
+                        <td>{{totalMonthlyAmount}}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="taxMode == 'Quaterly'">
+                    <tr *ngFor="let key of getObjectKeys(quaterObj); let i = index">
+                        <td>Quater {{i + 1}}</td>
+                        <td>{{quaterObj[key]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{totalMonthlyAmount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="bankDepositTbl mt-4" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th colspan="2">Reconcilliation of Sales</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Total of Sales Tax</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jan Receipt</td>
+                        <td><input type="number" maxlength="100" value="0" class="bankDepositInput"
+                                [(ngModel)]="janReceipt" /></td>
+                    </tr>
+                    <tr>
+                        <td>Feb Receipt</td>
+                        <td><input type="number" maxlength="100" value="0" class="bankDepositInput"
+                                [(ngModel)]="febReceipt" /></td>
+                    </tr>
+                    <tr>
+                        <td>Jan Receipt (Next Year)</td>
+                        <td><input type="number" maxlength="100" value="0" class="bankDepositInput"
+                                [readOnly]="prevYearDisable" /></td>
+                    </tr>
+                    <tr>
+                        <td>Feb Receipt (Next Year)</td>
+                        <td><input type="number" maxlength="100" value="0" class="bankDepositInput"
+                                [readOnly]="prevYearDisable" /></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+        <div class="grid grid-cols-3 gap-4">
+
+            <div>
+                <table class="bankDepositTbl mt-4" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Other Income</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let data of otherIncomeArr; let i = index">
+                            <td><input type="text" maxlength="100" [(ngModel)]="otherIncomeArr[i].Name"
+                                    (ngModelChange)="calculateTotalOtherIncome(i)" class="bankDepositInput" /></td>
+                            <td><input type="text" maxlength="100" [(ngModel)]="otherIncomeArr[i].Value"
+                                    (ngModelChange)="calculateTotalOtherIncome(i)" class="bankDepositInput" /></td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost Of Sale</td>
+                            <td>$ {{totalOtherIncome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="addOtherIncome()" class="mt-2" mat-raised-button color="primary">Add More
+                    Income</button>
+            </div>
+            <div>
+                <table class="bankDepositTbl mt-4" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Cost Of Sales (COS)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let data of costOfSaleArr; let i = index">
+                            <td><input type="text" maxlength="100" [(ngModel)]="costOfSaleArr[i].Name"
+                                    (ngModelChange)="calculateTotalCostOfSale(i)" class="bankDepositInput" /></td>
+                            <td><input type="text" maxlength="100" [(ngModel)]="costOfSaleArr[i].Value"
+                                    (ngModelChange)="calculateTotalCostOfSale(i)" class="bankDepositInput" /></td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost Of Sale</td>
+                            <td>$ {{totalCostOfSale}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="addCostOfSale()" class="mt-2" mat-raised-button color="primary">Add More Cost Of
+                    Sale</button>
+            </div>
+
+            <div>
+
+                <table class="bankDepositTbl mt-4" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Other Expenses</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let data of otherExpenseArr; let i = index">
+                            <td><input type="text" maxlength="100" [(ngModel)]="otherExpenseArr[i].Name"
+                                    (ngModelChange)="calculateTotalOtherExpense(i)" class="bankDepositInput" /></td>
+                            <td><input type="text" maxlength="100" [(ngModel)]="otherExpenseArr[i].Value"
+                                    (ngModelChange)="calculateTotalOtherExpense(i)" class="bankDepositInput" /></td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost Of Sale</td>
+                            <td>$ {{totalOtherExpense}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+        <button (click)="addOtherExpense()" class="mt-2" mat-raised-button color="primary">Add More Expenses</button>
+            </div>
+        </div>
+
+        <div style="display: flex; width: 100%; font-size: 1.3rem; margin-top: 1rem;">
+            <div style="margin-right: auto;">Gross Profit: ${{totalOtherIncome - totalCostOfSale}}</div>
+
+            <div style="margin-left: auto;">Net Profit: ${{(totalOtherIncome - totalCostOfSale) + totalOtherExpense}} </div>
+        </div>
+
+        <div class="flex flex-col items-end text-green-600 font-light text-2xl">
+            <div class="text-green-700">
+               <div> {{(totalOtherIncome - totalCostOfSale) + totalOtherExpense}} * 21%</div>
+               <div>Income Tax Payable ${{((totalOtherIncome - totalCostOfSale) + totalOtherExpense) * 0.21}} </div>
+            </div>
+            <button (click)="saveCorporateTax()"
+                class="bg-green-600 text-white font-bold py-2 px-3 text-lg rounded-md hover:shadow-2xl hover:bg-green-500">Save</button>
+        </div>
+    </div>
+</div>

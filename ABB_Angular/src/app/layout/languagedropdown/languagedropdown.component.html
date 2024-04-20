@@ -1,0 +1,16 @@
+<ul class="lang-dropdown-wrapper">
+  <li><a [routerLink]="['/profile']"><app-editprofileicon></app-editprofileicon>Edit Profile</a></li>
+  <li><a [routerLink]="['/rolepermission']"><app-appearenceicon></app-appearenceicon>Appearance</a></li>
+  <li><a [routerLink]="['/app/account-settings']"><app-appearenceicon></app-appearenceicon>Account
+      Settings</a>
+  </li>
+
+  <li><a href="javascript:void(0)" class="relative"><app-languageicon></app-languageicon>Language</a>
+    <ul class="lang-sub-down">
+      <li><a href="javascript:void(0)">English</a></li>
+      <li><a href="javascript:void(0)">Spanish</a></li>
+      <li><a href="javascript:void(0)">Chinese</a></li>
+    </ul>
+  </li>
+  <li><a href="javascript:void(0)" (click)="logout()"><app-logouticon></app-logouticon>Logout</a></li>
+</ul>

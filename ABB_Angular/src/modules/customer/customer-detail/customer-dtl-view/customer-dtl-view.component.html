@@ -1,0 +1,176 @@
+<div class="grid grid-cols-12 gap-x-8 maxSm:gap-x-0 customerInfoContainer pt-3">
+    <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          Language
+        </h5>
+        <div class="cashier-input-field-style" style="display: flex">
+          <mat-select placeholder=" Select Language" [(value)]="customer?.detail?.language.id" name="languageId" required
+            style="border-bottom: 1px solid;">
+            <mat-option *ngFor="let item of languages" [value]="item.id">{{item.name }}</mat-option>
+          </mat-select>
+          <button  class="selectAddBtn" style="display: flex; justify-content: center; align-items: center;" type="button" mat-raised-button color="primary"
+            (click)="openCreateLanguageDialog()">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                margin-bottom: 12px;
+            ">
+          Ethnicity
+        </h5>
+        <div class="cashier-input-field-style" style="display: flex">
+          <mat-select placeholder="Ethnicity  " [(value)]="customer?.detail?.ethnicity.id" name="ethnicityId" required
+            style="  border-bottom: 1px solid;">
+            <mat-option *ngFor="let item of ethnicities" [value]="item.id">{{item.name
+              }}</mat-option>
+          </mat-select>
+          <!-- <mat-select [(value)]="customer.ethnicityId" name="ethnicityId">
+                        <mat-option *ngFor="let item of ethnicities" [value]="item.id">
+                            {{item.name }}
+                        </mat-option>
+                    </mat-select> -->
+  
+          <button  class="selectAddBtn" style="display: flex; justify-content: center; align-items: center;" style="display: flex; justify-content: center; align-items: center;" type="button" mat-raised-button color="primary"
+            (click)="openCreateEthnicityDialog()">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          Sales Person
+        </h5>
+        <div class="cashier-input-field-style" style="display: flex">
+          <mat-select placeholder="Sales Person" [(value)]="customer?.detail?.salesPersonType.id" name="salesPersonTypeId"
+            required style="border-bottom: 1px solid;">
+            <mat-option *ngFor="let item of salesPersonTypes" [value]="item.id">{{item.name }}</mat-option>
+          </mat-select>
+          <button  class="selectAddBtn" style="display: flex; justify-content: center; align-items: center;" type="button" mat-raised-button color="primary"
+            (click)="openCreateSalesPersonTypeDialog()">
+            Add
+          </button>
+        </div>
+      </div>
+  
+  
+    </div>
+    <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          Job Title
+        </h5>
+        <div class="cashier-input-field-style" style="display: flex">
+          <mat-select placeholder="Job Title" [(ngModel)]="customer.jobTitleId" name="salesPersonTypeId" required
+            style="border-bottom: 1px solid;">
+            <mat-option *ngFor="let item of jobTitleArr" [value]="item.id">{{item.name }}</mat-option>
+          </mat-select>
+          <button  class="selectAddBtn" style="display: flex; justify-content: center; align-items: center;" type="button" mat-raised-button color="primary"
+            (click)="openJobTitleDialog()">
+            Add
+          </button>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>
+  
+  
+  <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5">
+    <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          EFTPS
+        </h5>
+        <div class="cashier-input-field-style">
+          <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+            <mat-label class="hidden"></mat-label>
+            <input type="number" matInput maxlength="50" placeholder="EFTPS" [(ngModel)]="customer.eftps" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          NYS UserName
+        </h5>
+        <div class="cashier-input-field-style">
+          <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+            <mat-label class="hidden"></mat-label>
+            <input type="text" matInput maxlength="50" placeholder="NYS UserName" [(ngModel)]="customer.nysUserName" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="lg:col-span-4 md:col-span-4 sm:col-span-12">
+      <div class="cashier-select-field mb-6">
+        <h5 class="text-[15px] text-heading font-semibold mb-1" style="margin-bottom: 12px;">
+          NYS Password
+        </h5>
+        <div class="cashier-input-field-style">
+          <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+            <mat-label class="hidden"></mat-label>
+            <div style="position: relative;">
+              <input [type]="showPass ? 'text' : 'password'" matInput maxlength="50" placeholder="NYS Password"
+                [(ngModel)]="customer.nysPassword" />
+              <i class="fa fa-eye" style="position: absolute; right: 0" (click)="showPass=!showPass"></i>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Comment
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field style="width: 100%;">
+          <mat-label class="hidden"></mat-label>
+          <textarea matInput placeholder="Comment" [(ngModel)]="comment" style="color: #dc2626;">
+      </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-span-12 flex justify-end -mt-8 mb-4">
+    <div class="flex cashier-managesale-top-btn default-light-theme pt-2.5 customerBtnContainer">
+      <div class="flex items-center">
+        <div class="balanceContainer">
+          Balance: <span> ${{totalBalance.toFixed(2)}} </span>
+        </div>
+        <button class="customerBtn" mat-raised-button type="button" [matMenuTriggerFor]="actionTrigger" color="accent" icon="pi pi-times">
+          Actions <i class="fa fa-chevron-down" style="margin-left: 1rem;"></i>
+        </button>
+        <mat-menu #actionTrigger="matMenu" xPosition="before">
+          <button (click)="_router.navigate(['/app/invoices','c_' + customerId])" mat-menu-item>
+            <span>Invoices</span>
+          </button>
+          <button (click)="_router.navigate(['/app/all-sales/received-payment','c_' + customerId])" mat-menu-item>
+            <span>Received Payments</span>
+          </button>
+        </mat-menu>
+      </div>
+      <button class="customerBtn" mat-raised-button type="button" [routerLink]="['../customers']" color="accent" icon="pi pi-times">
+        Cancel
+      </button>
+      <button class="customerBtn" mat-raised-button color="primary" (click)="save()">
+        Save 
+      </button>
+    </div>
+  </div>

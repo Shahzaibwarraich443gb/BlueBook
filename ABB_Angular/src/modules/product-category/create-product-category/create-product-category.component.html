@@ -1,0 +1,91 @@
+<div [@routerTransition] class="model-input-size">
+  <div class="cashier-popup-header relative mb-11">
+    <div class="cashier-popup-header-title">
+      <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>{{data.id>0?'Edit Product
+        Category':'Create Product Category'}}</h2>
+    </div>
+    <div class="cashier-popup-header-close absolute -top-4 right-0">
+      <mat-dialog-actions>
+        <div class="default-light-theme">
+          <a href="javascript:void(0)" mat-dialog-close>
+            <mat-icon>clear</mat-icon>
+          </a>
+        </div>
+      </mat-dialog-actions>
+    </div>
+
+  </div>
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner">
+
+        <form autocomplete="off" #createProductCategory="ngForm" (ngSubmit)="save()">
+          <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+
+            <div class="col-span-4 mb-3">
+              <div class="">
+                <div class="custom-control custom-checkbox">
+                  <input type="radio" checked="true" class="custom-control-input"
+                    [(ngModel)]="createOrEditProductCategoryDto.nature" name="nature" value="service" id="nature" />
+                  <span style="margin-left: 11px"> Service </span>
+                </div>
+              </div>
+            </div>
+            <div class="productCategoryPosition rigthMagin col-span-4 mb-3  ">
+              <div class="">
+                <div class="custom-control custom-checkbox">
+                  <input type="radio" class="custom-control-input" [(ngModel)]="createOrEditProductCategoryDto.nature"
+                    name="nature" id="nature" value="product" />
+                  <span style="margin-left: 11px"> Product </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-span-12">
+              <div class="cashier-select-field  ">
+                <h5 class="text-[15px] text-heading font-semibold ">
+                  Name<span class="starColorRed">*</span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input (keypress)="firstSpaceNotAllowed($event)" type="type" matInput name="name" id="name" required
+                      [(ngModel)]="createOrEditProductCategoryDto.name" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-12 sm:col-span-12 mb-3 " *ngIf="createOrEditProductCategoryDto.id > 0">
+              <div class="cashier-select-field  ">
+                <div class="">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                      [(ngModel)]="createOrEditProductCategoryDto.isActive" name="isActive" id="isActive" />
+                    <span style="margin-left: 11px"> Active </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="submit" mat-raised-button color="primary" [disabled]="!createProductCategory.form.valid">
+                  Submit
+                </button>
+              </div>
+            </div>
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="button" mat-raised-button color="accent" (click)="hideDialog()">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

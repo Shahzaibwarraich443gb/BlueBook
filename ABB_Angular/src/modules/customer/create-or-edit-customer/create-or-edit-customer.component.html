@@ -1,0 +1,880 @@
+<mat-dialog-content>
+    <div class="popup-body">
+        <div class="cashier-popup-inner">
+            <div class="cashier-popup-header relative mb-11">
+                <div class="cashier-popup-header-title">
+                    <h2 *ngIf="data.id">Edit Customer</h2>
+                    <h2 *ngIf="!data.id">Create Customer</h2>
+                </div>
+                <div class="cashier-popup-header-close absolute -top-4 right-0">
+                    <mat-dialog-actions>
+                        <div class="default-light-theme">
+                            <a href="javascript:void(0)" mat-dialog-close>
+                                <mat-icon>clear</mat-icon>
+                            </a>
+                        </div>
+                    </mat-dialog-actions>
+                </div>
+            </div>
+            <form autocomplete="off" #customerForm="ngForm" (ngSubmit)="save()">
+                <mat-tab-group>
+                    <mat-tab label="Info">
+                        <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5">
+                            <!-- Business Name -->
+                           
+                            <div class="lg:col-span-4 md:col-span-6 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Business Name
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input type="text" matInput name="bussinessName"
+                                                [(ngModel)]="customer.bussinessName" id="bussinessName" maxlength="50"
+                                                placeholder="Busines Name" #bussinessNameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tex Id -->
+                            <div class="lg:col-span-1 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Tax Id
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="XX-XXXXXXX " type="text" matInput name="taxId"
+                                                [(ngModel)]="customer.taxId" id="taxId" maxlength="50" #taxIdEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fiscal year end -->
+                            <div class="lg:col-span-1 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Fiscal Year End
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="MM-DD-YYYY" matInput name="fiscalYearEnd"
+                                                [(ngModel)]="customer.fiscalYearEnd" id="fiscalYearEnd"
+                                                [matDatepicker]="releasedAtPicker1">
+
+                                            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker1">
+
+                                            </mat-datepicker-toggle>
+
+                                            <mat-datepicker #releasedAtPicker1>
+
+                                            </mat-datepicker>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Customer Time -->
+                            <div class="lg:col-span-2 md:col-span-2 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px;
+                                ">
+                                        Customer Type
+                                    </h5>
+
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder="Language  " [(value)]="customer.languageId"
+                                            name="languageId" required style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of languages" [value]="item.id">{{item.name
+                                                }}</mat-option>
+                                        </mat-select>
+                                        <!-- <mat-select [(value)]="customer.languageId" name="languageId">
+                                            <mat-option *ngFor="let item of languages" [value]="item.id">
+                                                {{item.name }}
+                                            </mat-option>
+                                        </mat-select> -->
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary"
+                                            (click)="openCreateLanguageDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                              <!-- Customer Name -->
+                            
+                              <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Customer Name
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Customer Name" type="text" matInput name="name"
+                                                [(ngModel)]="customer.name" id="name" required maxlength="50" #nameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Customer Name
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Customer Name" type="text" matInput name="name"
+                                                [(ngModel)]="customer.name" id="name" required maxlength="50" #nameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        SSN
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Customer Name" type="text" placeholder="XXX-XX-XXX" matInput name="name"
+                                                [(ngModel)]="customer.name" id="name" required maxlength="50" #nameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        DOB
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Customer Name" type="text" placeholder="XXX-XX-XXX" matInput name="name"
+                                                [(ngModel)]="customer.name" id="name" required maxlength="50" #nameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Customer Type -->
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px; 
+                                ">
+                                        Contact Person
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder="Contact Person  "
+                                            [(value)]="customer.contactPersonTypeId" name="contactPersonTypeId" required
+                                            style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of contactPersonTypes"
+                                                [value]="item.id">{{item.name }}</mat-option>
+                                        </mat-select>
+                                        <!-- <mat-select [(value)]="customer.contactPersonTypeId" name="contactPersonTypeId">
+                                            <mat-option *ngFor="let item of contactPersonTypes" [value]="item.id">
+                                                {{item.name }}
+                                            </mat-option>
+                                        </mat-select> -->
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary"
+                                            (click)="openCreateContactPersonTypeDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SSN -->
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        State UserName
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <input type="text" matInput name="stateUserName"
+                                                [(ngModel)]="customer.stateUserName" id="stateUserName" required
+                                                maxlength="50" #stateUserNameEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- DOB -->
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Password
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <input type="password" matInput name="stateUserPassword"
+                                                [(ngModel)]="customer.stateUserPassword" id="stateUserPassword" required
+                                                maxlength="50" #stateUserPasswordEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Job Description -->
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px; 
+                                ">
+                                        Source Referral
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder=" Ssource Referral  "
+                                            [(value)]="customer.sourceReferralTypeId" name="sourceReferralTypeId"
+                                            required style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of sourceReferralTypes"
+                                                [value]="item.id">{{item.name }}</mat-option>
+                                        </mat-select>
+
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary"
+                                            (click)="openCreateSourceReferralTypeDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px;
+                                ">
+                                        Ethnicity
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder="Ethnicity  " [(value)]="customer.ethnicityId"
+                                            name="ethnicityId" required style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of ethnicities" [value]="item.id">{{item.name
+                                                }}</mat-option>
+                                        </mat-select>
+                                        <!-- <mat-select [(value)]="customer.ethnicityId" name="ethnicityId">
+                                            <mat-option *ngFor="let item of ethnicities" [value]="item.id">
+                                                {{item.name }}
+                                            </mat-option>
+                                        </mat-select> -->
+
+                                        <button style="
+                                            margin-left: 8px;" type="button" mat-raised-button color="primary"
+                                            (click)="openCreateEthnicityDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        EFTPS
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="EFTPS" type="text" matInput name="eftps"
+                                                [(ngModel)]="customer.eftps" id="eftps" maxlength="50" #eftpsEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Bussiness Description
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input type="text" matInput name="businessDescription"
+                                                [(ngModel)]="customer.businessDescription" id="businessDescription"
+                                                maxlength="50" #businessDescriptionEl
+                                                placeholder="Bussiness Description" />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px; 
+                                ">
+                                        Sales Person
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder=" Sales Person " [(value)]="customer.salesPersonTypeId"
+                                            name="salesPersonTypeId" required style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of sourceReferralTypes"
+                                                [value]="item.id">{{item.name }}</mat-option>
+                                        </mat-select>
+
+                                        <!-- <mat-select [(value)]="customer.salesPersonTypeId" name="salesPersonTypeId">
+                                            <mat-option *ngFor="let item of salesPersonTypes" [value]="item.id">
+                                                {{item.name }}
+                                            </mat-option>
+                                        </mat-select> -->
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary"
+                                            (click)="openCreateSalesPersonTypeDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1" style="
+                                    margin-bottom: 12px; 
+                                ">
+                                        Entity Type
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select placeholder=" Entity Type" [(value)]="customer.generalEntityTypeId"
+                                            name="generalEntityTypeId" required style="  border-bottom: 1px solid;">
+                                            <mat-option *ngFor="let item of generalEntityTypes" [value]="item.id">
+
+                                                {{item.name }}</mat-option>
+                                        </mat-select>
+                                        <button style="
+                                    margin-left: 8px;
+                                " type="button" mat-raised-button color="primary"
+                                            (click)="openCreateGeneralEntityTypesDialog()">
+                                            Add
+                                        </button>
+                                    </div>
+                                    <!-- end -->
+
+                                    <!-- <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-select [(value)]="customer.generalEntityTypeId" name="generalEntityTypeId">
+                                            <mat-option *ngFor="let item of generalEntityTypes" [value]="item.id">
+                                                {{item.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <button type="button" mat-raised-button color="primary"
+                                            (click)="openCreateGeneralEntityTypesDialog()">
+                                            Add
+                                        </button>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Website
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Website" type="text" matInput name="website"
+                                                [(ngModel)]="customer.website" id="website" maxlength="50" #websiteEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Fiscal Year Start
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex;   ">
+
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Fiscal Year Start" matInput
+                                                [(ngModel)]="customer.fiscalYearStart" id="fiscalYearStart"
+                                                name="fiscalYearStart" [matDatepicker]="releasedAtPicker">
+
+                                            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+
+                                            </mat-datepicker-toggle>
+
+                                            <mat-datepicker #releasedAtPicker>
+
+                                            </mat-datepicker>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Job Description
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Job Description" type="text" matInput
+                                                name="jobDescription" [(ngModel)]="customer.jobDescription"
+                                                id="jobDescription" maxlength="50" #jobDescriptionEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Social Security Number
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Social Security Number" type="text" matInput
+                                                name="socialSecurityNumber" [(ngModel)]="customer.socialSecurityNumber"
+                                                id="socialSecurityNumber" maxlength="50" #socialSecurityNumberEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Date Of Birth
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Date Of Birth" matInput name="dateOfBirth"
+                                                [(ngModel)]="customer.dateOfBirth" id="dateOfBirth"
+                                                [matDatepicker]="releasedAtPickers">
+                                            <mat-datepicker-toggle matSuffix [for]="releasedAtPickers">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #releasedAtPickers>
+                                            </mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <!-- <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Spouse Info
+                                    </h5>
+                                    <div class="cashier-input-field-style" style="display: flex">
+                                        <button type="button" mat-raised-button color="primary">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Contact Info">
+                        <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5">
+                            <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Email Type
+                                    </h5>
+                                    <mat-label class="hidden"></mat-label>
+                                    <div class="cashier-input-field-style " style="display: flex">
+                                        <mat-select name="email.typeEmail" placeholder="Email"
+                                            [(value)]="email.typeEmail" style="width: 30%; border-bottom: 1px solid;">
+                                            <mat-option [value]="0">Personal</mat-option>
+                                            <mat-option [value]="1">Home</mat-option>
+                                            <mat-option [value]="2">Office</mat-option>
+                                        </mat-select>
+                                        <mat-label class="hidden"></mat-label>
+                                        <input placeholder="Email Address" type="email" matInput name="emailAddress"
+                                            class="lg:col-span-4 md:col-span-4 sm:col-span-12"
+                                            style="border-bottom: 1px solid;" [(ngModel)]="email.emailAddress"
+                                            id="email-input" maxlength="50" #emailAddressEl />
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary" (click)="addEmail()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Contact Type
+                                    </h5>
+                                    <mat-label class="hidden"></mat-label>
+                                    <div class="cashier-input-field-style " style="display: flex;padding: 5px;">
+                                        <mat-select placeholder="Contact Type" name="phone.type" [(value)]="phone.type"
+                                            style="width: 30%; border-bottom: 1px solid;">
+                                            <mat-option [value]="0">Personal</mat-option>
+                                            <mat-option [value]="1">Home</mat-option>
+                                            <mat-option [value]="2">Office</mat-option>
+                                        </mat-select>
+                                        <input type="number" placeholder="Contact Number" matInput name="number"
+                                            class="lg:col-span-4 md:col-span-4 sm:col-span-12"
+                                            [(ngModel)]="phone.number" id="contact-input"
+                                            style="border-bottom: 1px solid;" maxlength="50" #numberEl />
+
+                                        <button style="
+                                        margin-left: 8px;
+                                    " type="button" mat-raised-button color="primary" (click)="addPhoneNumber()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                <div class="cashier-salereturns-table-inner" *ngIf="emails.length>0">
+                                    <div
+                                        class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7">
+                                        <div
+                                            class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Email Type</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Email Address</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <h5>Action</h5>
+                                            </div>
+                                        </div>
+                                        <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+                                            *ngFor="let item of emails">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span *ngIf="item.typeEmail==0">Personal</span>
+                                                <span *ngIf="item.typeEmail==1">Home</span>
+                                                <span *ngIf="item.typeEmail==2">Office</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.emailAddress }}</span>
+                                            </div>
+
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <button type="button" mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                                                    class="common-action-menu-style"
+                                                    aria-label="Example icon-button with a menu">
+                                                    Action <mat-icon>arrow_drop_down</mat-icon>
+                                                </button>
+                                                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                                    <button type="button" mat-menu-item (click)="updateEmail(item)">
+                                                        <img src="../../../../assets/img/icon/action-2.png"
+                                                            alt="icon not found" />
+                                                        <span>Edit</span>
+                                                    </button>
+                                                    <button type="button" mat-menu-item (click)="deleteEmail(item)">
+                                                        <img src="../../../../assets/img/icon/action-6.png"
+                                                            alt="icon not found" />
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+                                <div class="cashier-salereturns-table-inner" *ngIf="phones.length>0">
+                                    <div
+                                        class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7">
+                                        <div
+                                            class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Contact Type</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Contact Number</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <h5>Action</h5>
+                                            </div>
+                                        </div>
+                                        <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+                                            *ngFor="let item of phones">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span *ngIf="item.type==0">Personal</span>
+                                                <span *ngIf="item.type==1">Home</span>
+                                                <span *ngIf="item.type==2">Office</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.number }}</span>
+                                            </div>
+
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <button type="button" mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                                                    class="common-action-menu-style"
+                                                    aria-label="Example icon-button with a menu">
+                                                    Action <mat-icon>arrow_drop_down</mat-icon>
+                                                </button>
+                                                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                                    <button type="button" mat-menu-item
+                                                        (click)="updatePhoneNumber(item)">
+                                                        <img src="../../../../assets/img/icon/action-2.png"
+                                                            alt="icon not found" />
+                                                        <span>Edit</span>
+                                                    </button>
+                                                    <button type="button" mat-menu-item
+                                                        (click)="deletePhoneNumber(item)">
+                                                        <img src="../../../../assets/img/icon/action-6.png"
+                                                            alt="icon not found" />
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Address">
+                        <div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5">
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1 " style="
+                                        margin-bottom: 24px;
+                                ">
+                                        Address Type
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-select placeholder=" Address Type" name="address.type"
+                                            [(value)]="address.type" required style="  border-bottom: 1px solid;">
+                                            <mat-option [value]="0">Personal</mat-option>
+                                            <mat-option [value]="1">Home</mat-option>
+                                            <mat-option [value]="2">Office</mat-option>
+                                            <mat-option [value]="3">Shipping</mat-option>
+
+                                        </mat-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Address
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="Address" type="text" matInput name="completeAddress"
+                                                [(ngModel)]="address.completeAddress" id="completeAddress"
+                                                maxlength="50" #completeAddressEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        City
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input type="text" placeholder="City" matInput name="city"
+                                                [(ngModel)]="address.city" id="city" maxlength="50" #cityEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        State
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder="State" type="text" matInput name="state"
+                                                [(ngModel)]="address.state" id="state" maxlength="50" #stateEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Country
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder=" Country" type="text" matInput name="country"
+                                                [(ngModel)]="address.country" id="country" maxlength="50" #countryEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <div class="cashier-select-field mb-6">
+                                    <h5 class="text-[15px] text-heading font-semibold mb-1">
+                                        Post Code
+                                    </h5>
+                                    <div class="cashier-input-field-style">
+                                        <mat-form-field [hideRequiredMarker]="true" class="w-full"
+                                            [floatLabel]="'always'">
+                                            <mat-label class="hidden"></mat-label>
+                                            <input placeholder=" Post Code" type="text" matInput name="postCode"
+                                                [(ngModel)]="address.postCode" id="postCode" maxlength="50"
+                                                #postCodeEl />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                                <button class="addAddButtonMarginTop" type="button" mat-raised-button color="primary"
+                                    (click)="addAddress()">
+                                    Add Address
+                                </button>
+                            </div>
+
+                            <div class="lg:col-span-6 addressTableFixWidth md:col-span-6 sm:col-span-12">
+                                <div class="cashier-salereturns-table-inner" *ngIf="addresses.length>0">
+                                    <div
+                                        class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7">
+                                        <div
+                                            class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Address Type</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Address</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>City</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>State</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Country</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <h5>Post Code</h5>
+                                            </div>
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <h5>Action</h5>
+                                            </div>
+                                        </div>
+                                        <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+                                            *ngFor="let item of addresses">
+
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span *ngIf="item.type==0">Personal</span>
+                                                <span *ngIf="item.type==1">Home</span>
+                                                <span *ngIf="item.type==2">Office</span>
+                                                <span *ngIf="item.type==3">Shiping</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.completeAddress }}</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.city }}</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.state }}</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.country }}</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-dateJ">
+                                                <span>{{ item.postCode }}</span>
+                                            </div>
+                                            <div class="cashier-salereturns-table-actionJ">
+                                                <button type="button" mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                                                    class="common-action-menu-style" type="button"
+                                                    aria-label="Example icon-button with a menu">
+                                                    Action <mat-icon>arrow_drop_down</mat-icon>
+                                                </button>
+                                                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                                    <button mat-menu-item (click)="updateAddress(item)" type="button">
+                                                        <img src="../../../../assets/img/icon/action-2.png"
+                                                            alt="icon not found" />
+                                                        <span>Edit</span>
+                                                    </button>
+                                                    <button mat-menu-item (click)="deleteAddress(item)" type="button">
+                                                        <img src="../../../../assets/img/icon/action-6.png"
+                                                            alt="icon not found" />
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </mat-menu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+                <div class="col-span-12">
+                    <div class="cashier-managesale-top-btn default-light-theme pt-2.5">
+                        <button mat-raised-button type="button" color="accent" icon="pi pi-times"
+                            (click)="hideDialog()">
+                            Cancel
+                        </button>
+                        <button mat-raised-button color="primary" *ngIf="!data.id">
+                            Submit
+                        </button>
+                        <button mat-raised-button color="primary" *ngIf="data.id">
+                            Update Customer
+                        </button>
+                    </div>
+                </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</mat-dialog-content>

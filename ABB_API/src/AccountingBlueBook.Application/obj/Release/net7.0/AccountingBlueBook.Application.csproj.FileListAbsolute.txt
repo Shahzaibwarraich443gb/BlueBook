@@ -1,0 +1,17 @@
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Application.deps.json
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Application.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Application.pdb
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Application.xml
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Core.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\bin\Release\net7.0\AccountingBlueBook.Core.pdb
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.csproj.AssemblyReference.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.AssemblyInfoInputs.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.AssemblyInfo.cs
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.csproj.CoreCompileInputs.cache
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.csproj.CopyComplete
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\refint\AccountingBlueBook.Application.dll
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.xml
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\AccountingBlueBook.Application.pdb
+D:\ABB_WebAPI\ABB_API\src\AccountingBlueBook.Application\obj\Release\net7.0\ref\AccountingBlueBook.Application.dll

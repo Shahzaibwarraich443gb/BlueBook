@@ -1,0 +1,335 @@
+<div class="cashier-content-area" *ngIf="show">
+  <div class="cashier-salereturns-area bg-white custom-shadow rounded-lg  mb-5 -mt-3" style="width: 101%;">
+    <div style="background-color: #6F4EF6;">
+      <div class="text-[20px] text-heading font-semibold mb-3 p-2">
+        <span style="color: white; font-size: 20px;">Company Details</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div>
+        <div class="text-[15px] text-heading font-semibold mb-3">
+          Profile Picture<span class="starColorRed">*</span>
+        </div>
+
+        <button type="submit" mat-raised-button color="primary" class="uppercase">Change Photo</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Company Name <span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Email<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Users Package:<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+        </mat-form-field>
+
+        <p class="text-sm" style="background-color: tomato; padding: 0.3rem">You will be charged $7.00/User, however,1
+          User is
+          free</p>
+        <br> <br>
+        <p class="text-sm" style=" background-color: blue; padding: 0.3rem">Total User Package Cost : 14.00 </p>
+      </div>
+
+
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Storage Upgrade<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+        <p class="text-sm" style="background-color: tomato;  padding: 0.3rem">You will be charged $ 5.00/GB however 1 GB
+          is Free
+        </p>
+        <br> <br>
+        <p class="text-sm" style=" background-color: blue;  padding: 0.3rem">Total Storage Package Cost : 10.00</p>
+      </div>
+    </div>
+
+    <div>
+
+      <div class="text-[15px] text-heading font-semibold mb-7">
+        <strong>Package Upgrade Before: 12/16/2023</strong><span class="starColorRed">*</span>
+      </div>
+      <button type="button" mat-raised-button color="primary" class="uppercase">Upgrade Package</button>
+    </div>
+    <div class="grid grid-cols-4 gap-4" style="margin-top: 20px;">
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Phone<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Fax<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Address<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            City<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            State<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Country<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Post Code<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Website<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" required />
+
+        </mat-form-field>
+      </div>
+
+
+
+    </div>
+
+    <div style="background-color: #6F4EF6;">
+      <div class="text-[20px] text-heading font-semibold mb-3 p-2">
+        <span style="color: white; font-size: 20px;">Merchant Settings</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4" style="margin-top: 10px;">
+      <div>
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Merchant<span class="starColorRed">*</span>
+          </div>
+          <mat-select name="title" name="merchant" [(ngModel)]="createoreditMerchantDto.id"
+            (selectionChange)="onMerchantChange($event)">
+            <mat-option [value]="merchant.id" *ngFor="let merchant of merchants">{{merchant.name}}</mat-option>
+
+          </mat-select>
+
+
+        </mat-form-field>
+      </div>
+      <div *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            API Key<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" matInput name="apiKey" id="apiKey" [(ngModel)]="createoreditMerchantDto.apiKey" required
+            disabled />
+
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            API Secret Key<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" disabled matInput name="apiKey" id="apiKey"
+            [(ngModel)]="createoreditMerchantDto.apiSecretKey" required />
+
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Token<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" disabled matInput name="apiKey" id="apiKey" [(ngModel)]="createoreditMerchantDto.token"
+            required />
+
+        </mat-form-field>
+      </div>
+      <div *ngIf="createoreditMerchantDto.name=='Card Connect'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            UserName<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" disabled matInput name="apiKey" id="apiKey" [(ngModel)]="createoreditMerchantDto.ccun"
+            required />
+
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="createoreditMerchantDto.name=='Card Connect'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            password<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" disabled matInput name="apiKey" id="apiKey" [(ngModel)]="createoreditMerchantDto.ccpwd"
+            required />
+
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="createoreditMerchantDto.name=='Card Connect'">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <div class="text-[15px] text-heading font-semibold mb-3">
+            Merchantid<span class="starColorRed">*</span>
+          </div>
+          <input type="apiKey" disabled matInput name="apiKey" id="apiKey" [(ngModel)]="createoreditMerchantDto.ccmid"
+            required />
+
+        </mat-form-field>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <button style="width: 160px;" type="button" (click)="savedata()" mat-raised-button color="primary"
+          class="uppercase">Add/Edit</button>
+
+
+      </div>
+
+
+
+    </div>
+    <hr style="margin-top: 10px;" />
+    <div style="background-color: #6F4EF6;">
+      <div class="text-[20px] text-heading font-semibold mb-3 p-2">
+        <strong><span style="color: white; font-size: 20px;">Social Media Links</span></strong>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+        <div class="cashier-select-field">
+          <div class="text-[15px] text-heading font-semibold">
+            Facebook
+          </div>
+          <div class="cashier-input-field-style" style="display: flex">
+            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+              <mat-label class="hidden"></mat-label>
+              <input type="text" placeholder="facebook..." matInput name="company" maxlength="50" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+        <div class="cashier-select-field">
+          <div class="text-[15px] text-heading font-semibold">
+            Twitter
+          </div>
+          <div class="cashier-input-field-style" style="display: flex">
+            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+              <mat-label class="hidden"></mat-label>
+              <input type="text" placeholder="Twitter..." matInput name="company" maxlength="50" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+
+      <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+        <div class="cashier-select-field">
+          <div class="text-[15px] text-heading font-semibold">
+            Linkdin
+          </div>
+          <div class="cashier-input-field-style" style="display: flex">
+            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+              <mat-label class="hidden"></mat-label>
+              <input type="text" placeholder="Twitter..." matInput name="company" maxlength="50" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+        <div class="cashier-select-field">
+          <div class="text-[15px] text-heading font-semibold">
+            Youtube
+          </div>
+          <div class="cashier-input-field-style" style="display: flex">
+            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+              <mat-label class="hidden"></mat-label>
+              <input type="text" placeholder="Youtube..." matInput name="company" maxlength="50" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-6 md:col-span-12 sm:col-span-12">
+      <div class="text-right maxSm:text-left">
+
+        <div class="default-light-theme mb-7 space-x-2">
+
+
+          <button type="button" mat-raised-button color="primary" class="uppercase">Save</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>

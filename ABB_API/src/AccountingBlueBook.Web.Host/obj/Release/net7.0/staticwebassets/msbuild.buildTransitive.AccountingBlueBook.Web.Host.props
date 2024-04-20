@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AccountingBlueBook.Web.Host.props" />
+</Project>

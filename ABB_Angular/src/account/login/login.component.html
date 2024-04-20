@@ -1,0 +1,44 @@
+﻿<div class="cashier-login-area flex justify-center items-center w-full h-full">
+  <div class="cashier-login-wrapper">
+    <div class="cashier-login-logo text-center mb-12">
+      <img src="../../../assets/img/logo/logo.png" alt="logo not found">
+    </div>
+    <div class="cashier-select-field mb-5">
+      <div class="cashier-input-field-style">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden">Joseph Tylor</mat-label>
+          <input matInput [placeholder]="'Username'" value="Admin"
+            [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress">
+        </mat-form-field>
+        <caption><mat-icon style="transform: translateY(-80%)">person_outline</mat-icon></caption>
+      </div>
+    </div>
+    <div class="cashier-select-field mb-5">
+      <div class="cashier-input-field-style cashier-input-field-style-eye">
+        <mat-form-field [hideRequiredMarker]="true" appearance="fill">
+          <mat-label class="hidden">Enter your password</mat-label>
+          <input matInput [placeholder]="'Password'" [(ngModel)]="authService.authenticateModel.password"
+            [type]="hide ? 'password' : 'text'" value="123456">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon style="transform: translateY(-60%)">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="cashier-login-footer-forgot mb-5">
+      <a [routerLink]="['/forgotpassword']" class="text-[16px] inline-block text-themeBlue">Forgot Password?</a>
+    </div>
+    <div class="cashier-login-btn mb-7">
+      <div class="cashier-login-btn-full default-light-theme">
+        <button (click)="login()" type="submit" mat-raised-button color="primary">Log in</button>
+      </div>
+    </div>
+    <div class="cashier-login-footer">
+      <div class="cashier-login-footer-account text-center">
+        <span class="text-[16px] inline-block text-bodyText">Have not an account? <a [routerLink]="['/account/signup']"
+            class="text-[16px] text-themeBlue">Register</a></span>
+      </div>
+    </div>
+  </div>
+</div>

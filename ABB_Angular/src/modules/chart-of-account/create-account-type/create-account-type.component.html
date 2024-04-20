@@ -1,0 +1,83 @@
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner">
+      <div class="cashier-popup-header relative mb-11">
+        <div class="cashier-popup-header-title">
+          <h4>Create Account Type</h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <form [formGroup]="createAccountForm">
+        <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+          <div class="col-span-12">
+            <h5 class="text-[15px] text-heading font-semibold ">
+              {{ "Account type" | localize }}
+            </h5>
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"> </mat-label>
+                <input
+                formControlName="typeName" 
+                type="text"
+                matInput
+                name="name"
+                id="name" 
+                maxlength="32"
+                [(ngModel)]="createAccountType.name"
+                
+                #nameEl
+                placeholder="Account type"
+                #accountnameEl 
+                  
+                />
+                <mat-error>Please Add Name</mat-error>
+              </mat-form-field>
+            
+            </div>
+          </div>
+          
+          
+          <div class="md:col-span-6 sm:col-span-12">
+            
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              
+          
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                class="saveBtnAccType"
+                [disabled]="!createAccountForm.valid"
+                (click)="save()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button
+                type="button"
+                mat-raised-button
+                color="accent"
+                (click)="hideDialog()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- <p class="text-xs mt-2 text-blue-600">Last Code Entry: {{data.lastEntry}}</p> -->
+</mat-dialog-content>

@@ -1,0 +1,261 @@
+<div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5 contactInfoCont">
+  <div class="lg:col-span-1 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Type
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <mat-select placeholder="Select Type" name="customerCotacttype" [(value)]="customerCotact.contactType">
+          <mat-option [value]="'Manager'">Manager</mat-option>
+          <mat-option [value]="'CEO'">CEO</mat-option>
+          <mat-option [value]="'Accountant'">Accountant</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Contact Person Name
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="Contact person name " type="text" matInput name="taxId" id="taxId" maxlength="50"
+          [(ngModel)]="customerCotact.name" #taxIdEl />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-1 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Type
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <mat-select placeholder="Select Type" name="customerCotacttype" [(value)]="customerCotact.numberType">
+          <mat-option [value]="'Personal'">Personal</mat-option>
+          <mat-option [value]="'Home'">Home</mat-option>
+          <mat-option [value]="'Office'">Office</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Contact Phone Number
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="+123456789 " type="number" matInput name="taxId" id="taxId"oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="15" #taxIdEl
+          [(ngModel)]="customerCotact.number" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-1 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Type
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <mat-select placeholder="Select Type" name="customerCotacttype" [(value)]="customerCotact.emailType">
+          <mat-option [value]="'Personal'">Personal</mat-option>
+          <mat-option [value]="'Home'">Home</mat-option>
+          <mat-option [value]="'Office'">Office</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Email Address
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="Email address " type="email" [email]="true" matInput name="taxId" id="taxId" maxlength="50" #taxIdEl
+          [(ngModel)]="customerCotact.email" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+    </h5>
+    <div class="cashier-input-field-style pt-5" style="display: flex">
+      <mat-checkbox class="example-margin" [(ngModel)]="customerCotact.isPrimary">
+        Primary
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Fax
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="Fax " type="text" matInput name="taxId" id="taxId" maxlength="50" #taxIdEl
+          [(ngModel)]="customerCotact.fax" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      E-Fax
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="E-Fax " type="text" matInput name="taxId" id="taxId" maxlength="50" #taxIdEl
+          [(ngModel)]="customerCotact.eFax" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Website
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input type="text" matInput name="taxId" id="taxId" maxlength="50" #taxIdEl
+          [(ngModel)]="customerCotact.website" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex; padding-top: 0.5rem;">
+      <button mat-raised-button color="primary" (click)="addMore()"
+        [disabled]="customerCotact.name==null||customerCotact.number==null||customerCotact.email==null">
+        Add
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-span-12">
+  <div class="cashier-select-field">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Comment
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field style="width: 100%;">
+        <mat-label class="hidden"></mat-label>
+        <textarea matInput placeholder="Comment" [(ngModel)]="comment" style="color: #dc2626;">
+    </textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+<div class="col-span-12 flex justify-end -mt-8 mb-4">
+  <div class="flex cashier-managesale-top-btn default-light-theme pt-2.5 customerBtnContainer">
+    <div class="flex items-center">
+      <div class="balanceContainer">
+        Balance: <span> ${{totalBalance.toFixed(2)}} </span>
+      </div>
+      <button mat-raised-button type="button" [matMenuTriggerFor]="actionTrigger" color="accent" icon="pi pi-times">
+        Actions <i class="fa fa-chevron-down" style="margin-left: 1rem;"></i>
+      </button>
+      <mat-menu #actionTrigger="matMenu" xPosition="before">
+        <button (click)="_router.navigate(['/app/invoices','c_' + customerId])" mat-menu-item>
+          <span>Invoices</span>
+        </button>
+        <button (click)="_router.navigate(['/app/all-sales/received-payment','c_' + customerId])" mat-menu-item>
+          <span>Received Payments</span>
+        </button>
+      </mat-menu>
+    </div>
+    <button mat-raised-button [routerLink]="['../customers']" type="button" color="accent" icon="pi pi-times">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="save()">
+      Save
+    </button>
+  </div>
+</div>
+<!-- Table -->
+<div class="cashier-salereturns-table-area">
+  <div class="cashier-salereturns-table-inner">
+    <div class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7">
+      <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
+
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Contact Type</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Contact Person Name</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Phone Type</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Phone</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Email Type</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Email</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Primary</h5>
+        </div>
+        <div class="cashier-salereturns-table-actionJ">
+          <h5>Action</h5>
+        </div>
+      </div>
+      <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+        *ngFor="let item of customerCotacts">
+        <div class="cashier-salereturns-table-dateJ pl-2">
+          <span>{{ item?.contactType }}</span>
+
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-2">
+          <span>{{ item?.name }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-2">
+          <span>{{ item?.numberType }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-2.5">
+          <span>{{ item?.number }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-5">
+          <span>{{ item?.emailType }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-5">
+          <span>{{ item?.email }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ pl-5">
+          <span>{{ item?.isPrimary }}</span>
+        </div>
+        <div class="cashier-salereturns-table-actionJ pl-2">
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style"
+            aria-label="Example icon-button with a menu">
+            Action <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="updateContactInfo(item)">
+              <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteContactInfo(item)">
+              <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+              <span>Delete</span>
+            </button>
+
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="cashier-pagination-area">
+    <app-pagination (notifyParent)="e($event)" #pagination [collectionSize]="totalRecords"
+      [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+  </div> -->
+</div>

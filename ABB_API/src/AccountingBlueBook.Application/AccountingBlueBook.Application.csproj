@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>AccountingBlueBook.Application</AssemblyName>
+    <PackageId>AccountingBlueBook.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>AccountingBlueBook</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AccountingBlueBook\**" />
+    <EmbeddedResource Remove="AccountingBlueBook\**" />
+    <None Remove="AccountingBlueBook\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="Nancy" Version="2.0.0" />
+    <PackageReference Include="Twilio" Version="6.11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccountingBlueBook.Core\AccountingBlueBook.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,120 @@
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner">
+      <div class="cashier-popup-header relative mb-11">
+        <div class="cashier-popup-header-title">
+          <h4 class="text-[20px] text-heading font-bold">{{ data.id ? "Edit User": "Add User" }}</h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <form autocomplete="off" #createOrEditUserForm="ngForm" (ngSubmit)="save()">
+        <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Name</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input required matInput [placeholder]="'Jhon'" name="name" id="name" required maxlength="32"
+                    [(ngModel)]="user.name">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Surname</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input matInput [placeholder]="'Doe'" name="surname" id="surname" required maxlength="32"
+                    [(ngModel)]="user.surname">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Email</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input type="email" matInput [placeholder]="'info@example.com'" name="surname" id="surname" required
+                    maxlength="32" [(ngModel)]="user.emailAddress"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-12 sm:col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Role </h5>
+              <div class="cashier-input-field-style">
+                <p-dropdown [options]="roles" name="role" placeholder="Select role" [filter]="true"
+                  [(ngModel)]="selectedRole" class="width-100-pc" (onFilter)="filterRoles($event)"
+                  optionLabel="value"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Password</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input [type]="hide ? 'password' : 'text'" name="password" id="password" required matInput
+                    [placeholder]="'Enter Password'" maxlength="32"
+                    pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$" reverse="true"
+                    [(ngModel)]="user.password" #passwordModel="ngModel">
+                  <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-select-field mb-6">
+              <h5 class="text-[15px] text-heading font-semibold mb-3">Confirm Password</h5>
+              <div class="cashier-input-field-style">
+                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                  <mat-label class="hidden">Customer name</mat-label>
+                  <input [type]="hideConfirmPassword ? 'password' : 'text'" matInput [placeholder]="'Confirm Password'">
+                  <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                    [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hideConfirmPassword">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button type="button" mat-raised-button color="accent" (click)="hideDialog()">Cancel</button>
+            </div>
+          </div>
+          <div class="md:col-span-6 sm:col-span-12">
+            <div class="cashier-popup-btn default-light-theme pt-1.5">
+              <button type="submit" mat-raised-button [disabled]="!createOrEditUserForm.valid"
+                [ngClass]="{ 'btn-disabled': !createOrEditUserForm.valid}" color="primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>

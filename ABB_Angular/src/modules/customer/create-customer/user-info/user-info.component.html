@@ -1,0 +1,162 @@
+<div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-5">
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Type
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <mat-select placeholder="" [(ngModel)]="userNamePassword.type" name="phone.type">
+          <mat-option [value]="'Personal'">Personal</mat-option>
+          <mat-option [value]="'Office'">Office</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      UserName
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="Username" type="text" matInput [(ngModel)]="userNamePassword.userName" name="taxId"
+          id="taxId" maxlength="50" #taxIdEl />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Password
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="password" type="password" matInput [(ngModel)]="userNamePassword.password" name="taxId"
+          id="taxId" maxlength="50" #taxIdEl />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      URL
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="url " type="text" matInput [(ngModel)]="userNamePassword.url" name="taxId" id="taxId"
+          maxlength="50" #taxIdEl />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+      Description
+    </h5>
+    <div class="cashier-input-field-style" style="display: flex">
+      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+        <mat-label class="hidden"></mat-label>
+        <input placeholder="Description " type="text" matInput [(ngModel)]="userNamePassword.description" name="taxId"
+          id="taxId" maxlength="50" #taxIdEl />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <h5 class="text-[15px] text-heading font-semibold">
+    </h5>
+    <div class="cashier-input-field-style pt-5" style="display: flex">
+      <button mat-raised-button color="primary"
+        [disabled]="userNamePassword.userName==null ||userNamePassword.password==null||userNamePassword.url==null"
+        (click)="addMore()">
+        Add More
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-span-12">
+  <div class="cashier-managesale-top-btn default-light-theme pt-2.5">
+    <button mat-raised-button type="button" [routerLink]="['../customers']" color="accent" icon="pi pi-times">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="save()">
+      Save
+    </button>
+  </div>
+</div>
+<!-- Table -->
+<div class="cashier-salereturns-table-area">
+  <div class="cashier-salereturns-table-inner">
+    <div class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7">
+      <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12">
+
+        <div class="cashier-salereturns-table-dateJ">
+
+          <h5>Type</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>UserName</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Password</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5></h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>URL</h5>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <h5>Description</h5>
+        </div>
+        <div class="cashier-salereturns-table-actionJ">
+          <h5>Action</h5>
+        </div>
+      </div>
+      <div class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+        *ngFor="let item of userNamePasswords">
+        <div class="cashier-salereturns-table-dateJ">
+          <span>{{ item?.type }}</span>
+
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <span>{{ item?.userName }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ" style="display: inline;">
+          <span >**** </span>
+          <span matTooltip="Info about the action" aria-label="Button that displays a tooltip when focused or hovered over">i</span> 
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <span>{{ item?.state }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <span>{{ item?.url }}</span>
+        </div>
+        <div class="cashier-salereturns-table-dateJ">
+          <span>{{ item?.description }}</span>
+        </div>
+
+        <div class="cashier-salereturns-table-actionJ">
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style"
+            aria-label="Example icon-button with a menu">
+            Action <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="update(item)">
+              <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="delete(item)">
+              <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+              <span>Delete</span>
+            </button>
+
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="cashier-pagination-area">
+    <app-pagination (notifyParent)="e($event)" #pagination [collectionSize]="totalRecords"
+      [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+  </div> -->
+</div>

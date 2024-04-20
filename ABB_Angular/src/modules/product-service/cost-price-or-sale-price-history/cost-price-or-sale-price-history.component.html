@@ -1,0 +1,174 @@
+<div class="cashier-breadcrumb-area px-7 py-9 bg-white mb-5">
+  <div class="cashier-breadcrumb-area-inner px-0.5">
+    <h5 class="text-[20px] text-heading font-bold mb-3">Source Referal</h5>
+    <div class="cashier-breadcrumb-area-inner-wrap">
+      <span class="text-[14px] text-gray font-normal inline-block mr-2"
+        >Products/Services</span
+      >
+      <span
+        class="text-[12px] text-bodyText font-normal inline-block mr-2 translate-y-0"
+        ><i class="far fa-chevron-right"></i
+      ></span>
+      <span class="text-[14px] text-gray font-normal inline-block mr-2"
+        >Products/Services</span
+      >
+    </div>
+  </div>
+</div>
+<div class="cashier-content-area px-7">
+  <div
+    class="cashier-salereturns-area bg-white custom-shadow rounded-lg  mb-5"
+  >
+    <h4 class="text-[20px] font-bold text-heading mb-9">
+
+      {{data.data == "CostPrice" ?"Cost Price History" :"Sale Price History"}}
+    </h4>
+    
+    <div class="cashier-table-header-search-area">
+      <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+        <div class="lg:col-span-5 md:col-span-6 col-span-12">
+          <div class="cashier-table-header-search relative maxSm:mb-4">
+            <input
+              type="text"
+              placeholder="{{ 'Search' }}"
+             
+            />
+            <span>
+              <mat-icon>search</mat-icon>
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="cashier-salereturns-table-area">
+      <div class="cashier-salereturns-table-inner">
+        <div *ngIf="data.data == 'CostPrice' ? true : false "
+          class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7"
+        >
+          <div
+            class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+          >
+         
+            <div class="cashier-salereturns-table-dateJ">
+              <h5>Cost Price</h5>
+            </div>
+            <div class="cashier-salereturns-table-referenceJ">
+              <h5>From  </h5>
+            </div>
+            <div class="cashier-salereturns-table-customerJ">
+              <h5>To </h5>
+            </div>
+       
+
+             <div class="cashier-salereturns-table-warehouseJ">
+                            <h5>Status</h5>
+                        </div>
+           
+          </div>
+          <div 
+            class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+            *ngFor="let item of productServiceDto"
+          >
+     
+            <div class="cashier-salereturns-table-dateJ">
+              <span>{{ item.name }}</span>
+            </div>
+            <div class="cashier-salereturns-table-referenceJ">
+               
+              <span>{{ item.fromCostPrice}}</span>
+            </div>
+            <div class="cashier-salereturns-table-customerJ">
+              {{ item.toCostPrice}}
+            </div>
+      
+            <div class="cashier-salereturns-table-warehouseJ">
+              <span *ngIf="item.isActive">
+                <figure
+                  class="text-[12px] font-semibold leading-[18px] text-themeGreenDark px-2.5 h-5 rounded-[100px] inline-block border border-solid border-themeGreenDark"
+                >
+                  Active
+                </figure>
+              </span>
+              <span *ngIf="!item.isActive">
+                <figure
+                  class="text-[12px] font-semibold leading-[18px] text-themeOrangeDark px-2.5 h-5 rounded-[100px] inline-block border border-solid border-themeOrangeDark"
+                >
+                  InActive
+                </figure>
+              </span>
+            </div>
+           
+          </div>
+        </div>
+        <div *ngIf="data.data == 'SalePrice' ? true : false "
+        class="cashier-salereturns-table-inner-wrapper border border-solid border-grayBorder border-b-0 mb-7"
+      >
+        <div
+          class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+        >
+       
+          <div class="cashier-salereturns-table-dateJ">
+            <h5>Sale Price</h5>
+          </div>
+          <div class="cashier-salereturns-table-referenceJ">
+            <h5>From  </h5>
+          </div>
+          <div class="cashier-salereturns-table-customerJ">
+            <h5>To</h5>
+          </div>
+     
+
+           <div class="cashier-salereturns-table-warehouseJ">
+                          <h5>Status</h5>
+                      </div>
+         
+        </div>
+        <div 
+          class="cashier-salereturns-table-list flex border-b border-solid border-grayBorder h-12"
+          *ngFor="let item of productServiceDto"
+        >
+   
+          <div class="cashier-salereturns-table-dateJ">
+            <span>{{ item.name }}</span>
+          </div>
+          <div class="cashier-salereturns-table-referenceJ">
+             
+            <span>{{ item.fromSalePrice}}</span>
+          </div>
+          <div class="cashier-salereturns-table-customerJ">
+            {{ item.toSalePrice}}
+          </div>
+    
+          <div class="cashier-salereturns-table-warehouseJ">
+            <span *ngIf="item.isActive">
+              <figure
+                class="text-[12px] font-semibold leading-[18px] text-themeGreenDark px-2.5 h-5 rounded-[100px] inline-block border border-solid border-themeGreenDark"
+              >
+                Active
+              </figure>
+            </span>
+            <span *ngIf="!item.isActive">
+              <figure
+                class="text-[12px] font-semibold leading-[18px] text-themeOrangeDark px-2.5 h-5 rounded-[100px] inline-block border border-solid border-themeOrangeDark"
+              >
+                InActive
+              </figure>
+            </span>
+          </div>
+         
+        </div>
+      </div>
+      </div>
+      <div class="cashier-pagination-area">
+        <app-pagination
+          
+         
+        ></app-pagination>
+      </div>
+    </div>
+
+    <!-- <mat-paginator #paginatorPageSize [pageSizeOptions]="pageSizes" showFirstLastButtons></mat-paginator> -->
+  </div>
+</div>

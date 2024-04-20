@@ -1,0 +1,82 @@
+.head-img {
+    padding: 3px;
+    border: 1px solid #f4f4f4;
+    width: 60px;
+  }
+  
+  .example-chip-list {
+    width: 100%;
+  }
+  
+  ::ng-deep {
+    .invoiceFormField.mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: transparent;
+    }
+    .invoiceTblCell .mat-form-field-wrapper {
+      padding: 0;
+    }
+    .mat-form-field-autofill-control {
+      height: 17px;
+    }
+    .mat-form-field-infix {
+      padding: 0px;
+      position: relative;
+      bottom: 10px;
+    }
+    // .mat-form-field-infix{
+    //   padding: 0px !important;
+    // }
+  }
+  .example-section {
+    padding-top: 37px;
+  }
+  
+  .align-right {
+    text-align: right;
+  }
+  
+  .align-center {
+    text-align: center;
+    width: 50px;
+    padding-top: 10px;
+  }
+  
+  @media (min-width: 992px) {
+    .custom-dropdown {
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: -12px;
+      /* margin-top: -12px; */
+      margin-top: 0px;
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .custom-dropdown {
+      width: 100%;
+      margin-bottom: -12px;
+      /* margin-top: -12px; */
+      margin-top: 0px;
+    }
+  }
+  
+  // .close {
+  //   float: right;
+  //   position: relative;
+  //   bottom: 85px;
+  //   color: red;
+  //   font-size: x-large;
+  //   font-weight: bold;
+  //   right: 20px;
+  //   cursor: pointer;
+  // }
+  
+  .tbl-header {
+    padding: 6px 16px 6px 16px;
+    background: #f6f4f4;
+  }
+  
+  .starColorRed{
+    color: red;
+  }

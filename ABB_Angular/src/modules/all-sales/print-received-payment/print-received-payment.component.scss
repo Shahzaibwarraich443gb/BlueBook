@@ -1,0 +1,66 @@
+@media print {
+  @page {
+    background: #cbe3eb;
+    margin: 25px;
+  }
+
+  p {
+    margin-top: 5px !important;
+  }
+
+  table {
+    text-indent: 19px;
+    border-collapse: initial;
+  }
+
+  th {
+    background: #cbe3eb;
+    width: 170px;
+    padding: 0px 5px 0px 5px;
+    border: 2px solid #939393;
+    color: #53abc6;
+    text-overflow: inherit;
+    /* text-align: center; */
+  }
+
+  tr {
+    width: 180px;
+    border: 1px solid;
+    text-align: center;
+  }
+
+  tbody tr td {
+    border: 1px solid;
+  }
+}
+
+p {
+  margin-top: 5px !important;
+}
+
+table {
+  text-indent: 19px;
+  border-collapse: initial;
+}
+
+th {
+  background: #cbe3eb;
+  width: 170px;
+  padding: 0px 5px 0px 5px;
+  border: 2px solid #939393;
+  color: #53abc6;
+  text-overflow: inherit;
+  /* text-align: center; */
+}
+
+tr {
+  width: 180px;
+  border: 1px solid;
+  text-align: center;
+}
+label {
+  text-align: center;
+}
+tbody tr td {
+  border: 1px solid;
+}

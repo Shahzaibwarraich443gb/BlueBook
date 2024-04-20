@@ -1,0 +1,165 @@
+<div #printArea class="print-area" style="margin: 25px;">
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="font-weight:600">{{companyName}}</p>
+            <p class="uppercase">
+                {{comAddress}}
+            </p>
+            <p class="uppercase">{{comCity}} , {{comState}} {{comPostCode}}</p>
+            <p class="uppercase">{{comCountry}}</p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> {{comPhone}}
+            </p>
+            <p>
+            </p>
+            <div><span style="font-weight:600 !important;">Email:</span> {{comEmail}}</div>
+            <p></p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="color:#53abc6;text-align:left; font-size:24px">Invoice</p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 style="font-weight:600 !important;">Recipient</h2>
+            <p>
+                {{customerName}}
+            </p>
+            <p style="width:500px;">
+                {{customerAddress}}
+            </p>
+            <p class="uppercase">{{customerCity}} , {{customerState}} {{customerPostCode}}</p>
+            <p class="uppercase">{{customerCountry}}</p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> {{customerPhone}}
+            </p>
+            <p>
+                <span style="font-weight:600 !important;">Email:</span> {{customerEmail}}
+            </p>
+
+        </div>
+        <div style="margin-left: 500px;width: 400px;">
+            <table class="meta">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Invoice #</span>
+                        </th>
+                        <td>
+                            <span> {{orignalInvoiceNo}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <td><span> {{customerName}}</span></td>
+                    </tr>
+                    <tr>
+                        <th><span>CSR</span></th>
+                        <td><span> {{csr}}</span></td>
+                    </tr>
+                    <tr>
+                        <th><span>Date</span></th>
+                        <td style="width: 200px;">
+                            <span>
+                                {{paymentDate | date}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Due Date</span></th>
+                        <td style="width: 200px;">
+                            <span>
+                                {{paymentDate | date}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="inventory">
+                <thead>
+                    <tr>
+                        <th style="width:25px;">#</th>
+                        <th>Product/Service</th>
+                        <th><span><span> Description </span></span></th>
+                        <th><span><span> Quantity </span></span></th>
+                        <th><span><span> Rate </span></span></th>
+                        <th><span><span> Sales Tax % </span></span></th>
+                        <th><span><span> Discount % </span></span></th>
+                        <th><span><span> Amount </span></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dataList; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{item.product}}</td>
+                        <td>
+                            <span>{{item.description}}</span>
+                        </td>
+                        <td>
+                            <span data-prefix="">
+                                <span>{{item.quantity}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span>{{item.rate}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span>{{item.saleTax}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span>{{item.discount}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span class="text-left">{{item.amount}}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div style="width: 65%;">
+            <h5>Notes</h5>
+            <textarea id="Note" [(ngModel)]="note" name="Note" readonly="readonly"
+                class="border-gray-dark input-mask form-control" style="border: 2px solid gray;" rows="4"
+                cols="50"></textarea>
+        </div>
+        <div style="margin-top: 15px;width: 35%;">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label style="width: 130px;">Total </label></td>
+                        <td><label style="width: 100px;">$ {{total}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label style="width: 130px;">Tax </label></td>
+                        <td><label style="width: 100px;">$ {{totalSaleTax}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label style="width: 130px;">Amount Received </label></td>
+                        <td><label style="width: 100px;"> </label></td>
+                    </tr>
+                    <tr>
+                        <td><label>Balance Due </label></td>
+                        <td><label>$ {{total}}<span class="AmountToCredit">0</span></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

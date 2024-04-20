@@ -1,0 +1,45 @@
+
+<div class="col-span-12 mt-4">
+
+  <div class="col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Comment
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field style="width: 100%;">
+          <mat-label class="hidden"></mat-label>
+          <textarea matInput placeholder="Comment" [(ngModel)]="comment" style="color: #dc2626;">
+      </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-12 flex justify-end -mt-8 mb-4">
+    <div class="flex cashier-managesale-top-btn default-light-theme pt-2.5 customerBtnContainer">
+      <div class="flex items-center">
+        <div class="balanceContainer">
+          Balance: <span> ${{totalBalance.toFixed(2)}} </span>
+        </div>
+        <button mat-raised-button type="button" [matMenuTriggerFor]="actionTrigger" color="accent" icon="pi pi-times">
+          Actions <i class="fa fa-chevron-down" style="margin-left: 1rem;"></i>
+        </button>
+        <mat-menu #actionTrigger="matMenu" xPosition="before">
+          <button (click)="_router.navigate(['/app/invoices','c_' + customerId])" mat-menu-item>
+            <span>Invoices</span>
+          </button>
+          <button (click)="_router.navigate(['/app/all-sales/received-payment','c_' + customerId])" mat-menu-item>
+            <span>Received Payments</span>
+          </button>
+        </mat-menu>
+      </div>
+      <button mat-raised-button type="button"(click)="backToListView()" color="accent" icon="pi pi-times">
+        Cancel
+      </button>
+      <button (click)="addCustomerCRMComment()" mat-raised-button color="primary">
+        Save
+      </button>
+    </div>
+  </div>
+</div>

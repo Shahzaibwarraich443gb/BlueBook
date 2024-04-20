@@ -1,0 +1,135 @@
+.cardContainerPersonalInfo div {
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    height: 6rem !important;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0.8rem;
+}
+
+/* styles.css */
+.user-box {
+    position: relative;
+    /* To allow absolute positioning of the circles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 32px;
+    color: #888;
+    overflow: hidden;
+    /* Hide overflowing colored circles */
+}
+
+.status-circle {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.circle-green {
+    background-color: #00cc00;
+    /* Green circle for users with logic "green" */
+}
+
+.circle-red {
+    background-color: #ff0000;
+    /* Red circle for users with logic "red" */
+}
+
+/* Optional: Add spacing between the user boxes */
+.grid-cols-3>* {
+    margin-bottom: 16px;
+}
+
+/* styles.css (or styles.scss) */
+.user-card {
+    background-color: #2196f3;
+    /* Blue background color for the card */
+    width: 300px;
+    /* Adjust the width as per your requirement */
+    margin: 0 auto;
+    /* Center the card horizontally */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Add a subtle box shadow */
+    transition: transform 0.2s ease;
+    /* Add a smooth transition effect on hover */
+
+    /* Hover effect to elevate the card slightly on hover */
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.user-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    /* White text color for the content */
+    padding: 24px;
+
+}
+
+.user-logo {
+    width: 100px;
+    /* Set the width and height as needed */
+    height: 100px;
+    margin-bottom: 20px;
+    /* Adjust the margin as needed */
+    background-color: #f0f0f0;
+    /* Add a background color to the user logo container for a better visual */
+    border-radius: 50%;
+    /* Apply border-radius to make it circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    /* Adjust the font size for the icon as needed */
+}
+
+
+
+.user-name {
+    font-size: 28px;
+    /* Larger font size for the heading */
+    font-weight: bold;
+    /* Add bold style to the heading */
+    margin: 0;
+}
+
+.user-email {
+    font-size: 18px;
+    /* Font size for the description */
+    margin: 8px 0;
+    /* Add some spacing between the heading and description */
+}
+
+/* Add a circular user avatar image */
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    color: #2196f3;
+    /* Blue color for the user icon */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow to the avatar */
+    margin-bottom: 16px;
+}

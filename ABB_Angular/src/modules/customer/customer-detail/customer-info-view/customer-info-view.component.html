@@ -1,0 +1,582 @@
+<div class="grid grid-cols-12 gap-x-12 maxSm:gap-x-0 pt-3 customerInfoContainer">
+  <!-- Business Name -->
+  <div class="lg:col-span-6 md:col-span-6 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Business Name
+      </h5>
+      <div class="cashier-input-field-style">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input type="text" matInput name="bussinessName" [(ngModel)]="customer?.customerInfo.bussinessName"
+            id="bussinessName" maxlength="50" placeholder="Busines Name" #bussinessNameEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Tax id -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Tax Id
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input [textMask]="taxIdMask" type="text" matInput name="taxId"
+            [(ngModel)]="customer?.customerInfo.taxId" id="taxId" maxlength="11" #taxIdEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Fiscal year -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Fiscal Year End
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input #fiscalYearEndInput placeholder="MM/DD" matInput [(ngModel)]="fiscalYearEndAlt"
+            (ngModelChange)="onCustDateChange('fiscalYearEnd')" name="fiscalYearEnd" id="fiscalYearEnd"
+            [matDatepicker]="fiscalYearEnd" (focus)="fiscalYearEnd.open()" (focusout)="onFiscalYearChange()">
+
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="fiscalYearEnd">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #fiscalYearEnd>
+
+          </mat-datepicker>
+
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12 customerContAddSelect">
+    <div class="cashier-select-field mb-6">
+      <h5 class="text-[15px] text-heading font-semibold mb-1">
+        Source Referral
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-select placeholder=" Source Referral  " [(value)]="customer?.customerInfo.sourceReferralType.id"
+          name="sourceReferralTypeId" required style="  border-bottom: 1px solid;">
+          <mat-option *ngFor="let item of sourceReferralTypes" [value]="item.id">{{item.name }}</mat-option>
+        </mat-select>
+
+        <button class="selectAddBtn" style="display: flex !important; justify-content: center; align-items: center;"
+          type="button" mat-raised-button color="primary" (click)="openCreateSourceReferralTypeDialog()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- customer Name -->
+  <div class="lg:col-span-4 md:col-span-4 sm:col-span-12 ">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Customer Name
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Customer Name" type="text" matInput name="name" [(ngModel)]="customer?.customerInfo.name"
+            id="name" maxlength="50" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Customer Type -->
+  <div class="lg:col-span-2 md:col-span-2 sm:col-span-12 customerContAddSelect">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Customer Type
+      </h5>
+
+      <div class="cashier-input-field-style" style="display: flex; position: relative;">
+        <mat-select placeholder="Select Type  " [(value)]="customer?.customerInfo?.customerType.id"
+          name="customer?.customerInfo?.customerType.id" style="  border-bottom: 1px solid;">
+          <mat-option *ngFor="let item of customerTypeDto" [value]="item.id">{{item.name
+            }}</mat-option>
+        </mat-select>
+        <button class="selectAddBtn" style="display: flex; justify-content: center; align-items: center;" type="button"
+          mat-raised-button color="primary" (click)="openCustomerTypeDialog()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ssn -->
+  <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        SSN
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input type="text" [textMask]="custSSNMask" matInput name="customer_customerInfo_ssn"
+            [(ngModel)]="customer?.customerInfo.ssn" id="customer_customerInfo_ssn" maxlength="30" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DOB -->
+  <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DOB
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input type="text" placeholder="MM-DD-YYYY" matInput name="dateOfBirth" [(ngModel)]="dobAlt"
+            (ngModelChange)="onCustDateChange('dob')" id="dateOfBirth" maxlength="50" #dateOfBirthEl
+            [matDatepicker]="releasedAtPicker2" (focus)="releasedAtPicker2.open()" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker2">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker2>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Job Description -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Job Description
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Job Descriptions" type="text" matInput name="jobDescription"
+            [(ngModel)]="customer?.customerInfo.jobDescription" id="jobDescription" maxlength="150" #jobDescriptionEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Driving License -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Driving License
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input type="text" matInput name="drivingLicense" [(ngModel)]="customer?.customerInfo.drivingLicense"
+            id="name" maxlength="20" #drivingLicenseEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL Issue Date -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL Issue Date
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="MM-DD-YYYY" type="text" matInput name="dlIssue" [(ngModel)]="dlIssueAlt"
+            (ngModelChange)="onCustDateChange('dlIssue')" id="dlIssue" maxlength="50" #dlIssueEl
+            [matDatepicker]="releasedAtPicker3" (focus)="releasedAtPicker3.open()" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker3">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker3>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL Expiry -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL Expiry
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="MM-DD-YYYY" type="text" matInput name="dlExpiry" [(ngModel)]="dlExpiryAlt"
+            (ngModelChange)="onCustDateChange('dlExpiry')" id="dlExpiry" maxlength="50" #dlExpiryEl
+            [matDatepicker]="releasedAtPicker4" (focus)="releasedAtPicker4.open()" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker4">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker4>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL State -->
+  <div class="lg:col-span-2 md:col-span-2 sm:col-span-12"
+    class="customerContSelect lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL State
+      </h5>
+
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-select placeholder="DL State  " [(ngModel)]="customer?.customerInfo.dlState"
+          style="  border-bottom: 1px solid;" (selectionChange)="toggleDLCode()">
+          <mat-option *ngFor="let item of dlStatesArr" [value]="item.id">{{item.stateName}}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </div>
+  <!-- Code -->
+  <div [ngStyle]="{'visibility': showDlCode ? 'visible' : 'hidden' }"
+    class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Code
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex" *ngIf="showDlCode">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="XXX" type="text" matInput name="code" (ngModelChange)="toggleDLCode()"
+            [(ngModel)]="customer?.customerInfo.code" id="code" maxlength="3" #codeEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Comment
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field style="width: 100%;">
+          <mat-label class="hidden"></mat-label>
+          <textarea matInput placeholder="Comment" [(ngModel)]="customer.comment" style="color: #dc2626;">
+      </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add spouse Code -->
+  <div style="display: flex;" class="-mt-6">
+    <div class="cashier-managesale-top-btn default-light-theme">
+      <button type="button" class="customerBtn" mat-raised-button [ngClass]="!showSpouseField?'primary-color':'danger-color'"
+        (click)="showSpouseField =!showSpouseField">
+        <i [ngClass]="!showSpouseField ? 'fal fa-plus pr-5' : 'fal fa-minus pr-5'"></i>
+        <span>Add Spouse</span>
+      </button>
+    </div>
+    <div style="margin-left: 1rem;">
+      <div class="cashier-managesale-top-btn default-light-theme">
+        <button class="customerBtn" type="button" mat-raised-button [ngClass]="!showDependentField ? 'primary-color' : 'danger-color'"
+          (click)="showDependentField =!showDependentField">
+          <i [ngClass]="showDependentField?'fal fa-minus pr-5':'fal fa-plus pr-5'" class=""></i>
+          Add Dependent
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lg:col-span-11 md:col-span-10 sm:col-span-12 flex justify-end float-right -mt-8" >
+    <div class="col-span-12 flex justify-end">
+      <div class="cashier-managesale-top-btn default-light-theme pt-2.5 flex customerBtnContainer">
+        <div class="flex items-center">
+          <div class="balanceContainer">
+            Balance: <span> ${{totalBalance.toFixed(2)}} </span>
+          </div>
+          <button class="customerBtn"  mat-raised-button type="button" [matMenuTriggerFor]="actionTrigger" color="accent" icon="pi pi-times">
+            Actions <i class="fa fa-chevron-down" style="margin-left: 1rem;"></i>
+          </button>
+          <mat-menu #actionTrigger="matMenu" xPosition="before">
+            <button  class="customerBtn" (click)="_router.navigate(['/app/invoices','c_' + customer.customerInfo.id])" mat-menu-item>
+              <span>Invoices</span>
+            </button>
+            <button  class="customerBtn" (click)="_router.navigate(['/app/all-sales/received-payment','c_' + customer.customerInfo.id])" mat-menu-item>
+              <span>Received Payments</span>
+            </button>
+          </mat-menu>
+        </div>
+        <button class="customerBtn" mat-raised-button type="button" (click)="backToListView()" color="accent" icon="pi pi-times">
+          Cancel
+        </button>
+        <button class="customerBtn" mat-raised-button color="primary" (click)="save()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="lg:col-span-10 md:col-span-4 sm:col-span-12 mt-4"></div>
+  <!-- spouse name -->
+  <div class="lg:col-span-4 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Spouse Name
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Spouse Name" type="text" matInput name="firstName"
+            [(ngModel)]="customer?.customerInfo?.spouse.name" id="firstName" maxlength="50" #firstNameEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- SSN -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        SSN
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input [textMask]="custSSNMask" type="text" matInput name="ssn"
+            [(ngModel)]="customer?.customerInfo?.spouse.ssn" id="ssn" maxlength="30" #ssnEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Spouse BOB -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DOB
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="MM-DD-YYYY" type="text" matInput name="dateOfBirth" [(ngModel)]="spouseDobAlt"
+            (ngModelChange)="onSpouseDateChange('dob')" id="dateOfBirth" [matDatepicker]="releasedAtPicker8"
+            maxlength="50" #dateOfBirthEl (focus)="releasedAtPicker8.open()" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker8">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker8>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- Job Description -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Job Description
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Job Description" type="text" matInput name="spouseJobDescription"
+            [(ngModel)]="customer?.customerInfo?.spouse.spouseJobDescription" id="spouseJobDescription" maxlength="200"
+            #spouseJobDescriptionEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField"></div>
+  <!-- Driving License -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Driving License
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Driving License" type="text" matInput name="drivingLicense"
+            [(ngModel)]="customer?.customerInfo?.spouse.drivingLicense" id="drivingLicense" maxlength="50"
+            #drivingLicenseEl />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL Issue Date -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL Issue Date
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="DL Issue Date" type="text" matInput name="spouse.dlIssue" [(ngModel)]="spouseDlIssueAlt"
+            (ngModelChange)="onSpouseDateChange('dlIssue')" maxlength="50" #spouse.dlIssueEl
+            [matDatepicker]="releasedAtPicker12" (focus)="releasedAtPicker12.open()" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker12">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker12>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL Expiry -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL Expiry
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="DL Expiry" type="text" matInput name="customerInfo.spouse.dlExpiry"
+            [(ngModel)]="spouseDlExpiryAlt" (ngModelChange)="onSpouseDateChange('dlExpiry')"
+            id="customerInfo.spouse.dlExpiry" [matDatepicker]="releasedAtPicker13" (focus)="releasedAtPicker13.open()" maxlength="50" />
+          <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker13">
+
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #releasedAtPicker13>
+
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- DL state -->
+  <div *ngIf="showSpouseField" class="customerContSelect lg:col-span-2 md:col-span-4 sm:col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        DL State
+      </h5>
+
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-select placeholder="DL State  " name="spouse.state" [(ngModel)]="customer?.customerInfo?.spouse.dlState"
+          style="  border-bottom: 1px solid;" (ngModelChange)="toggleSpouseDLCode()">
+          <mat-option *ngFor="let item of dlStatesArr" [value]="item.id">{{item.stateName}}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </div>
+  <!-- Code -->
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField && showSpouseDlCode">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Code
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex" *ngIf="showSpouseDlCode">
+        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+          <mat-label class="hidden"></mat-label>
+          <input placeholder="Code" type="text" matInput name="spouse.code"
+            [(ngModel)]="customer?.customerInfo?.spouse.code" id="spouse.code" maxlength="20" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="lg:col-span-2 md:col-span-4 sm:col-span-12" *ngIf="showSpouseField"></div>
+  <!-- End spouse Code -->
+
+  <!-- Add Dependent -->
+
+  <div class="lg:col-span-10 md:col-span-4 sm:col-span-12"></div>
+
+  <div style="display: flex; width: 100%; " class="col-span-12 mt-4" [formGroup]="dependentForm"
+    *ngIf="showDependentField">
+    <div class="grid grid-cols-9 gap-4">
+      <ng-container formArrayName="dependendentDetail">
+        <ng-container *ngFor="let depForm of dependent.controls; let i = index">
+
+          <ng-container [formGroup]="depForm">
+            <input style="visibility: hidden;width: 0; height: 0; position: absolute" type="text" matInput
+              formControlName="id" maxlength="50" readonly />
+            <div class="lg:col-span-2 md:col-span-4 sm:col-span-12">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">
+                  Dependent Name
+                </h5>
+                <div class="cashier-input-field-style" style="display: flex">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input placeholder="Dependent Name" type="text" matInput formControlName="dependentName"
+                      maxlength="50" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-2 md:col-span-4 sm:col-span-12 ml-4">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">
+                  Relation
+                </h5>
+                <div class="cashier-input-field-style" style="display: flex">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input placeholder="Relation" type="text" matInput formControlName="relation" maxlength="20" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-2 md:col-span-4 sm:col-span-12 ml-4">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">
+                  SSN
+                </h5>
+                <div class="cashier-input-field-style" style="display: flex">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input placeholder="SSN" type="text" matInput formControlName="ssn" maxlength="11" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-2 md:col-span-4 sm:col-span-12 ml-4">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] text-heading font-semibold">
+                  DOB
+                </h5>
+                <div class="cashier-input-field-style" style="display: flex">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input placeholder="MM-DD-YYYY" type="text" matInput [matDatepicker]="releasedAtPicker14"
+                      formControlName="dob" maxlength="50" (focus)="releasedAtPicker14.open()" />
+                    <mat-datepicker-toggle class="fulWidthMatDatePicker" matSuffix [for]="releasedAtPicker14">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #releasedAtPicker14>
+
+                    </mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="lg:col-span-12 md:col-span-4 sm:col-span-12" *ngIf="isDetailView">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Comment
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field style="width: 100%;">
+                <mat-label class="hidden"></mat-label>
+                <textarea matInput placeholder="Comment">
+          </textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div> -->
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <button (click)="addDependent()" style="margin-top: auto; margin-bottom: 2rem; margin-left: 1rem;" mat-mini-fab
+        color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!-- End Dependent -->
+</div>

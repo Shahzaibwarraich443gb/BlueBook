@@ -1,0 +1,54 @@
+@import '../../custom-palettes.scss';
+
+//sidebar menu style
+@include cashierSidebarMuneStyle;
+
+.cashier-dashboard-main.sidebar-enable {
+    .apexcharts-canvas {
+        width: 100% !important;
+    }
+}
+.cashier-bar-chart h5 {
+    @apply left-[50%] translate-x-[-50%] bottom-[25px];
+}
+.common-blue-badge {
+    @apply h-5 leading-5 px-2.5 bg-themeBlue rounded inline-block text-white text-[11px] font-bold;
+}
+
+.cashier-dashboard-sidebar {
+    @media (min-width: 1201px) and (max-width: 1900px) {
+        @apply ml-[-315px];
+    }
+    @media (max-width: 1200px) {
+      @apply ml-[-300px];
+    }
+    .cashier-header-bar-responsive {
+        @media (max-width: 1900px) {
+            @apply -right-14;
+          }
+        @media (max-width: 1200px) {
+            @apply -right-10;
+        }
+    }
+  }
+  // .cashier-dashboard-main {
+  //   @media (min-width: 1201px) and (max-width: 1900px) {
+  //     @apply ml-0;
+  //   }
+  //   @apply maxLg:ml-0;
+  // }
+  .cashier-dashboard-sidebar.sidebar-enable {
+    @media (min-width: 1201px) and (max-width: 1900px) {
+      @apply ml-0;
+    }
+    @apply maxLg:ml-0;
+  }
+
+.cashier-menu-overlay-dashboard.sidebar-enable {
+  @media (max-width: 1900px) {
+    background: rgba(0,0,0,0.6);
+    @apply fixed top-0 left-0 right-0 bottom-0 z-10;
+  }
+}
+
+@include cashierHeaderStyle;

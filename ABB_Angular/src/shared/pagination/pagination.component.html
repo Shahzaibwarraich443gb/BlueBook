@@ -1,0 +1,38 @@
+<div class="cashier-pagination-wrapper">
+    <div class="grid grid-cols-12">
+        <div class="lg:col-span-3 md:col-span-6 col-span-12">
+            <div class="cashier-pagination-sort flex items-center flex-wrap maxSm:mb-4 maxSm:justify-center">
+                <figure class="text-[14px] font-normal text-gray mr-1.5">Rows per page : </figure>
+                <div class="cashier-select-field-style w-16">
+                    <mat-form-field [hideRequiredMarker]="true">
+                        <mat-select class="block" [placeholder]="'10'" (selectionChange)="updatePageSize($event.value)">
+                            <mat-option value="10">10</mat-option>
+                            <mat-option value="20">20</mat-option>
+                            <mat-option value="50">50</mat-option>
+                            <mat-option value="100">100</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="lg:col-span-9 md:col-span-6 col-span-12">
+            <div class="cashier-pagination text-right maxSm:text-center">
+                <ul>
+                    <li [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'" *ngIf="nextPreviousButtons">
+                        <a href="javascript:void(0)" (click)="previous()"><mat-icon>arrow_back_ios</mat-icon></a>
+                    </li>
+                    <ng-container *ngFor="let p of totalPages; index as i">
+                        <li><a href="javascript:void(0)" (click)="selectPageNumber(i + 1)"
+                                [class]="currentPage === i + 1 ? 'active' : ''">
+                                {{ i + 1 }} </a></li>
+                    </ng-container>
+
+                    <li [class]="currentPage === totalPages.length ? 'page-item disabled' : 'page-item'"
+                        *ngIf="nextPreviousButtons">
+                        <a href="javascript:void(0)" (click)="next()"><mat-icon>arrow_forward_ios</mat-icon></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

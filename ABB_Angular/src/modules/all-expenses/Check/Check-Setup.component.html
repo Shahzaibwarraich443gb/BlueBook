@@ -1,0 +1,230 @@
+<div class="cashier-content-area px-7">
+    <div id="demo" class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
+        <span class="close" routerLink="/app/all-expenses/check">X</span>
+
+        <div class="flex justify-around">
+            <div class="grid grid-cols-1 gap-4" style="width: 20%;">
+                <div>
+                    <label>Check Style</label>
+                    <mat-radio-group [(ngModel)]="checkSetupObj.checkStyle" aria-label="Select an option" class="flex">
+                        <div class="flex flex-col items-center">
+                            <mat-radio-button value="voucher">
+                                Voucher
+                            </mat-radio-button>
+                            <img style="width: 2.8rem;" class="ml-8" src="../../../assets/img/signlecheck.png" />
+                        </div>
+                        <div class="flex flex-col items-center ml-4">
+                            <mat-radio-button value="standard">
+                                Standard
+                            </mat-radio-button>
+                            <img style="width: 2.8rem;" class="ml-8" src="../../../assets/img/multicheck.png" />
+                        </div>
+                    </mat-radio-group>
+                </div>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Select Bank*</label>
+                    <mat-select [(ngModel)]="checkSetupObj.bankId" (ngModelChange)="onBankChange()">
+                        <mat-option *ngFor="let data of bankArr" [value]="data.id">{{data.bankName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Company Name*</label>
+                    <mat-label></mat-label>
+                    <input matInput type="text" name="bank" maxlength="50" [(ngModel)]="checkSetupObj.companyName" required />
+                </mat-form-field>
+
+
+
+                <div>Address</div>
+
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Line 1*</label>
+                    <mat-label></mat-label>
+                    <input matInput [(ngModel)]="checkSetupObj.addressLine1" type="text" name="addr1" maxlength="50" required />
+                </mat-form-field>
+
+
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Line 2*</label>
+                    <mat-label></mat-label>
+                    <input matInput type="text" [(ngModel)]="checkSetupObj.addressLine2" name="addr1" maxlength="50" required />
+                </mat-form-field>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Line 3*</label>
+                    <mat-label></mat-label>
+                    <input matInput type="text" [(ngModel)]="checkSetupObj.addressLine3" name="addr1" maxlength="50" required />
+                </mat-form-field>
+
+            </div>
+            <div class="grid grid-cols-1 gap-4" style="width: 50%;">
+
+                <div>Footer Settings</div>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>First Place*</label>
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="footerValArr[0]" (ngModelChange)="changeCheckFooter(0)">
+                        <ng-container *ngFor="let data of checkFooterArr">
+                            <mat-option [value]=data.value>{{data.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Second Place*</label>
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="footerValArr[1]" (ngModelChange)="changeCheckFooter(1)">
+                        <ng-container *ngFor="let data of checkFooterArr">
+                            <mat-option [value]=data.value>{{data.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field [hideRequiredMarker]="true">
+                    <label>Third Place*</label>
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="footerValArr[2]" (ngModelChange)="changeCheckFooter(2)">
+                        <ng-container *ngFor="let data of checkFooterArr">
+                            <mat-option [value]=data.value>{{data.name}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <table class="print-layout checkDesignTbl"
+                    style="border:1px solid #00000a;width:100%;height:220px;margin-bottom: 20px;" cellspacing="0"
+                    cellpadding="0" align="left">
+                    <tbody>
+                        <tr>
+                            <td width="5px"></td>
+                            <td width="570">
+                                <table style="width:100%" align="left">
+                                    <tbody>
+                                        <tr>
+                                            <td width="15px">&nbsp;</td>
+                                            <td width="190px">
+                                                <p style="float:left;font-size:12px;vertical-align:top">
+                                                    <b id="banknames"></b>
+                                                    <br><b id="company_name">{{checkSetupObj.companyName}}</b>
+                                                    <br><b id="company_add_line1">{{checkSetupObj.addressLine1}}</b>
+                                                    <br><b id="company_add_line2">{{checkSetupObj.addressLine2}}</b>
+                                                    <br><b id="company_add_line3">{{checkSetupObj.addressLine3}}</b>
+                                                </p>
+                                            </td>
+                                            <td width="130px">
+                                                <p style="float:left;font-size:12px;vertical-align:top">
+                                                    <b id="banknames"></b>
+                                                    <br><b id="bank_name">{{selectedBank.bankName}}</b>
+                                                    <br><b id="bank_address">{{selectedBank.address}}</b>
+
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p style="margin:0px 10px 0 0;padding-left: 160px;    font-size: medium;"
+                                                    contenteditable="" align="right">CHK-###</p>
+                                                <p style="margin:0px 10px 0 0;    font-size: medium;" contenteditable=""
+                                                    align="right"><b>Date:</b>&nbsp;MM/DD/YYYY</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="5px"></td>
+                            <td align="center">
+                                <table width="98%" cellspacing="0" cellpadding="0" align="left">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border-bottom: 1px solid black;" width="10%" height="20px"> <b
+                                                    style=" line-height: 15px;font-size: smaller;    font-weight: 700;">Pay
+                                                    to the Order of</b> </td>
+                                            <td style="border-bottom: 1px solid;    width: 520px;" width="50%">
+                                                <p style="margin: 0px;    font-size: medium;" contenteditable="">&nbsp;
+                                                </p>
+                                            </td>
+                                            <td style="font-size: x-large;" width="2%"> <b>$</b> </td>
+                                            <td style="border:1px solid #00000a">
+                                                <p style="margin: 0px;     width: 110px;    font-size: medium; padding: 0.3rem"
+                                                    contenteditable=""></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="border-bottom:1px solid #00000a" height="30px">
+                                                <p id="checkamountwords" style="margin: 0px;    font-size: medium;"
+                                                    contenteditable="">&nbsp;&nbsp;&nbsp;</p>
+                                            </td>
+                                            <td>
+                                                <p>&nbsp;</p>
+                                            </td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="padding-top:3px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" valign="bottom" height="30px">
+                                                <table style="padding:0px" width="100%" height="30px" cellspacing="0"
+                                                    cellpadding="0" align="left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="7%"> <b>Memo</b> </td>
+                                                            <td style="border-bottom:1px solid #00000a">
+                                                                <p style="    font-size: medium;" contenteditable="">
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <p>&nbsp;</p>
+                                            </td>
+                                            <td style="border-bottom:1px solid #00000a">
+                                                <p>&nbsp;</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" height="30px">
+                                                <table style="padding:0px" width="100%" height="30px" cellspacing="0"
+                                                    cellpadding="0" align="left">
+                                                    <tbody>
+                                                        <tr id="checkfooter">
+
+                                                            <td width="28%"> <span
+                                                                    style="margin-left:8px;font-size:medium;"
+                                                                    class="amounts" id="banknos">A<span
+                                                                        id="F_Place">000001</span>A</span></td>
+                                                            <td width="28%"> <span
+                                                                    style="margin-left:8px;font-size:medium;"
+                                                                    class="amounts" id="banknos">C<span
+                                                                        id="S_Place">639871570</span>C</span> </td>
+                                                            <td> <span style="margin-left:10px;font-size: x-large;"
+                                                                    id="routingnos" class="amounts"></span> <span
+                                                                    style="margin-left: 8px;font-size:medium;"
+                                                                    class="amounts"><span
+                                                                        id="T_Place">021000021</span></span> </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <button mat-raised-button color="accent" style="margin-right: 1rem;" routerLink="/app/check">Cancel</button>
+            <button mat-raised-button color="primary" (click)="saveCheckSetup()">Save</button>
+        </div>
+    </div>
+</div>

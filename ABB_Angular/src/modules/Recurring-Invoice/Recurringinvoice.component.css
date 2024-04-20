@@ -1,0 +1,52 @@
+.head-img {
+    padding: 3px;
+    border: 1px solid #f4f4f4;
+    width: 60px;
+}
+
+.example-chip-list {
+    width: 100%;
+}
+
+.example-section {
+    padding-top: 37px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+    width: 50px;
+    padding-top: 30px;
+}
+
+@media (min-width: 992px) {
+    .custom-dropdown {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: -12px;
+        /* margin-top: -12px; */
+        margin-top: 0px;
+    }
+}
+
+@media (min-width: 576px) {
+    .custom-dropdown {
+        width: 100%;
+        margin-bottom: -12px;
+        /* margin-top: -12px; */
+        margin-top: 0px;
+    }
+}
+
+.radio-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .radio-button {
+    margin-right: 10px;
+  }

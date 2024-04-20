@@ -1,0 +1,53 @@
+.required {
+  color: red;
+}
+
+.nextButtonSection {
+  text-align: right !important;
+  float: right !important;
+  display: flex;
+}
+
+.backButtonSection {
+  text-align: left;
+  float: left;
+}
+
+.nextBtn,
+.nextBtn:focus,
+.nextBtn:hover {
+  background-color: #34a740;
+  margin-left: 8px;
+}
+
+.btnCancel {
+  background-color: #e91e63;
+}
+
+.tblHeaderColor {
+  color: #3f51b5;
+}
+
+
+
+
+
+.phoneNumber,
+.phoneNumber:first-child {
+  width: 100% !important;
+}
+
+
+
+
+/* CSS */
+.highlight {
+  color: red;
+  /* You can change the color to your preference */
+  font-weight: bold;
+}
+
+.text-sm {
+  margin-top: -30px;
+  color: azure;
+}

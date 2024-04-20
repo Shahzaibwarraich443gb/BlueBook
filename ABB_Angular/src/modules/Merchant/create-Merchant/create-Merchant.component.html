@@ -1,0 +1,189 @@
+<div [@routerTransition] class="model-input-size">
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner">
+        <div class="cashier-popup-header relative mb-11">
+          <div class="cashier-popup-header-title">
+            <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+              {{data.id>0?"Edit Merchant":"Create Merchant"}}
+            </h2>
+          </div>
+          <div class="cashier-popup-header-close absolute -top-4 right-0">
+            <mat-dialog-actions>
+              <div class="default-light-theme">
+                <a href="javascript:void(0)" mat-dialog-close>
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </mat-dialog-actions>
+          </div>
+        </div>
+        <form autocomplete="off" #createChartForm="ngForm" (ngSubmit)="save()">
+          <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+
+            <div class="col-span-12">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  Select Merchant<span class="starColorRed">*</span>
+                </h5>
+                <div>
+
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+
+                    <mat-select name="merchant" [(ngModel)]="createoreditMerchantDto.name"
+                      (selectionChange)="onMerchantChange($event)">
+                      <mat-option [value]="merchant.value"
+                        *ngFor="let merchant of merchantList">{{merchant.name}}</mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12">
+              <div class="cashier-select-field" *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  API Key<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="apiKey" matInput name="apiKey" id="apiKey" required
+                      [(ngModel)]="createoreditMerchantDto.apiKey" cdkFocusInitial maxlength="40"
+                      #apiKeyInput="ngModel" />
+
+                  </mat-form-field>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12" *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  API Secret Key<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input type="apiSecretKey" matInput name="apiSecretKey" id="apiSecretKey" required
+                      [(ngModel)]="createoreditMerchantDto.apiSecretKey" cdkFocusInitial #apiKeyInput="ngModel"
+                      maxlength="40" />
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12" *ngIf="createoreditMerchantDto.name=='Pay Easy'">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  Token<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input type="token" matInput name="token" id="token" [(ngModel)]="createoreditMerchantDto.token"
+                      required cdkFocusInitial #apiKeyInput="ngModel" maxlength="25" />
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12" *ngIf="createoreditMerchantDto.name=='Card Connect'">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  UserName<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input type="name" matInput name="name" id="password" [(ngModel)]="createoreditMerchantDto. ccun"
+                      (keypress)="letterOnly($event)" required cdkFocusInitial #apiKeyInput="ngModel" maxlength="20" />
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12" *ngIf="createoreditMerchantDto.name=='Card Connect'">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-1 text-heading font-semibold">
+                  Password<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input type="password" matInput name="ccpwd" id="ccpwd" [(ngModel)]="createoreditMerchantDto.ccpwd"
+                      required cdkFocusInitial #apiKeyInput="ngModel" maxlength="15" />
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-12" *ngIf="createoreditMerchantDto.name=='Card Connect'">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-2 text-heading font-semibold">
+                  Merchant Id<span class="starColorRed">:</span>
+                  <span class="error-message" *ngIf="apiKeyInput.invalid && (apiKeyInput.dirty || apiKeyInput.touched)">
+                    - This Field is required.
+                  </span>
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"></mat-label>
+                    <input type="ccmid" matInput name="ccmid" id="password" [(ngModel)]="createoreditMerchantDto.ccmid"
+                      required cdkFocusInitial #apiKeyInput="ngModel" maxlength="20" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="md:col-span-12 sm:col-span-12" *ngIf="createoreditMerchantDto.id >0 ? true:false">
+              <div class="cashier-select-field mb-3">
+                <div class="">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="createoreditMerchantDto.active"
+                      name="active" id="active" />
+                    <span style="margin-left: 11px"> Active </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="submit" mat-raised-button color="primary" [disabled]="!createChartForm.form.valid">
+                  Save
+                </button>
+              </div>
+            </div>
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="button" mat-raised-button color="accent" (click)="hideDialog()">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

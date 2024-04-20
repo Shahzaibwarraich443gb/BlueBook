@@ -1,0 +1,109 @@
+<div [@routerTransition] class="model-input-size">
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner py-1">
+        <div class="cashier-popup-header relative mb-11">
+          <div class="cashier-popup-header-title">
+            <h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+              {{data.id>0?"Edit Card Information":"Add Card Information"}}
+            </h2>
+          </div>
+          <div class="cashier-popup-header-close absolute -top-4 right-0">
+            <mat-dialog-actions>
+              <div class="default-light-theme">
+                <a href="javascript:void(0)" class="close-btn" mat-dialog-close>
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </mat-dialog-actions>
+          </div>
+        </div>
+        <form autocomplete="off" #createChartForm="ngForm" (ngSubmit)="save()">
+          <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+            <div class="col-span-12">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-4 text-heading font-semibold h-0">
+                  Name on Card<span class="starColorRed">*</span>
+                </h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input (keypress)="letterOnly($event)" type="type" maxlength="30" matInput name="name" id="name"
+                      required [(ngModel)]="creditCard.cardHolderName" cdkFocusInitial />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-4 text-heading font-semibold h-0">
+                  Credit Card Number<span class="starColorRed">*</span>
+                </h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="text" matInput name="number" id="number" required [(ngModel)]="creditCard.cardNumber"
+                      #cardNumber="ngModel" pattern="[0-9]{16}" maxlength="16">
+                    <mat-error *ngIf="cardNumber.invalid">
+                      Credit card number must be a 16-digit numeric value.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-6">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-4 text-heading font-semibold h-0">
+                  MM/YYYY<span class="starColorRed">*</span>
+                </h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="text" matInput name="expDate" id="expDate" [(ngModel)]="creditCard.expDate">
+                    <!-- <mat-error *ngIf="expDate.invalid">
+                      Expiration date must be in the format MM/YYYY.
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-6">
+              <div class="cashier-select-field">
+                <h5 class="text-[15px] mb-4 text-heading font-semibold h-0">
+                  CVC<span class="starColorRed">*</span>
+                </h5>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input type="text" matInput name="ccvNo" id="ccvNo" required [(ngModel)]="creditCard.ccvNo"
+                      #ccvNo="ngModel" pattern="[0-9]{3}" maxlength="3">
+                    <mat-error *ngIf="ccvNo.invalid">
+                      CVC must be a 3-digit numeric value.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="submit" mat-raised-button color="primary" [disabled]="!createChartForm.valid"
+                  [ngClass]="{ 'btn-disabled': !createChartForm.valid}" style="width: 100%;">
+                  <span style="font-size: small;">( {{totalAmount | number: '1.2-2' }} )</span> Pay Now
+                </button>
+              </div>
+            </div>
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button type="button" mat-raised-button color="accent" (click)="hideDialog()" style="width: 100%;">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

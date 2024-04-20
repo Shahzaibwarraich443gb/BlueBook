@@ -1,0 +1,15 @@
+@import '../../../custom-palettes.scss';
+
+.cashier-quickview {
+    @apply min-w-[230px] w-[22%] min-h-[275px] maxXl:min-w-0 maxXl:w-[31.33%] maxMd:min-w-0 maxMd:w-[31%] maxSm:w-full;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+		width: 21%;
+		min-width: 195px;
+	}
+}
+.cashier-quickview-last {
+    @apply min-w-[80px] min-h-[275px] w-[8%] maxXl:min-w-0 maxXl:w-[31.33%] maxMd:min-w-0 maxMd:w-[31%] maxSm:w-full;
+}
+.cashier-quickview-wrapper {
+    @apply maxXl:justify-start maxXl:flex-wrap;
+}

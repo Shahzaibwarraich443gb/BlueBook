@@ -1,0 +1,37 @@
+.clr-gry {
+  background: #f8f7f7;
+  font-weight: 600;
+}
+.title {
+  text-align: center;
+  padding: 5px 0;
+  background: #e5e7eb;
+  border: 1px solid #e5e7eb;
+  line-height: 0px;
+}
+
+.title-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333; /* Customize the color */
+  margin: 5px 0;
+}
+
+.not-found{
+  display: flex;
+  padding: 10px 0px 10px 44rem;
+  text-align: center;
+  color: red;
+}
+.grand-total-footer {
+  text-align: right;
+  background-color: #e5e7eb;
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  padding: 10px 0px 10px 49rem;
+  border-top: 1px solid #ccc;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}

@@ -1,0 +1,1299 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "node_modules/@angular/material" as mat;
+@use "node_modules/@angular/material/theming" as theme;
+
+@include mat.core();
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "./custom-palettes.scss";
+
+// @import "~bootstrap/dist/css/bootstrap.css";
+@import "swiper/swiper-bundle.css";
+@import "./assets/css/font-awesome-pro.css";
+@import "./assets/css/elegant-icon.css";
+@import "./assets/scss/main.scss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  @apply p-0 m-0 font-primary box-border;
+}
+
+.mat-form-field-underline {
+  margin-bottom: 0.9rem;
+}
+
+.cashier-header-breadcrumb{
+  margin-left: -1.4rem;
+}
+
+
+th .mat-sort-header-container .mat-sort-header-content {
+  width: 100% !important;
+  justify-content: left !important;
+}
+
+
+/* Optional: If you want to remove the bottom border from the selected tab indicator */
+.mat-tab-header-pagination::after {
+  border-bottom: none !important;
+}
+
+/* Optional: If you want to remove the bottom border from the selected tab indicator */
+.mat-tab-header-pagination::after {
+  border-bottom: none !important;
+}
+
+ th, td{
+  text-align: left !important;
+  padding-left: 0.4rem !important;
+}
+
+td input, td input:focus, td mat-select, td select:focus{
+  outline: none !important;
+  border: none !important;
+}
+
+//table action button
+td .cashier-salereturns-table-actionJ{
+  margin-left: 0 !important;
+}
+
+.actionTh{
+  width: 2rem;
+}
+
+.requiredMark{
+  color: red;
+}
+
+.noDataContainer {
+  border: 2px solid #ccc;
+  padding: 2rem;
+  text-align: center;
+  font-weight: 600;
+  border-bottom-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.selectAddBtn {
+  margin-left: 8px;
+  height: 25px !important;
+  display: flex;
+  transform: translateY(-30%) !important;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  bottom: -0.4rem !important;
+  margin-top: auto !important;
+  position: absolute;
+}
+
+.selectAddBtnPR {
+  margin-left: 8px !important;
+  height: 25px !important;
+  display: flex !important;
+  transform: translateY(-140%) !important;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto !important;
+}
+
+.selectAddBtnCoa {
+  margin-left: 8px !important;
+  height: 25px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto !important;
+}
+
+.mat-form-field-infix {
+  padding: 0px;
+  position: relative;
+  bottom: 14px;
+}
+
+::ng-deep {
+  mat-form-field div div {
+    margin-top: -2rem !important;
+  }
+
+  mat-form-field div div div {
+    // margin-bottom: -0.2rem;
+  }
+
+  textarea {
+    margin-top: 2.8rem !important;
+  }
+
+  .mat-paginator-page-size-select {
+    margin-top: 1rem !important;
+  }
+}
+
+.searchInput {
+  border: 1px solid #ccc;
+  padding: 0.6rem;
+  border-radius: 0.375rem;
+}
+
+.starColorRed {
+  color: red;
+}
+
+.close {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #dc2626;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 3px solid #dc2626;
+  border-radius: 100%;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  cursor: pointer;
+}
+
+.mat-tab-labels div {
+  min-width: 20px !important;
+}
+.mat-tab-labels {
+  justify-content: space-around;
+}
+
+.customerMatTab.mat-tab-labels div{
+  // padding: 0;
+  // margin: 0;
+  // padding-left: 0.4rem;
+  // padding-right: 0.4rem;
+  width: 10%;
+  padding: 0;
+  padding-left: 0.1rem;
+  display: flex;
+  justify-content: start;
+}
+
+
+.mat-tab-label-active{
+  background-color: rgba(30, 64, 175, 0.1) 
+
+}
+
+.cashier-salereturns-area {
+  position: relative;
+  padding: 1.2rem !important;
+}
+
+.cashier-table-header-search-action-btn.text-right {
+  margin-top: 1rem !important;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  @apply inline-block;
+}
+button.mat-raised-button,
+button.mat-raised-button:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+.cashier-salereturns-table-checkbox {
+  .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+    @apply bg-themeBlue;
+  }
+}
+//shortcut dropdown
+.cashier-quick-dropdown {
+  @apply absolute top-full right-0 w-[220px] z-[9] border border-solid border-grayBorder py-3 px-5 bg-white opacity-0 scale-0 invisible;
+  box-shadow: 0px 20px 40px rgba(18, 42, 91, 0.05);
+  &.shortmenu-enable,
+  &.langmenu-enable,
+  &.promenu-enable {
+    @apply opacity-100 visible scale-100;
+  }
+  ul {
+    li {
+      a {
+        @apply text-[14px] py-3 px-5 rounded block font-normal text-bodyText hover:bg-grayBgLight hover:text-themeBlue;
+        @include transition;
+        svg {
+          @apply mr-2.5 translate-y-[-1px];
+        }
+        &:hover {
+          path,
+          rect {
+            @apply fill-themeBlue;
+          }
+        }
+      }
+    }
+  }
+}
+// notify dropdown
+.cashier-notify-dropdown-list {
+  .cashier-notify-img {
+    @apply rounded-[5px] mr-4 w-[50px];
+  }
+  .cashier-notify-text {
+    h6 {
+      @apply text-[14px] font-semibold text-heading mb-2;
+    }
+    span {
+      @apply text-[12px] font-normal text-bodyText block;
+    }
+  }
+}
+.cashier-notify-dropdown-list a {
+  @apply inline-flex text-bodyText hover:text-themeBlue leading-none;
+  & .mat-icon {
+    @apply text-[16px] ml-1;
+  }
+}
+.cashier-notify-dropdown {
+  @apply absolute top-[45px] right-0 w-[250px] z-[9] bg-white opacity-0 scale-0 invisible;
+  box-shadow: 0px 20px 40px rgba(18, 42, 91, 0.05);
+  &.notifydropdown-enable,
+  &.emaildropdown-enable {
+    @apply opacity-100 visible scale-100;
+    @media (max-width: 1400px) {
+      @apply left-auto;
+      @apply right-0;
+    }
+  }
+  &.notifydropdown-enable {
+    @media (max-width: 575px) {
+      @apply left-auto -right-20;
+    }
+  }
+  &.emaildropdown-enable {
+    @media (max-width: 575px) {
+      @apply left-auto -right-14;
+    }
+  }
+}
+// height width inherit property
+@mixin heightInherit {
+  height: inherit;
+}
+@mixin widthInherit {
+  width: inherit;
+}
+@mixin transition {
+  transition: all linear 0.3s;
+}
+@mixin minWidthInherit {
+  min-width: inherit;
+}
+@mixin minHeightInherit {
+  min-height: inherit;
+}
+@mixin overflowInitial {
+  overflow: initial;
+}
+@mixin lineHeightinherit {
+  line-height: inherit;
+}
+//select field
+@mixin cashierSelectFieldStyle {
+  .cashier-select-field-style {
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+      .mat-form-field-label {
+      @apply hidden;
+    }
+    .mat-form-field-hide-placeholder .mat-select-placeholder {
+      @apply text-bodyText opacity-70;
+      -webkit-text-fill-color: #616161;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      @apply hidden;
+    }
+    .mat-form-field-flex {
+      @apply h-12 leading-[46px] border border-solid border-grayBorder px-5 rounded-[3px] outline-none block text-[14px] text-bodyText font-primary font-normal w-full bg-grayBg;
+    }
+    .mat-form-field-infix {
+      @apply w-full border-t-0 flex items-center;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+      @apply p-0;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+      @apply top-0 mt-0;
+    }
+    .mat-form-field-subscript-wrapper {
+      @apply py-0 top-0;
+    }
+    .mat-form-field {
+      @apply block;
+    }
+    .mat-form-field-label-wrapper {
+      @apply pt-0 -top-[18px];
+    }
+    .mat-select-value-text {
+      @apply text-bodyText font-primary;
+    }
+    .mat-form-field {
+      @apply font-primary;
+    }
+    .mat-select-arrow-wrapper {
+      @apply opacity-70;
+    }
+  }
+  .mat-select-panel {
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+    @apply py-0 min-w-[112px] max-w-[280px] overflow-auto max-h-[256px] rounded outline-0 bg-white;
+  }
+  .mat-select-panel .mat-option.mat-active {
+    @apply bg-grayBorder;
+  }
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    @apply text-bodyText;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    @apply pb-0;
+  }
+  .mat-option {
+    @apply font-primary;
+  }
+}
+
+//input field
+@mixin cashierInputFieldStyle {
+  .cashier-input-field-style {
+    & .mat-form-field-appearance-legacy .mat-form-field-infix {
+      @apply p-0;
+    }
+    & input.mat-input-element {
+      @apply m-0 h-12 leading-[46px] border border-solid border-grayBorder px-5 rounded-[3px] outline-none block text-[14px] text-bodyText font-primary font-normal w-full bg-grayBg focus:bg-white box-border;
+    }
+    & .mat-form-field-appearance-legacy .mat-form-field-underline {
+      @apply hidden;
+    }
+    & .mat-form-field-infix {
+      @apply border-0 overflow-hidden;
+    }
+    & .mat-form-field-label-wrapper {
+      @apply top-0 p-0;
+    }
+    & .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      @apply p-0 w-full flex;
+    }
+    & .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+      @apply m-0 top-0;
+    }
+    & .mat-form-field {
+      @apply flex;
+    }
+  }
+}
+
+@mixin cashierTextareaFieldStyle {
+  .cashier-input-field-style textarea {
+    @apply h-12 leading-[46px] border border-solid border-grayBorder px-5 rounded-[3px] outline-none block text-[14px] text-bodyText font-primary font-normal w-full bg-grayBg focus:bg-white box-border;
+    @include transition;
+    &:focus {
+      @apply bg-white;
+    }
+    &::-moz-placeholder,
+    &::placeholder {
+      @apply text-bodyText opacity-70 font-primary font-normal;
+    }
+  }
+  .cashier-input-field-style textarea {
+    @apply py-2.5 pt-0 h-[120px];
+  }
+}
+@mixin cashierInputFileFieldStyle {
+  .cashier-input-field-file-label {
+    input {
+      @apply h-12 leading-[46px] border border-solid border-grayBorder px-5 rounded-[3px] outline-none block text-[14px] text-bodyText font-primary font-normal w-full bg-grayBg focus:bg-white box-border cursor-pointer;
+    }
+    input::file-selector-button {
+      @apply bg-grayBg rounded border border-solid border-grayBorder p-0 px-2 font-primary font-normal text-bodyText mr-3;
+    }
+  }
+}
+@mixin cashierRadioBtnStyle {
+  .mat-radio-button ~ .mat-radio-button {
+    @apply ml-4;
+  }
+  .cashier-radio-field-style {
+    .mat-radio-label-content {
+      @apply text-[14px] text-bodyText font-primary font-normal pl-0.5;
+    }
+    .mat-radio-outer-circle {
+      @apply h-[14px] w-[14px] border-[3px] border-[#C9CCD4] top-[3px];
+    }
+    .mat-radio-checked .mat-radio-outer-circle {
+      @apply bg-themeBlue;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      @apply bg-transparent;
+    }
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      @apply border-[#C9CCD4];
+    }
+    .mat-radio-button.mat-accent.mat-radio-checked
+      .mat-radio-persistent-ripple {
+      @apply bg-themeBlue;
+    }
+  }
+}
+//product counter style
+@mixin productCounter {
+  & p {
+    @apply text-[14px];
+    @apply font-normal;
+    @apply text-bodyText;
+    @apply px-3;
+  }
+  & button {
+    @apply leading-[26px] rounded-[3px] text-center inline-block text-themeBlue h-[30px] w-[30px] border-2 border-[#C1D5FE] border-solid;
+    & .material-icons {
+      @apply leading-[26px] translate-x-[0px] text-[16px] rounded-none;
+    }
+    &.active {
+      @apply bg-themeBlue text-white border-themeBlue;
+    }
+  }
+}
+
+//product delete btn
+@mixin productDeleteBtn {
+  .product-delete-btn {
+    @apply h-6 w-6 leading-[23px] text-center inline-block border rounded-[3px] border-themeWarn border-solid;
+    & .material-icons {
+      @apply leading-[22px] translate-x-[-1px] text-[16px] text-themeWarn;
+    }
+  }
+}
+
+@mixin cashierCalenderFieldStyle {
+  .cashier-calender-field-style {
+    &
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+      .mat-form-field-label {
+      @apply hidden;
+    }
+    & .mat-form-field-hide-placeholder .mat-select-placeholder {
+      @apply hidden;
+    }
+    & .mat-form-field-appearance-legacy .mat-form-field-underline {
+      @apply hidden;
+    }
+    & .mat-form-field-flex {
+      @apply h-12 leading-[46px] border border-solid border-grayBorder px-5 rounded-[3px] outline-none block text-[14px] text-bodyText font-primary font-normal w-full bg-grayBg focus:bg-white box-border;
+    }
+    & .mat-form-field-infix {
+      @apply w-full border-t-0 h-full flex items-center;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-infix {
+      padding: 8px 0 0.75em 0;
+    }
+    & .mat-form-field-wrapper,
+    & .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      @apply py-0 top-0;
+    }
+    & .mat-form-field {
+      @apply block;
+    }
+    & .mat-form-field-label-wrapper {
+      @apply pt-0 -top-1;
+    }
+    & .mat-select-arrow {
+      @apply text-bodyText;
+    }
+    & .mat-select-value {
+      @apply text-bodyText;
+    }
+    & .mat-form-field-underline {
+      @apply hidden;
+    }
+    & .mat-form-field-suffix {
+      @apply absolute top-[7px] right-5;
+    }
+    .mat-form-field:not(.mat-form-field-appearance-legacy)
+      .mat-form-field-suffix
+      .mat-icon-button {
+      @include heightInherit;
+      @include widthInherit;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+      padding: 6px 20px 0px 20px;
+    }
+    svg {
+      display: block !important;
+    }
+  }
+  abbr[title] {
+    text-decoration: none !important;
+  }
+}
+
+//popup close icon
+@mixin cashierPopupClose {
+  .cashier-popup-header-close a {
+    @apply h-9 w-9 leading-[35px] text-center inline-block border border-solid rounded-[3px] border-themeWarn outline-none;
+    & .material-icons {
+      @apply text-[20px];
+      @apply leading-[34px];
+      @apply text-themeWarn;
+      transform: translateX(-1px);
+    }
+  }
+}
+
+//popup material-btn
+@mixin materialPopupBtn {
+  .cashier-popup-btn {
+    .mat-raised-button {
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #fff !important;
+      border-radius: 5px !important;
+      height: 48px !important;
+      line-height: 48px !important;
+      padding: 0px 16px !important;
+      width: 100% !important;
+      @apply text-center;
+    }
+    .mat-raised-button.mat-primary {
+      @apply bg-themeBlue;
+    }
+  }
+}
+
+//popup common style
+@mixin popupCommonStyle {
+  .mat-dialog-container {
+    padding: 0px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+  .cdk-overlay-dark-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .mat-dialog-content {
+    max-height: 90vh;
+    max-width: 90vw;
+  }
+}
+
+//common action menu style
+@mixin commonActionMenuStyle {
+  .mat-menu-item img {
+    @apply w-4;
+    @apply mr-3;
+  }
+  .mat-menu-item span {
+    @apply text-heading;
+  }
+  .mat-menu-item:hover:not([disabled]) {
+    background: #f6f9ff;
+  }
+  .mat-menu-item {
+    height: 40px !important;
+    line-height: 40px !important;
+  }
+  .common-action-menu-style {
+    color: red !important;
+    height: 36px !important;
+    border: 1px solid #c1d5fe !important;
+    border-radius: 3px !important;
+    padding: 0px 10px !important;
+    width: inherit !important;
+    line-height: 36px !important;
+    span {
+      @apply text-themeBlue;
+    }
+    .mat-icon {
+      width: 18px !important;
+    }
+  }
+}
+
+//cashier header searchbar
+@mixin cashierHeaderSearch {
+  div {
+    .cashier-table-header-search {
+      & input {
+        @apply h-10 w-full block rounded-[3px] border border-solid border-grayBorder pl-11 pr-4 text-[14px] font-normal font-primary text-bodyText;
+        &:focus-visible {
+          @apply outline-none;
+        }
+      }
+      & span {
+        @apply absolute top-2.5 left-3.5 text-[#B7B7B7] text-[20px] inline-block;
+      }
+    }
+    .cashier-input-field-file label {
+      @apply h-12 border-0 rounded-none outline-none block w-full bg-transparent cursor-pointer focus:bg-white;
+      line-height: 48px !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      color: #fff !important;
+      @include transition;
+    }
+    .cashier-input-field-file input {
+      @apply hidden;
+    }
+  }
+}
+
+//cashier header searchbar action
+@mixin cashierHeaderSearchAction {
+  .cashier-table-header-search-action-btn {
+    & button {
+      @apply h-10 w-10 rounded-[3px] border border-solid border-grayBorder p-0 text-[14px] leading-[38px] font-normal font-primary inline-block text-bodyText text-center ml-2.5;
+      & svg {
+        @apply inline-block;
+      }
+      &.filter {
+        @include widthInherit;
+        @apply border-[#6F4EF6];
+        @apply px-5;
+        @apply text-[#6F4EF6];
+        @apply ml-0;
+        @apply maxSm:px-4;
+        & svg {
+          @apply mr-1.5;
+        }
+      }
+      &.pdf {
+        @apply border-[#FF9720];
+      }
+      &.csv {
+        @apply border-[#27DB8D];
+      }
+      &.printer {
+        @apply border-[#6F4EF6];
+      }
+    }
+  }
+}
+
+.error-border {
+  border-bottom: 1px solid red !important;
+}
+
+//sidebar menu style
+@mixin cashierSidebarMuneStyle {
+  .cashier-dashboard-sidebar {
+    @include transition;
+    @apply relative max-w-[315px] ml-0 bg-white z-10;
+    .cashier-header-bar-responsive {
+      @apply absolute top-[23px] right-[-60px] z-[11] inline-block cursor-pointer text-center h-8 w-8 leading-[47px] text-themeBlue bg-grayBorder maxLg:-right-11;
+      @media (max-width: 359px) {
+        right: -20px !important;
+      }
+      .mat-icon {
+        @apply leading-[0px];
+      }
+    }
+  }
+  .cashier-dashboard-main {
+    @apply ml-[315px] minMaxTablet:ml-0 maxLg:ml-0;
+
+    @media (min-width: 320px) and (max-width: 1900px) {
+      @apply ml-0;
+    }
+    @include transition;
+
+    float: right;
+    position: relative;
+    width: 100%;
+    width: calc(100% - 15rem);
+  }
+  .cashier-dashboard-sidebar.sidebar-enable {
+    .cashier-menu-wrapper {
+      //@apply left-[-315px] minMaxTablet:left-0 maxLg:left-0;
+      //@media (min-width: 320px) and (max-width: 1900px) {
+      @apply left-0;
+      //}
+    }
+  }
+  .cashier-dashboard-main.sidebar-enable {
+    @apply ml-0;
+  }
+  .cashier-menu-overlay.sidebar-enable {
+    @media (max-width: 1900px) {
+      background: rgba(0, 0, 0, 0.6);
+      transition: all linear 0.3s;
+      @apply fixed top-0 left-0 right-0 bottom-0 z-10;
+    }
+  }
+}
+
+@mixin cashierHeaderStyle {
+  .cashier-breadcrumb-area {
+    @apply hidden;
+    @media (max-width: 575px) {
+      @apply block;
+    }
+  }
+  .cashier-content-area {
+    padding: 0 !important;
+  }
+  .cashier-header-breadcrumb {
+    @media (max-width: 575px) {
+      @apply hidden;
+    }
+  }
+  //header area start
+  .cashier-header-shortmenu {
+    @apply relative;
+    & .mat-icon {
+      @apply text-[18px];
+      width: 18px !important;
+    }
+    @media (max-width: 359px) {
+      @apply hidden;
+    }
+  }
+  .cashier-header-language-content {
+    & ul {
+      & li {
+        @apply leading-none;
+      }
+    }
+    & .mat-icon {
+      width: 14px !important;
+      @apply text-bodyText text-[18px] translate-y-1;
+    }
+  }
+  .cashier-header-language-content {
+    @apply translate-y-[-2px];
+  }
+  .cashier-header-bar {
+    @apply leading-none;
+  }
+  .custom-height-70 {
+    @apply h-[70px];
+  }
+  .cashier-header-notify-wrapper {
+    & svg {
+      @apply min-w-[18px];
+    }
+  }
+  .cashier-header-profile-info {
+    & i {
+      @apply text-heading absolute top-0 right-0 text-[16px] translate-y-1;
+    }
+  }
+  .cashier-header-bar span {
+    @apply mb-[1px];
+  }
+
+  //shortcut dropdown
+  .cashier-quick-dropdown {
+    @apply absolute top-full right-0 w-[220px] z-[9] border border-solid border-grayBorder py-3 px-5 bg-white opacity-0 scale-0 invisible;
+    box-shadow: 0px 20px 40px rgba(18, 42, 91, 0.05);
+    &.shortmenu-enable,
+    &.langmenu-enable,
+    &.promenu-enable {
+      @apply opacity-100 visible scale-100;
+    }
+    ul {
+      li {
+        a {
+          @apply text-[14px] py-3 px-5 rounded block font-normal text-bodyText hover:bg-grayBgLight hover:text-themeBlue;
+          @include transition;
+          svg {
+            @apply mr-2.5 translate-y-[-1px];
+          }
+          &:hover {
+            path,
+            rect {
+              @apply fill-themeBlue;
+            }
+          }
+        }
+      }
+    }
+  }
+  .cashier-quick-lang-dropdown {
+    @apply w-[240px] p-2.5;
+    &.langmenu-enable {
+      @apply left-auto right-0 top-[45px];
+    }
+  }
+  .cashier-quick-pro-dropdown {
+    @apply w-[195px];
+    &.promenu-enable {
+      @apply left-auto right-0 top-[59px];
+    }
+  }
+  .cashier-quick-pro-dropdown {
+    & a {
+      @apply inline-flex items-center leading-none;
+      .mat-icon {
+        width: 24px !important;
+        @apply text-[16px] translate-y-[3px];
+      }
+    }
+  }
+  .cashier-quick-dropdown {
+    @apply maxSm:right-auto maxXs:left-0;
+  }
+  // notify dropdown
+  .cashier-notify-dropdown-list {
+    .cashier-notify-img {
+      @apply rounded-[5px] mr-4 w-[50px];
+    }
+    .cashier-notify-text {
+      h6 {
+        @apply text-[14px] font-semibold text-heading mb-2;
+      }
+      span {
+        @apply text-[12px] font-normal text-bodyText block;
+      }
+    }
+  }
+  .cashier-notify-dropdown-list a {
+    @apply inline-flex text-bodyText hover:text-themeBlue leading-none;
+    & .mat-icon {
+      @apply text-[16px] ml-1;
+    }
+  }
+  .cashier-notify-dropdown {
+    @apply absolute top-[45px] right-0 w-[250px] z-[9] bg-white opacity-0 scale-0 invisible;
+    box-shadow: 0px 20px 40px rgba(18, 42, 91, 0.05);
+    &.notifydropdown-enable,
+    &.emaildropdown-enable {
+      @apply opacity-100 visible scale-100;
+      @media (max-width: 1400px) {
+        @apply left-auto;
+        @apply right-0;
+      }
+    }
+    &.notifydropdown-enable {
+      @media (max-width: 575px) {
+        @apply left-auto -right-20;
+      }
+    }
+    &.emaildropdown-enable {
+      @media (max-width: 575px) {
+        @apply left-auto -right-14;
+      }
+    }
+  }
+  .cashier-header-shortmenu {
+    a.short {
+      @apply relative z-[9];
+    }
+  }
+  .cashier-header-profile {
+    @apply relative z-[9];
+    margin-bottom: 1rem;
+  }
+  .cashier-header-notification {
+    a.noti {
+      @apply relative z-[9];
+    }
+  }
+  .cashier-header-email {
+    .emai {
+      @apply relative z-[9];
+    }
+  }
+  .cashier-header-language {
+    @apply relative z-[9] cursor-pointer;
+  }
+  .cashier-notify-dropdown {
+    @apply z-[9];
+  }
+  .cashier-quick-dropdown {
+    @apply z-[9];
+  }
+
+  .cashier-header-overlay.shortmenu-enable {
+    @apply block;
+  }
+  .cashier-header-overlay.notifydropdown-enable {
+    @apply block;
+  }
+  .cashier-header-overlay.emaildropdown-enable {
+    @apply block;
+  }
+  .cashier-header-overlay.langmenu-enable {
+    @apply block;
+  }
+  .cashier-header-overlay.promenu-enable {
+    @apply block;
+  }
+  .cashier-header-overlay {
+    @apply hidden fixed top-0 left-0 right-0 w-full h-full z-[8];
+  }
+}
+
+.cashier-dashboard-main.sidebar-enable {
+  .apexcharts-canvas {
+    width: 100% !important;
+  }
+}
+.cashier-bar-chart h5 {
+  @apply left-[50%] translate-x-[-50%] bottom-[25px];
+}
+.common-blue-badge {
+  @apply h-5 leading-5 px-2.5 bg-themeBlue rounded inline-block text-white text-[11px] font-bold;
+}
+
+.cashier-dashboard-sidebar {
+  @media (min-width: 1201px) and (max-width: 1900px) {
+    @apply ml-[-315px];
+  }
+  @media (max-width: 1200px) {
+    @apply ml-[-300px];
+  }
+  .cashier-header-bar-responsive {
+    @media (max-width: 1900px) {
+      @apply -right-14;
+    }
+    @media (max-width: 1200px) {
+      @apply -right-10;
+    }
+  }
+}
+.cashier-dashboard-main {
+  @media (min-width: 1201px) and (max-width: 1900px) {
+    @apply ml-0;
+  }
+  @apply maxLg:ml-0;
+}
+.cashier-dashboard-sidebar.sidebar-enable {
+  @media (min-width: 1201px) and (max-width: 1900px) {
+    @apply ml-0;
+  }
+  @apply maxLg:ml-0;
+}
+
+.cashier-menu-overlay-dashboard.sidebar-enable {
+  @media (max-width: 1900px) {
+    background: rgba(0, 0, 0, 0.6);
+    @apply fixed top-0 left-0 right-0 bottom-0 z-10;
+  }
+}
+.cashier-quickview {
+  @apply min-w-[230px] w-[22%] min-h-[275px] maxXl:min-w-0 maxXl:w-[31.33%] maxMd:min-w-0 maxMd:w-[31%] maxSm:w-full;
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 21%;
+    min-width: 195px;
+  }
+}
+.cashier-quickview-last {
+  @apply min-w-[80px] min-h-[275px] w-[8%] maxXl:min-w-0 maxXl:w-[31.33%] maxMd:min-w-0 maxMd:w-[31%] maxSm:w-full;
+}
+.cashier-quickview-wrapper {
+  @apply maxXl:justify-start maxXl:flex-wrap;
+}
+
+.customerBtn {
+  width: 13rem !important;
+  height: 48px !important;
+}
+
+//sidebar menu style
+@include cashierSidebarMuneStyle;
+.cashier-managesale-top-btn {
+  .mat-raised-button {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    border-radius: 5px !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    padding: 0px 28px !important;
+    margin-right: 16px !important;
+    margin-bottom: 6px !important;
+    &:last-child {
+      margin-right: 0px !important;
+    }
+  }
+  .mat-button-wrapper {
+    display: flex !important;
+    align-items: center !important;
+  }
+  .mat-icon {
+    width: 20px !important;
+    transform: translateX(-3px) !important;
+    @apply mr-2.5;
+  }
+
+  .mat-raised-button.mat-accent {
+    @apply bg-[#FFC403];
+    color: #0d0f19 !important;
+  }
+}
+
+//cashier header searchbar
+@include cashierHeaderSearch;
+
+//cashier header searchbar action
+@include cashierHeaderSearchAction;
+@include commonActionMenuStyle;
+@include cashierHeaderStyle;
+
+.cashier-salereturns-table-checkboxJ,
+.cashier-salereturns-table-dateJ,
+.cashier-salereturns-table-referenceJ,
+.cashier-salereturns-table-customerJ,
+.cashier-salereturns-table-companyJ,
+.cashier-salereturns-table-warehouseJ,
+.cashier-salereturns-table-actionJ {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+  & h5 {
+    @apply text-[15px] font-semibold text-heading;
+  }
+  & span {
+    @apply text-[14px];
+    @apply font-normal;
+    @apply text-bodyText;
+  }
+}
+.cashier-salereturns-table-checkboxJ {
+  min-width: 70px;
+  width: 4.5%;
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    min-width: 50px;
+    width: 4.5%;
+  }
+}
+.cashier-salereturns-table-dateJ {
+  min-width: 220px;
+  width: 15%;
+  @media (min-width: 1601px) and (max-width: 1900px) {
+    width: 15%;
+    min-width: 175px;
+  }
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 18%;
+    min-width: 180px;
+  }
+  @media (max-width: 1400px) {
+    width: 18%;
+    min-width: 180px;
+  }
+}
+.cashier-salereturns-table-referenceJ {
+  min-width: 220px;
+  width: 15%;
+  @media (min-width: 1601px) and (max-width: 1900px) {
+    width: 15%;
+    min-width: 175px;
+  }
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 14%;
+    min-width: 120px;
+  }
+  @media (max-width: 1400px) {
+    width: 14%;
+    min-width: 120px;
+  }
+}
+.cashier-salereturns-table-customerJ {
+  min-width: 280px;
+  width: 19%;
+  @media (min-width: 1601px) and (max-width: 1900px) {
+    width: 18%;
+    min-width: 200px;
+  }
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 16%;
+    min-width: 150px;
+  }
+  @media (max-width: 1400px) {
+    width: 16%;
+    min-width: 150px;
+  }
+}
+.cashier-salereturns-table-companyJ {
+  min-width: 230px;
+  width: 16%;
+  @media (min-width: 1601px) and (max-width: 1900px) {
+    width: 17%;
+    min-width: 185px;
+  }
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 15%;
+    min-width: 120px;
+  }
+  @media (max-width: 1400px) {
+    width: 15%;
+    min-width: 120px;
+  }
+}
+.cashier-salereturns-table-warehouseJ {
+  min-width: 345px;
+  width: 23%;
+  @media (min-width: 1601px) and (max-width: 1900px) {
+    width: 20%;
+    min-width: 160px;
+  }
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 21%;
+    min-width: 205px;
+  }
+  @media (max-width: 1400px) {
+    width: 21%;
+    min-width: 205px;
+  }
+}
+@include commonActionMenuStyle;
+
+.cashier-salereturns-table-checkboxJ {
+  .mat-checkbox-layout {
+    @apply ml-4;
+  }
+  .mat-checkbox-frame {
+    border-color: #cbced4 !important;
+  }
+  .mat-checkbox {
+    @apply flex;
+  }
+}
+
+.cashier-salereturns-table-inner {
+  @media (max-width: 1200px) {
+    overflow-x: auto;
+    scrollbar-height: thin;
+  }
+}
+.cashier-salereturns-table-inner-wrapper {
+  @media (max-width: 1200px) {
+    width: 1090px;
+    scrollbar-height: thin;
+  }
+}
+// .mat-dialog-container#mat-dialog-0 {
+//   max-width: 700px !important;
+//   max-height: 750px !important;
+//   min-width: 700px !important;
+//   min-height: 750px !important;
+// }
+abp-validation-summary {
+  color: red;
+}
+
+.cashier-pagination {
+  ul {
+    @apply inline-flex border border-solid border-grayBorder;
+    li {
+      a {
+        @apply h-10 w-10 text-center text-[14px] font-normal text-bodyText leading-10 inline-block border-r border-solid border-grayBorder;
+        &.active {
+          @apply bg-themeBlue;
+          @apply border-themeBlue;
+          @apply text-white;
+        }
+      }
+      &:last-child {
+        a {
+          @apply border-r-0;
+        }
+      }
+      .material-icons {
+        @apply text-[15px] leading-10;
+      }
+    }
+  }
+}
+.cashier-pagination-sort {
+  @include cashierSelectFieldStyle;
+  .mat-select-arrow-wrapper {
+    @apply translate-y-[-1px];
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
+    @apply pt-[11px];
+  }
+}
+.cashier-pagination-sort .cashier-select-field-style .mat-form-field-flex {
+  @apply bg-white h-10 px-3;
+}
+.cashier-salereturns-table-list.flex.border-b.border-solid.border-grayBorder.h-12 {
+  padding-left: 10px !important;
+}
+.w-30 {
+  width: 30rem !important;
+}
+.w-40 {
+  width: 40rem !important;
+}
+.width-100-pc {
+  width: 100%;
+}
+.h-0 {
+  height: 0px !important;
+}
+
+.btn-disabled {
+  background-color: rgb(151 130 239 / var(--tw-bg-opacity)) !important;
+}
+h5.text-\[15px\].text-heading.font-semibold.mb-1 {
+  font-weight: 549;
+}
+
+.cashier-popup-header-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.mat-tab-body-content.ng-tns-c187-34.ng-trigger.ng-trigger-translateTab {
+  overflow: hidden;
+}
+.mat-tab-label-content {
+  font-size: large;
+  font-weight: bold;
+  text-decoration-color: black;
+}
+.mat-ripple .mat-ripple .mat-tab-label-active {
+  text-decoration-color: blue !important;
+}
+h5.text-\[15px\].text-heading.font-semibold.mb-1 {
+  font-weight: bold;
+}
+
+// .model-input-size .mat-form-field-infix {
+//   padding: 3px 0 !important;
+//   border-top: 0 solid transparent;
+// }
+.mat-tab-group {
+  font-family: "Nunito Sans", sans-serif !important;
+}
+button.mat-raised-button,
+button.mat-raised-button:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+.primary-color {
+  background-color: #3f51b5;
+}
+.danger-color {
+  background-color: #f44336;
+}
+.mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+.close-btn {
+  border: 1px solid red;
+  color: red;
+  padding: 3px 5px 0px 5px;
+  border-radius: 3px;
+}
+.close-btn:hover {
+  color: red;
+}

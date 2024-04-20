@@ -1,0 +1,21 @@
+@import '../../../custom-palettes.scss';
+.lang-dropdown-wrapper {
+    li {
+        .lang-sub-down {
+            @apply absolute top-[60%] left-[-84%] opacity-0 invisible bg-white border border-solid border-grayBorder w-[200px] maxXs:left-auto maxXs:right-[-84%];
+            @media (max-width: 480px) {
+                @apply w-[100px] right-[-36%];
+            }
+            li {
+                a {
+                    @apply block;
+                }
+            }
+        }
+        &:hover {
+            .lang-sub-down {
+                @apply opacity-100 visible top-[50%];
+            }
+        }
+    }
+}

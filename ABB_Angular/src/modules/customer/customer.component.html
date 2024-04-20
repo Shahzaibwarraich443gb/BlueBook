@@ -1,0 +1,105 @@
+<div class="cashier-content-area">
+  <div class="cashier-salereturns-area bg-white p-4 custom-shadow rounded-lg mb-5">
+    <div class="flex">
+      <div class="cashier-managesale-top-btn default-light-theme mb-2">
+        <button mat-raised-button color="accent" class="mb-1" (click)="createCustomers()">
+          <mat-icon>add</mat-icon>Add Customer
+        </button>
+      </div>
+      <div class="ml-auto">
+        <div class="cashier-table-header-search relative maxSm:mb-4" style="width: 30rem;">
+          <input type="text" [(ngModel)]="keyword" placeholder="{{ 'Search' }}" (ngModelChange)="search()" />
+          <span>
+            <mat-icon>search</mat-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <table class="mat-elevation-z0 custTbl" style="width: 100%;" mat-table matSort matSortDirection="desc"
+      [dataSource]="customerDS" (matSortChange)="sortCustomerData($event)">
+
+      <ng-container matColumnDef="no">
+        <th mat-header-cell mat-sort-header="no" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Sr #</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text" (dblclick)="viewDetail(data.id)"> {{i + 1}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header="name" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Name</th>
+        <td mat-cell *matCellDef="let data" class="header-text" (dblclick)="viewDetail(data.id)"> {{data.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="company">
+        <th mat-header-cell mat-sort-header="company" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Company</th>
+        <td mat-cell *matCellDef="let data" class="header-text" (dblclick)="viewDetail(data.id)"> {{data.bussinessName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell mat-sort-header="phoneNumber" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Contact Number</th>
+        <td mat-cell *matCellDef="let data" class="header-text" (dblclick)="viewDetail(data.id)"> {{data.phoneNumber}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="emailAddress">
+        <th mat-header-cell mat-sort-header="emailAddress" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Email Address</th>
+        <td mat-cell *matCellDef="let data" class="header-text" (dblclick)="viewDetail(data.id)"> {{data.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="file">
+        <th mat-header-cell mat-sort-header="file" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Files</th>
+        <td mat-cell *matCellDef="let data" class="header-text"> <img src="../../../../assets/img/icon/attach-file.png"
+            (click)="showAttchment(data)" alt="icon not found" width="16px" height="16px" style="cursor: pointer;" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell mat-sort-header="action" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;text-align: center;" class="actionTh">Action
+        </th>
+        <td mat-cell *matCellDef="let data" class="header-text">
+          <div class="cashier-salereturns-table-actionJ"
+            style="width: 8rem; display: flex;margin-left: auto; margin-right: auto;">
+            <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style"
+              aria-label="Example icon-button with a menu">
+              Action <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="viewDetail(data.id)">
+                <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="viewDetail(data.id)">
+                <img src="../../../../assets/img/icon/action-1.png" alt="icon not found" />
+                <span>Detail</span>
+              </button>
+              <button mat-menu-item (click)="delete(data)">
+                <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <ng-container *ngIf="customers.length == 0">
+      <div class="noDataContainer">
+        No data
+      </div>
+    </ng-container>
+    <mat-paginator #customerPaginator [pageSizeOptions]="[10]" showFirstLastButtons>
+    </mat-paginator>
+
+
+  </div>
+</div>

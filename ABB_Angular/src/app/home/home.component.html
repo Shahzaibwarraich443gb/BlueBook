@@ -1,0 +1,62 @@
+﻿
+
+
+<div class="cashier-breadcrumb-area px-7 py-9 bg-white mb-5 hidden">
+  <div class="cashier-breadcrumb-area-inner px-0.5">
+    <h5 class="text-[20px] text-heading font-bold mb-3 leading-none">Dashboard </h5>
+    <span class="text-[14px] text-bodyText font-normal leading-none">Dashboard</span>
+  </div>
+</div>
+<div class="cashier-content-area mt-[30px] px-7">
+  <div class="grid grid-cols-12 gap-x-5">
+    <div class="col-span-12 xxl:col-span-9 xl:col-span-8">
+      <div class="invention-quickreport-area pl-0.5">
+        <app-quickview></app-quickview>
+      </div>
+      <div class="cashier-line-chart bg-white pt-6 pl-1.5 rounded-lg mb-5">
+          <app-splinechart></app-splinechart>
+      </div>
+      <div class="grid grid-cols-12 gap-x-5">
+        <div class="col-span-12 xl:col-span-7">
+          <div class="cashier-bar-chart relative bg-white pt-6 pl-1.5 pb-2 rounded-lg mb-5">     
+            <app-barchart></app-barchart>
+          </div>
+        </div>
+        <div class="col-span-12 xl:col-span-5 lg:col-span-6">
+          <div class="cashier-dashboard-supplier-area">
+            <app-balancealert></app-balancealert>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-6 xl:hidden">
+          <div class="cashier-dashboard-user-area">
+            <!-- <app-user></app-user> -->
+          </div>
+        </div>
+        <div class="col-span-12">
+          <div class="cashier-dashboard-transaction-area">
+            <app-recentvoucher></app-recentvoucher>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-12 xxl:col-span-3 xl:col-span-4">
+      <div class="grid grid-cols-12 gap-x-5 maxSm:gap-x-0">
+        <div class="col-span-12 xl:col-span-12 lg:col-span-6">
+          <div class="cashier-dashboard-topseller-area">
+            <app-recentclients></app-recentclients>
+          </div>
+        </div>
+        <div class="col-span-12 xl:col-span-12 lg:col-span-6 lg:mb-5">
+          <div class="cashier-dashboard-piechart bg-white rounded-lg mb-5 lg:mb-0 pt-6 pb-4 lg:h-full">
+            <app-piechart></app-piechart>
+          </div>
+        </div>
+        <div class="col-span-12 xl:col-span-12 lg:col-span-6 maxLg:hidden">
+          <div class="cashier-dashboard-user-area">
+            <!-- <app-user></app-user> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

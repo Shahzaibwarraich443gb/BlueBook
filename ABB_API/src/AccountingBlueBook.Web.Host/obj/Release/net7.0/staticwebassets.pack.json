@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\DBScript\\sql.txt",
+      "PackagePath": "staticwebassets\\DBScript\\sql.txt"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\0_1691147956588_Checks (3).csv",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\0_1691147956588_Checks (3).csv"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\0_1691155755110_Checks (9).csv",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\0_1691155755110_Checks (9).csv"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\1_1687585653948_c8912580-2054-4318-a48c-8759556b6966.png",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\1_1687585653948_c8912580-2054-4318-a48c-8759556b6966.png"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\1_1689774986008_Screenshot (2).png",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\1_1689774986008_Screenshot (2).png"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\1_1689775015569_sample.pdf",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\1_1689775015569_sample.pdf"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\CustomerAttachments\\65_1691155777066_Checks (7).csv",
+      "PackagePath": "staticwebassets\\Files\\CustomerAttachments\\65_1691155777066_Checks (7).csv"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\VendorAttachments\\1043_1690970409794_attach-file.png",
+      "PackagePath": "staticwebassets\\Files\\VendorAttachments\\1043_1690970409794_attach-file.png"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\VendorAttachments\\1043_1690970740867_transaction.png",
+      "PackagePath": "staticwebassets\\Files\\VendorAttachments\\1043_1690970740867_transaction.png"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\Files\\VendorAttachments\\1046_1690970507212_alarm.png",
+      "PackagePath": "staticwebassets\\Files\\VendorAttachments\\1046_1690970507212_alarm.png"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\swagger\\ui\\abp.js",
+      "PackagePath": "staticwebassets\\swagger\\ui\\abp.js"
+    },
+    {
+      "Id": "D:\\ABB_WebAPI\\ABB_API\\src\\AccountingBlueBook.Web.Host\\wwwroot\\swagger\\ui\\abp.swagger.js",
+      "PackagePath": "staticwebassets\\swagger\\ui\\abp.swagger.js"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.AccountingBlueBook.Web.Host.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.AccountingBlueBook.Web.Host.props",
+      "PackagePath": "build\\AccountingBlueBook.Web.Host.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.AccountingBlueBook.Web.Host.props",
+      "PackagePath": "buildMultiTargeting\\AccountingBlueBook.Web.Host.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.AccountingBlueBook.Web.Host.props",
+      "PackagePath": "buildTransitive\\AccountingBlueBook.Web.Host.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

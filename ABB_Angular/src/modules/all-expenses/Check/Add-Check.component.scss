@@ -1,0 +1,60 @@
+::ng-deep .personalTaxDatePicker .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-suffix{
+    margin-top: auto !important;
+    margin-bottom: 10px;
+}
+
+.bankDepositInput, .bankDepositInput {
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+}
+
+.bankDepositTbl th,
+.bankDepositTbl td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.bankDepositTbl td input{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+
+.bankDepositTbl th{
+    background-color: #e5e7eb;
+}
+
+.addCheckBtn{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    background-color: #e7e5e4;
+    border-radius: 0.375rem;
+}
+
+div .addCheckBtn:not(:first-child){
+    margin-left: 1rem;
+}
+
+input:read-only{
+    background-color: #f8fafc !important;
+    opacity: 0.7;
+}
+
+.check-select{
+    border: 1px solid #ccc;
+    height: 2.6rem; 
+    display: flex; 
+    align-items: center;
+    padding: 0.5rem;
+}
+
+
+.invalid-select.mat-select, .invalid-input {
+    border-color: red !important; /* Change this to your desired border color for invalid mat-select */
+  }
+
+ 

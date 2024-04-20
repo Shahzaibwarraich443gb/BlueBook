@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\AccountingBlueBook.Web.Host.props" />
+</Project>

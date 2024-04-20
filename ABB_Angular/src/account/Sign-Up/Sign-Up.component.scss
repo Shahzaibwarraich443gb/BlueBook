@@ -1,0 +1,63 @@
+/* Add any custom styles here to enhance the design */
+
+/* Center the form vertically */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin-top: 8px;
+}
+
+
+
+// .mat-form-field .mat-input-element {
+//   height: 10px;
+//   padding: 0px;
+//   margin-top: 5PX;
+//   /* Adjust the height value as needed */
+// }
+.validation-error {
+  color: red;
+  /* Error message color */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.validation-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  /* Error icon background color */
+  color: white;
+  /* Error icon color */
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  /* Error icon font size */
+  margin-right: 10px;
+}
+
+:host ::ng-deep .Style-Class {
+  // CSS
+}
+
+.OTPSection>label {
+  display: block;
+}
+
+.OTPSection,
+.otpCodeSection {
+  margin-top: 10px;
+}

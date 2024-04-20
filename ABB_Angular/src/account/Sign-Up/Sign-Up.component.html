@@ -1,0 +1,267 @@
+<div class="max-w-3xl  mx-auto p-8 bg-white mt-4 ">
+    <!-- Company Name -->
+    <div class="mt-auto flex justify-end">
+        <div class="text-sm text-gray-600">
+            <button mat-raised-button color="primary" class="w-full mt-7" [routerLink]="['/account/login']">
+                Login
+            </button>
+        </div>
+    </div>
+
+    <div class="cashier-login-logo text-center ">
+        <img src="../../../assets/img/logo/logo.png" alt="logo not found">
+    </div>
+
+
+    <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="save(registerForm)">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>What is your company name?</mat-label>
+            <input matInput type="text" name="companyName" required maxlength="40" [(ngModel)]="model.tenancyName"
+                #CompanyModel="ngModel" #CompanynameEl class="center-text">
+        </mat-form-field>
+
+
+        <!-- First Name and Last Name -->
+        <div class="grid grid-cols-2 gap-4 ">
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" name="firstName" maxlength="25" [(ngModel)]="model.firstName"
+                    #FirstNameModel="ngModel" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" name="lastName" maxlength="25" [(ngModel)]="model.lastName"
+                    #lastNameModel="ngModel" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" name="emailAddress" maxlength="26" [(ngModel)]="model.adminEmailAddress "
+                    #emailAddressModel="ngModel" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>PhoneNumber</mat-label>
+                <input matInput type="text" name="phoneNumber" maxlength="15" [(ngModel)]="phoneNumber"
+                    #phoneNumberModel="ngModel" required>
+            </mat-form-field>
+        </div>
+
+        <!-- <mat-form-field appearance="outline" class="w-full ">
+            <mat-label># Of Users </mat-label>
+            <input matInput type="number" name="ofusers" [(ngModel)]="model.noOfUsers" #noofusersModel="ngModel"
+                required>
+        </mat-form-field> -->
+
+        <!-- <mat-form-field appearance="outline" class="w-full ">
+            <mat-label>Storage Limit(Gb)</mat-label>
+            <input matInput type="number" name="storagelim" [(ngModel)]="model.storagelimit" #storagelimModel="ngModel"
+                required>
+        </mat-form-field> -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="w-full">
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" (input)="validatePassword(password.value)" #password
+                        maxlength="9" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                        [(ngModel)]="model.adminPassword" #passwordModel="ngModel"
+                        [type]="hidePassword ? 'password' : 'text'" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="hidePassword ? 'Hide password' : 'Show password'">
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div class="password-validation " style="margin-bottom: 30px;">
+                    <p *ngIf="!isUpperCaseLetter" class="validation-error">
+                        <span class="validation-icon">!</span>
+                        Password must contain at least one uppercase letter
+                    </p>
+                    <p *ngIf="!isLowerCaseLetter" class="validation-error">
+                        <span class="validation-icon">!</span>
+                        one lowercase letter
+                    </p>
+                    <p *ngIf="!isNumber" class="validation-error">
+                        <span class="validation-icon">!</span>
+                        one number
+                    </p>
+                    <p *ngIf="!isSpecialCharacter" class="validation-error">
+                        <span class="validation-icon">!</span>
+                        one special character
+                    </p>
+                    <p *ngIf="!isMinLength" class="validation-error">
+                        <span class="validation-icon">!</span>
+                        at least 8 characters long
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="w-full">
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" [(ngModel)]="ConfirmNewPassword"
+                        (ngModelChange)="confirmPassword($event)" maxlength="32" name="ConfirmPassword"
+                        [type]="hidePassword ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix>
+
+                    </button>
+                </mat-form-field>
+                <div style="margin-top: -18px;" class="text-red-500 text-sm" *ngIf="isActive">
+                    Passwords do not match.
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+
+            <!-- <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Fiscal Year Start</mat-label>
+                <input matInput [matDatepicker]="datePicker" name="fiscalYearStart" [(ngModel)]="AltfiscalYearStart"
+                    #fiscalYearStartModel="ngModel" required (ngModelChange)="calculateDate()" />
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Fiscal Year Start</mat-label>
+                <input type="text" [(ngModel)]="AltfiscalYearStart" matInput name="invoiceDate"
+                    [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()"
+                    (ngModelChange)="calculateDate()" />
+                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
+                <mat-datepicker #releasedAtPicker></mat-datepicker>
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Fiscal Year End</mat-label>
+                <input type="text" [(ngModel)]="AltfiscalYearEnd" matInput name="fiscalYearEnd"
+                    [matDatepicker]="endPicker" (focus)="endPicker.open()" />
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+
+        </div>
+
+        <mat-form-field appearance="outline" class="w-full ">
+            <mat-label>Address</mat-label>
+            <input matInput type="text" name="address" maxlength="150" [(ngModel)]="model.address"
+                #addressModel="ngModel" required>
+        </mat-form-field>
+        <div class="grid grid-cols-2 gap-4">
+            <mat-form-field appearance="outline">
+                <mat-label>Zip Code</mat-label>
+                <input matInput type="text" name="zipCode" maxlength="25" [(ngModel)]="model.zip_code"
+                    #zip_codeModel="ngModel" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput type="text" name="City" maxlength="30" [(ngModel)]="model.city" #cityModel="ngModel"
+                    required>
+            </mat-form-field>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <input matInput type="text" name="state" maxlength="29" [(ngModel)]="model.state" #stateModel="ngModel"
+                    required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Country</mat-label>
+                <input matInput type="text" name="Country" maxlength="25" [(ngModel)]="model.country"
+                    #countryModel="ngModel" required>
+            </mat-form-field>
+        </div>
+
+
+
+        <mat-checkbox name="groupname" value="val1" (change)="enableTwoWayAuthentication($event)"
+            label="Two Way Authentication"></mat-checkbox>
+        <span class="ml-2 text-sm text-gray-600">Two Way Authentication</span>
+
+        <!-- <div *ngIf="checked" class="OTPSection">
+            <label>Phone #<span style="color: red">*</span></label>
+            <div class="p-grid">
+                <div class="p-col-4">
+                    <p-dropdown [options]="countriesCodes" [(ngModel)]="countryPhoneCode" name="countryCode"
+                        optionLabel="label" [filter]="true" [appendTo]="'body'" required>
+                    </p-dropdown>
+                </div>
+                <div class="p-col-4">
+                    <input pInputText name="phoneNumber" [(ngModel)]="phoneNumber" type="tel" required
+                        #phoneNumberInput="ngModel">
+                    <small style="color: red" *ngIf="phoneNumberInput.errors?.required">
+                        Please enter a phone number
+                    </small>
+                </div>
+            </div>
+        </div> -->
+        <div *ngIf="checked">
+            <label>Phone #<span style="color: red">*</span></label>
+            <div class="flex items-center">
+
+                <div style="width: 20%; margin-top: -1.2rem;">
+                    <p-dropdown [style]="{'height':'4.2rem', 'position': 'flex', 'align-items': 'center'}"
+                        [options]="countriesCodes" [(ngModel)]="countryPhoneCode" name="countryCode" optionLabel="label"
+                        [filter]="true" [appendTo]="'body'" required>
+                    </p-dropdown>
+                </div>
+                <div class="relative ml-6" style="width: 50%;">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label></mat-label>
+                        <input matInput type="text" name="emailAddress" maxlength="26" [(ngModel)]="phoneNumber"
+                            #phoneNumberInput="ngModel">
+                    </mat-form-field>
+                    <div style="position: absolute; bottom: 0;" *ngIf="phoneNumberInput.errors?.required">
+                        Please enter a phone number
+                    </div>
+                </div>
+
+                <button mat-raised-button color="primary" type="button"
+                    style="height: 3.2rem;margin-top: -1.2rem;margin-left: 1rem;" (click)="sendOTPCode()">Send</button>
+
+
+            </div>
+            <div class="otpCodeSection">
+                <label> OTP<span style="color: red">*</span> </label>
+                <form method="get" class="digit-group" #otpForm="ngForm" data-group-name="digits"
+                    data-autosubmit="false" autocomplete="off" (ngSubmit)="checkOTP(otpForm.value)">
+                    <div style="height: fit-content !important">
+                        <p class="a-o-i" style="color: #000">
+                            Enter verification code
+                        </p>
+                        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent"
+                            [config]="config"></ng-otp-input>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+        <div class="flex items-center mb-5">
+
+
+
+            <mat-checkbox name="isAccept" [(ngModel)]="model.isAccept" #isAcceptModel="ngModel" required></mat-checkbox>
+            <span class="ml-2 text-sm text-gray-600">I accept Terms and Conditions and Privacy Policy*</span>
+
+
+        </div>
+
+
+
+        <!-- Rest of the form fields... -->
+
+        <!-- Register button -->
+        <button mat-raised-button style="margin-bottom: 12px;" color="primary" type="submit" class="w-full ">Register

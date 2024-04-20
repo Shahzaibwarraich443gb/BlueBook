@@ -1,0 +1,175 @@
+<div class="cashier-content-area" *ngIf="show">
+  <div class="cashier-salereturns-area bg-white custom-shadow rounded-lg mb-5 -mt-3" style="width: 101%;">
+    <!-- <form autocomplete="off" #invoiceForm="ngForm" (ngSubmit)="cleardata()"> -->
+    <div class="p-2 mb-3" style="background-color: #6F4EF6;">
+      <div class="text-[20px] text-heading font-semibold">
+        <strong><span style="color: white; font-size: 20px;">Contact Details</span></strong>
+      </div>
+    </div>
+
+
+    <div class="cashier-table-header-search-area">
+      <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Email
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="email" [(ngModel)]="contactDetaildto.email"
+                  maxlength="50" disabled />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Phone Number
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="Phonenumber" [(ngModel)]="contactDetaildto.phoneNumber"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Mobile Number
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="MobileNumber"
+                  [(ngModel)]="contactDetaildto.mobileNumber" maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Address
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="address" [(ngModel)]="contactDetaildto.address"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              City
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="city" [(ngModel)]="contactDetaildto.city"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              State
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="state" [(ngModel)]="contactDetaildto.state"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Country
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="country" [(ngModel)]="contactDetaildto.country"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Post Code
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="PostCode" [(ngModel)]="contactDetaildto.postCode"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="lg:col-span-6 md:col-span-12 sm:col-span-12">
+        <div class="text-right maxSm:text-left">
+
+          <div class="default-light-theme mb-7 space-x-2">
+
+
+            <button type="submit" mat-raised-button color="primary" (click)="save()" class="uppercase">Save</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

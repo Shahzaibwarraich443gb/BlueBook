@@ -1,0 +1,103 @@
+﻿IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Finance_SpGetInvoiceNO')
+DROP PROCEDURE Finance_SpGetInvoiceNO
+GO
+
+SET ANSI_NULLS ON
+GO     
+    
+CREATE PROC [dbo].[Finance_SpGetInvoiceNO]-- 61087,1    
+@TenantId AS BIGINT,    
+@InvoiceTypeCode AS nvarchar(max)    
+AS   
+Begin
+    SELECT  InvoiceNo    
+    FROM    Invoices    
+    WHERE   Id = ISNULL(( SELECT MAX(Id)    
+                                 FROM  Invoices WHERE InvoiceType = @InvoiceTypeCode and RefCompanyID=@TenantId    
+                               ), 0) AND RefCompanyID= @TenantId     
+End 
+Go  
+
+--###############################-----------END-----------###############################
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Finance_SpGetVouvherNO')
+DROP PROCEDURE Finance_SpGetVouvherNO
+GO
+
+SET ANSI_NULLS ON
+GO     
+  
+CREATE PROC [dbo].[Finance_SpGetVouvherNO]    
+@VoucherTypeCode as nvarchar(10),    
+@TenantId AS BIGINT    
+AS    
+Begin   
+    SELECT  VoucherNo    
+    FROM    Vouchers v inner join VoucherDetail vd on  v.Id = vd.VoucherId  
+    WHERE   v.Id = ISNULL(( SELECT MAX(Id)    
+                                 FROM   vouchers    
+         where VoucherTypeCode=@VoucherTypeCode    
+                               ), 0) AND vd.TenantId=@TenantId      
+End 
+Go 
+
+--###############################-----------END-----------###############################
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'sp_Finance_Get_InvoiceBalance')
+DROP PROCEDURE sp_Finance_Get_InvoiceBalance
+GO
+
+SET ANSI_NULLS ON
+GO     
+  
+CREATE PROC [dbo].[sp_Finance_Get_InvoiceBalance]    
+    @TenantId AS BIGINT ,    
+    @InvoiceID AS BIGINT    
+AS
+Begin
+    SELECT  ISNULL(i.Total, 0)    
+            - ( SELECT  ISNULL(SUM(id.PaidAmount), 0)    
+                FROM    InvoiceDetails id    
+                        JOIN Invoices ii ON id.InvoiceID = ii.ID    
+                WHERE   id.RefPaidInvoiceID = i.ID AND ii.IsDeleted=0    
+              ) AS OpenBalance    
+    FROM    Invoices i    
+    WHERE  -- i.ref_InvoiceType = 1    
+    --        AND    
+   i.ID = @InvoiceID    
+            AND i.refCompanyID = @TenantId    
+            AND ISNULL(i.IsDeleted, 0) = 0     
+     
+End 
+Go 
+
+--###############################-----------END-----------###############################
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'sp_Finance_Get_PurchaseInvoiceBalance')
+DROP PROCEDURE sp_Finance_Get_PurchaseInvoiceBalance
+GO
+
+SET ANSI_NULLS ON
+GO     
+  
+CREATE PROC [dbo].[sp_Finance_Get_PurchaseInvoiceBalance]    
+    @TenantId AS BIGINT ,    
+    @InvoiceID AS BIGINT    
+AS 
+Begin
+    SELECT  ISNULL(i.Total, 0)    
+            - ( SELECT  ISNULL(SUM(id.PaidAmount), 0)    
+                FROM    InvoiceDetails id    
+                        JOIN Invoices ii ON id.InvoiceId = ii.Id    
+                WHERE   id.RefPaidInvoiceID = i.Id AND ii.IsDeleted=0    
+              ) AS OpenBalance    
+    FROM    Invoices i    
+    WHERE   i.InvoiceType = 10    
+            AND i.Id = @InvoiceID    
+            AND i.RefCompanyID = @TenantId    
+            AND ISNULL(i.IsDeleted, 0) = 0       
+End 
+Go 
+
+--###############################-----------END-----------###############################

@@ -1,0 +1,67 @@
+<div class="cashier-breadcrumb-area bg-white mb-5">
+  <div class="cashier-breadcrumb-area-inner">
+    <h5 class="text-[20px] text-heading font-bold mb-3">Customers</h5>
+    <div class="cashier-breadcrumb-area-inner-wrap">
+      <span class="text-[14px] text-gray font-normal inline-block mr-2">Customers</span>
+      <span class="text-[12px] text-bodyText font-normal inline-block mr-2 translate-y-0"><i
+          class="far fa-chevron-right"></i></span>
+      <span class="text-[14px] text-gray font-normal inline-block mr-2">Customers</span>
+    </div>
+  </div>
+</div>
+<div class="cashier-content-area">
+  <div class="cashier-salereturns-area bg-white custom-shadow rounded-lg mb-5" style="padding: 0.4rem !important;">
+
+    <form autocomplete="off" #customerForm="ngForm">
+      <mat-tab-group color="transparent" (selectedTabChange)="tabChange($event)">
+        <mat-tab label="Info">
+          <app-customer-info #CustomerInfoViewComponent (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event" (customerId)="customerId=$event">
+          </app-customer-info>
+        </mat-tab>
+        <!-- <mat-tab label="Detail" [disabled]="activeTab=='Info'||!customerId"> -->
+        <mat-tab label="Detail">
+          <app-detail-customer [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event">
+          </app-detail-customer>
+        </mat-tab>
+        <mat-tab label="Passwords">
+          <app-customer-passwords [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <mat-tab label="License">
+          <app-customer-license [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event" />
+        </mat-tab>
+        <mat-tab label="Contact info">
+          <!-- <mat-tab label="Contact info" [disabled]="activeTab=='Info'||activeTab=='Detail'"> -->
+          <app-contact-info [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)"
+            (activeTab)="activeTab=$event"></app-contact-info>
+        </mat-tab>
+        <!-- <mat-tab label="Address" [disabled]="activeTab=='Info'||activeTab=='Detail' ||activeTab=='Contact info'"> -->
+        <mat-tab label="Address">
+          <app-address [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event"></app-address>
+        </mat-tab>
+        <mat-tab label="To-do List">
+          <app-customer-todo-list [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event"></app-customer-todo-list>
+        </mat-tab>
+        <mat-tab label="CRM">
+          <app-customer-crm [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event"></app-customer-crm>
+        </mat-tab>
+        <mat-tab label="Attachments">
+          <app-customer-attachments [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event"></app-customer-attachments>
+        </mat-tab>
+        <mat-tab label="Diary">
+          <app-customer-diary [customerId]="customerId" [comment]="comment" (onSave)="moveNextTab($event)" (activeTab)="activeTab=$event"></app-customer-diary>
+        </mat-tab>
+        <!-- <mat-tab label="Filling Details"
+          [disabled]="activeTab=='Info'||activeTab=='Detail' ||activeTab=='Contact info'||activeTab=='Address'"> -->
+        <!-- <mat-tab label="Filling Details">
+          <app-filling-detail></app-filling-detail>
+        </mat-tab> -->
+        <!-- <mat-tab label="Username/Password"
+          [disabled]="activeTab=='Info'||activeTab=='Detail' ||activeTab=='Filling Details'"> -->
+      </mat-tab-group>
+      <div *ngIf="isDetailOrEditView">
+        <hr style="margin-bottom: 7px; height:2px;border-width:0;color:gray;background-color:gray">
+        <app-service-list-view></app-service-list-view>
+      </div>
+    </form>
+  </div>
+</div>

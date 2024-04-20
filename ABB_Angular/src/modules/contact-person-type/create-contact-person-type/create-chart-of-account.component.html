@@ -1,0 +1,74 @@
+<div [@routerTransition]>
+  <mat-dialog-content>
+    <div class="popup-body">
+      <div class="cashier-popup-inner">
+        <div class="cashier-popup-header relative mb-11">
+          <div class="cashier-popup-header-title">
+            <h2 *ngIf="data.id">Edit Contact Person</h2>
+            <h2 *ngIf="!data.id">Create Contact Person</h2>
+          </div>
+          <div class="cashier-popup-header-close absolute -top-4 right-0">
+            <mat-dialog-actions>
+              <div class="default-light-theme">
+                <a href="javascript:void(0)" mat-dialog-close>
+                  <mat-icon>clear</mat-icon>
+                </a>
+              </div>
+            </mat-dialog-actions>
+          </div>
+        </div>
+        <form autocomplete="off" #createChartForm="ngForm" (ngSubmit)="save()">
+          <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+            <div class="col-span-12">
+              <div class="cashier-select-field mb-6">
+                <h5 class="text-[15px] text-heading font-semibold mb-3">
+                  Name
+                </h5>
+                <div>
+                  <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden"> </mat-label>
+                    <input
+                      type="type"
+                      matInput
+                      [placeholder]="'Name'"
+                      name="name"
+                      id="name"
+                      required
+                      required
+                      [(ngModel)]="createOrEditContactPersonTypeInputDto.name"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!createChartForm.form.valid"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+            <div class="md:col-span-6 sm:col-span-12">
+              <div class="cashier-popup-btn default-light-theme pt-1.5">
+                <button
+                  type="button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="hideDialog()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

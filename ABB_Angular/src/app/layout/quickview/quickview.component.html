@@ -1,0 +1,65 @@
+<div class="cashier-quickview-area p-7 pt-5 pb-2 bg-white rounded-lg mb-5">
+  <div class="cashier-dashboard-supplier-header flex flex-wrap items-center justify-between mb-6 m-0.5">
+      <h5 class="text-[18px] text-heading font-bold maxSm:mb-2 maxSm:text-[16px]">Shortcut Report</h5>
+      <a [routerLink]="['/profitreport']" class="text-[15px] font-semibold text-bodyText maxSm:mb-2 maxSm:text-[14px]">View Report <i class="far fa-arrow-right inline-block ml-1"></i></a>
+  </div>
+  <div class="cashier-quickview-wrapper flex items-center justify-between gap-x-5 maxXs:gap-x-0">
+      <div class="cashier-quickview bg-[#EEF0F8] mb-5 rounded-lg">
+          <a [routerLink]="['/accountsbalance']" class="p-[30px] inline-block">
+              <div class="cashier-quickview-box">
+                  <div class="cashier-quickview-box-icon mb-5">
+                      <img src="../../../assets/img/icon/quick-1.png" alt="icon not found" class="inline-block rounded-[15px]">
+                  </div>
+                  <h4 class="text-[22px] font-extrabold text-heading">$24,575</h4>
+                  <span class="block text-[15px] font-semibold text-bodyText mb-8">Opening Balance</span>
+                  <span class="h-[35px] rounded-[17px] bg-white inline-block text-[14px] font-semibold leading-[35px] px-3 min-w-[70px] text-center text-heading">+65%</span>
+              </div>
+          </a>
+      </div>
+
+      <div class="cashier-quickview bg-[#F8F0E7] mb-5 rounded-lg">
+          <a [routerLink]="['/transection']" class="p-[30px] inline-block">
+              <div class="cashier-quickview-box">
+                  <div class="cashier-quickview-box-icon mb-5">
+                      <img src="../../../assets/img/icon/quick-2.png" alt="icon not found" class="inline-block rounded-[15px]">
+                  </div>
+                  <h4 class="text-[22px] font-extrabold text-heading">$5,786</h4>
+                  <span class="block text-[15px] font-semibold text-bodyText mb-8">Today's Transection</span>
+                  <span class="h-[35px] rounded-[17px] bg-white inline-block text-[14px] font-semibold leading-[35px] px-3 min-w-[70px] text-center text-heading">+3.47%</span>
+              </div>
+          </a>
+      </div>
+
+      <div class="cashier-quickview bg-[#F9E8E8] mb-5 rounded-lg">
+          <a [routerLink]="['/expensereport']" class="p-[30px] inline-block">
+              <div class="cashier-quickview-box">
+                  <div class="cashier-quickview-box-icon mb-5">
+                      <img src="../../../assets/img/icon/quick-3.png" alt="icon not found" class="inline-block rounded-[15px]">
+                  </div>
+                  <h4 class="text-[22px] font-extrabold text-heading">$57,575</h4>
+                  <span class="block text-[15px] font-semibold text-bodyText mb-8">Today's Expense</span>
+                  <span class="h-[35px] rounded-[17px] bg-white inline-block text-[14px] font-semibold leading-[35px] px-3 min-w-[70px] text-center text-heading">-2.8%</span>
+              </div>
+          </a>
+      </div>
+
+      <div class="cashier-quickview bg-[#E6F2E2] mb-5 rounded-lg">
+          <a [routerLink]="['/netincomereport']" class="p-[30px] inline-block">
+              <div class="cashier-quickview-box">
+                  <div class="cashier-quickview-box-icon mb-5">
+                      <img src="../../../assets/img/icon/quick-4.png" alt="icon not found" class="inline-block rounded-[15px]">
+                  </div>
+                  <h4 class="text-[22px] font-extrabold text-heading">$24,575</h4>
+                  <span class="block text-[15px] font-semibold text-bodyText mb-8">Today's Net Income</span>
+                  <span class="h-[35px] rounded-[17px] bg-white inline-block text-[14px] font-semibold leading-[35px] px-3 min-w-[70px] text-center text-heading">+65%</span>
+              </div>
+          </a>
+      </div>
+
+      <div class="cashier-quickview-last rounded-lg border-[1.5px] border-dashed p-[30px] mb-5 border-[#DCE0EB] h-full flex flex-col justify-center items-center">
+          <div class="cashier-quickview-box ">
+              <i class="far fa-plus text-[#B4BBD2] text-[20px]"></i>
+          </div>
+      </div>
+  </div>
+</div>

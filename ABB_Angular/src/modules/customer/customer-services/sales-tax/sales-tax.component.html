@@ -1,0 +1,112 @@
+<div class="salesTaxContainer">
+    <div>
+        <mat-form-field>
+            <label>Financial Year *</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedFinancialYear" (selectionChange) = "getSalesTax()">
+                <mat-option *ngFor="let data of financialYearArr;" [value]="data">
+                    {{data}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-4 gap-2 w-full">
+        <mat-form-field>
+            <label>Legal Status</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedLegalStatus">
+                <mat-option *ngFor="let data of legalStatus;" [value]="data.id" >
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label>Tenure(Form) *</label>
+            <mat-label></mat-label>
+            <mat-select [(ngModel)]="selectedTenure">
+                <mat-option *ngFor="let data of tenure;" [value]="data.id">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="flex flex-col p-3 justify-center" style="margin-top: -2rem;">
+            <label>Start and End Date</label>
+            <div>{{dateRange}}</div>
+        </div>
+
+        <div class="flex flex-col p-3 justify-center" style="margin-top: -2rem;">
+            <label>Due Date</label>
+            <div>{{dueDate}}</div>
+        </div>
+    </div>
+
+    <div>
+        <table class="bankDepositTbl" style="display: inline-table;">
+            <thead>
+                <tr>
+                    <th style="font-weight: 600;">Month</th>
+                    <th style="font-weight: 600;">Bank Deposit ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of fiscalMonthArr">
+                    <td>{{m.month}}</td>
+                    <td><input type="number" maxlength="100" value="0" (input)="calculateTotalMonthlyAmount()"
+                            class="bankDepositInput monthInput" /></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><input type="text" class="bankDepositInput" [(ngModel)]="totalMonthlyAmount" readonly /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="display: inline-table;">
+            <table class="SalesTaxComptTbl ml-8" >
+                <thead>
+                    <tr>
+                        <th colspan="5" style=" background-color: #e5e7eb;">Sales Tax Computation</th>
+                    </tr>
+                    <tr>
+                        <th style="font-weight: 600; background-color: #e5e7eb;">Annual</th>
+                        <th style="font-weight: 600; background-color: #e5e7eb;">Bank Deposit</th>
+                        <th style="font-weight: 600; background-color: #e5e7eb;">Non-Taxable Sales</th>
+                        <th style="font-weight: 600; background-color: #e5e7eb;">Taxable Sales</th>
+                        <th style="font-weight: 600; background-color: #e5e7eb;">Sales Tax</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Annualy</td>
+                        <td>{{totalMonthlyAmount}}</td>
+                        <td><input type="text" [(ngModel)]="nonTaxableAmount" (ngModelChange)="calculateTaxableSales()"
+                                class="bankDepositInput" /></td>
+                        <td>{{taxableSales}}</td>
+                        <td>{{salesTax}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{totalMonthlyAmount}}</td>
+                        <td>{{nonTaxableAmount}}</td>
+                        <td>{{taxableSales}}</td>
+                        <td>{{salesTax}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="float-right mt-4">
+                <label>Rate %</label>
+                <input type="number" class="bankDepositInput ml-2" [(ngModel)]='salesRatePercentage' (ngModelChange)="calculateSalesTax()" />
+            </div>
+        </div>
+
+        <div class="flex flex-col items-end text-green-600 font-light text-2xl">
+            <div>Income Tax Payable</div>
+            <div class="font-bold" *ngIf="salesTax">${{salesTax}}</div>
+            <div class="font-bold" *ngIf="!salesTax">$0.00</div>
+            <button (click)="saveSalesTax()" class="bg-green-600 text-white font-bold py-2 px-3 text-lg rounded-md hover:shadow-2xl hover:bg-green-500">Save</button>
+        </div>
+    </div>
+</div>

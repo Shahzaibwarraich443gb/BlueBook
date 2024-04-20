@@ -1,0 +1,50 @@
+.salesTaxContainer {
+    padding: 1rem;
+}
+
+
+// .salesTaxContainer div mat-form-field:not(:first-child), .salesTaxContainer div div:not(:first-child){
+//     margin-left: 1rem;
+// }
+
+.salesTaxContainer div mat-form-field label {
+    font-weight: 600;
+    color: #52525b;
+    margin-bottom: 0.4rem;
+}
+
+
+
+
+.salesTaxContainer div label {
+    font-weight: 700;
+    color: #52525b;
+    margin-bottom: 0.4rem;
+}
+
+
+.bankDepositInput {
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+}
+
+.bankDepositTbl th,
+.bankDepositTbl td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.bankDepositTbl th {
+    background-color: #e5e7eb;
+}
+
+.SalesTaxComptTbl th,
+.SalesTaxComptTbl td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.monthInput:read-only,
+.bankDepositInput:read-only {
+    opacity: 70%;
+}

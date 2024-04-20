@@ -1,0 +1,124 @@
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="cashier-popup-inner" style="width: 480px !important;height: 31rem;">
+      <div class="cashier-popup-header relative">
+        <div class="cashier-popup-header-title">
+          <h4 class="text-[20px] text-heading font-bold">
+            {{ data.id ? "Edit Role" : "Add New Role" }}
+          </h4>
+        </div>
+        <div class="cashier-popup-header-close absolute -top-4 right-0">
+          <mat-dialog-actions>
+            <div class="default-light-theme">
+              <a href="javascript:void(0)" class="close-btn" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </mat-dialog-actions>
+        </div>
+      </div>
+
+      <div class="cashier-addsupplier-area bg-whitecustom-shadow rounded-lg">
+        <form autocomplete="off" #createOrEditRoleForm="ngForm" (ngSubmit)="save()">
+          <mat-tab-group>
+            <mat-tab label="Role Info">
+              <div class="grid grid-cols-12 mt-3 gap-x-7 maxSm:gap-x-0">
+                <div class="col-span-12">
+                  <div class="cashier-select-field">
+                    <h5 class="text-[15px] text-heading font-semibold mb-3">
+                      {{ "Name" | localize }}
+                    </h5>
+                    <div class="cashier-input-field-style">
+                      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                        <!-- <mat-label class="hidden">Customer name</mat-label> -->
+                        <input type="text" matInput name="name" id="name" required maxlength="32"
+                          [(ngModel)]="role.name" #nameModel="ngModel" #nameEl />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+                <div class="col-span-12">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="role.ipRestriction"
+                      name="ipRestrictionUserGroup" id="isActive" />
+                    <span class="spn"> IP Restrictions </span>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-12 mt-3 gap-x-7 maxSm:gap-x-0">
+                <div class="col-span-12">
+                  <div class="cashier-select-field">
+                    <!-- <h5 class="text-[15px] text-heading font-semibold mb-3">
+                      IP Address
+                    </h5> -->
+                    <!-- <div class="cashier-input-field-style">
+                      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                        <input type="text" matInput name="ipAddress" id="ipAddress" required maxlength="32"
+                          [(ngModel)]="role.ipAddress" #ipAddress="ngModel" #ipAddressEI />
+                      </mat-form-field>
+                    </div> -->
+                    <mat-form-field class="example-chip-list col-md-12 invoiceFormField" appearance="fill">
+                      <mat-label>IP Address</mat-label>
+                      <mat-chip-list #chipList aria-label="Fruit selection">
+                        <mat-chip *ngFor="let item of emailList" (removed)="removeEmail(item)">
+                          {{item}}
+                          <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip>
+                        <input placeholder="add new IP Address" [matChipInputFor]="chipList" name="ipaddress"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIpAddress($event,0)"
+                          (keydown.space)="addIpAddress($event, 0)">
+                      </mat-chip-list>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-12 gap-x-7 maxSm:gap-x-0">
+                <div class="col-span-12">
+                  <div class="cashier-select-field mb-1">
+                    <h5 class="text-[15px] text-heading font-semibold mb-3">
+                      {{ "Description" | localize }}
+                    </h5>
+                    <div class="cashier-input-field-style">
+                      <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                        <mat-label class="hidden"></mat-label>
+                        <textarea matInput name="description" id="description" maxlength="1000"
+                          [(ngModel)]="role.description" #descriptionModel="ngModel" #descriptionEl></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Permissions">
+              <div class="form-group mt-1 row mb-0">
+                <div class="col-md-12">
+                  <permission-tree #permissionTree></permission-tree>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+          <div class="col-span-12">
+            <div class="cashier-managesale-top-btn default-light-theme">
+              <button mat-raised-button type="button" color="accent" icon="pi pi-times" (click)="hideDialog()">
+                Cancel
+              </button>
+              <button mat-raised-button color="primary" *ngIf="!data.id"
+                [disabled]="!createOrEditRoleForm.valid || saving">
+                Create Role
+              </button>
+              <button mat-raised-button color="primary" *ngIf="data.id"
+                [disabled]="!createOrEditRoleForm.valid || saving">
+                Update Role
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

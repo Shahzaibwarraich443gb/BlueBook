@@ -1,0 +1,65 @@
+.salesTaxContainer {
+    padding: 1rem;
+}
+
+
+// .salesTaxContainer div mat-form-field:not(:first-child), .salesTaxContainer div div:not(:first-child){
+//     margin-left: 1rem;
+// }
+
+.salesTaxContainer div mat-form-field label {
+    font-weight: 600;
+    color: #52525b;
+    margin-bottom: 0.3rem;
+}
+
+.salesTaxContainer div label {
+    font-weight: 700;
+    color: #52525b;
+    margin-bottom: 0.3rem;
+}
+
+::ng-deep .ptaxDateToggle button{
+    margin-top: -1rem !important;
+}
+
+
+.bankDepositInput {
+    border: 1px solid #ccc;
+    padding: 0.6rem;
+}
+
+.bankDepositTbl th,
+.bankDepositTbl td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.bankDepositTbl td input{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+
+.bankDepositTbl th{
+    background-color: #e5e7eb;
+}
+
+.SalesTaxComptTbl th,
+.SalesTaxComptTbl td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+::ng-deep .personalTaxDatePicker .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-suffix{
+    margin-top: auto !important;
+    margin-bottom: 10px;
+}
+
+#personalTaxBtn:disabled{
+    background-color: #ccc;
+    color: black;
+}
+

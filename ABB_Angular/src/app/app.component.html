@@ -1,0 +1,105 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="cashier-dashboard-area">
+  <div class="cashier-dashboard-sidebar" [class.sidebar-enable]="menuSidebarActive"
+  >
+    <div
+      class="cashier-menu-wrapper bg-white border-r border-b border-solid border-grayBorder py-6 maxLg:py-6">
+      <app-menu></app-menu>
+    </div>
+    <div class="cashier-menu-overlay cashier-menu-overlay-dashboard" (click)="myfunction()"
+      [class.sidebar-enable]="menuSidebarActive"></div>
+  </div>
+  <div class="cashier-dashboard-main" [class.sidebar-enable]="menuSidebarActive">
+    <div class="cashier-header-area">
+      <div
+        class="cashier-header-wrapper custom-height-70 px-7 custom-height-70 bg-white border-b border-solid border-grayBorder">
+        <div class="grid grid-cols-12 items-center h-full">
+          <div class="col-span-12">
+            <!-- header area start here -->
+            <div class="cashier-header-content flex items-center justify-between custom-height-70">
+              <div class="cashier-header-breadcrumb">
+                <h5 class="text-[20px] text-heading font-bold mb-1 leading-none">Dashboard</h5>
+                <!---BreadCrumb List-->
+                <!-- <ul>
+                  <li class="text-[14px] text-bodyText font-normal inline-block mr-2">Home</li>
+                  <li class="text-[12px] text-bodyText font-normal inline-block mr-2 translate-y-0"><i
+                      class="far fa-chevron-right"></i></li>
+                  <li class="text-[14px] text-bodyText font-normal inline-block mr-2">Dashboard</li>
+                </ul> -->
+
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="cashier-header-shortmenu pr-5 maxSm:pr-4 items-center flex flex-col justify-center custom-height-70">
+                  <a href="javascript:void(0)" (click)="shortmenu()"
+                    class="h-10 w-10 leading-[38px] border border-grayBorder border-solid text-center inline-block rounded-[3px] text-bodyText short">
+                    <i class="fal fa-plus"></i>
+                  </a>
+                  <div class="cashier-quick-dropdown" [class.shortmenu-enable]="menuShortcutActive">
+                    <app-quickdropdown></app-quickdropdown>
+                  </div>
+                </div>
+                <div class="cashier-header-bar-responsive cursor-pointer mr-5" (click)="myfunction()">
+                  <app-baricon></app-baricon>
+                </div>
+                <div
+                  class="cashier-header-notify-wrapper px-5 flex items-center border-l border-solid border-grayBorder custom-height-70 pr-0">
+                  <div class="cashier-header-notification pr-5 relative">
+                    <a href="javascript:void(0)" class="noti" (click)="notifydropdown()">
+                      <app-notifyicon></app-notifyicon></a>
+                    <div class="cashier-notify-dropdown" [class.notifydropdown-enable]="notifyShortcutActive">
+                      <app-notifydropdown></app-notifydropdown>
+                    </div>
+                  </div>
+                  <div class="cashier-header-email pr-5 relative">
+                    <a href="javascript:void(0)" class="emai"
+                      (click)="emaildropdown()"><app-emailicon></app-emailicon></a>
+                    <div class="cashier-notify-dropdown cashier-email-dropdown"
+                      [class.emaildropdown-enable]="emailShortcutActive">
+                      <app-emaildropdown></app-emaildropdown>
+                    </div>
+                  </div>
+                  <div class="cashier-header-language flex items-center relative" (click)="langdropdown()">
+                    <div class="cashier-header-language-content">
+                      <ul>
+                        <li class="flex "><a href="javascript:void(0)"
+                            class="text-[14px] text-bodyText translate-y-[2px] font-bold"><app-settingicon></app-settingicon></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="cashier-quick-dropdown cashier-quick-lang-dropdown"
+                      [class.langmenu-enable]="langShortcutActive">
+                      <app-languagedropdown></app-languagedropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cashier-header-overlay" (click)="shortmenu()" [class.shortmenu-enable]="menuShortcutActive">
+            </div>
+            <div class="cashier-header-overlay" (click)="notifydropdown()"
+              [class.notifydropdown-enable]="notifyShortcutActive"></div>
+            <div class="cashier-header-overlay" (click)="emaildropdown()"
+              [class.emaildropdown-enable]="emailShortcutActive"></div>
+            <div class="cashier-header-overlay" (click)="langdropdown()" [class.langmenu-enable]="langShortcutActive">
+            </div>
+            <div class="cashier-header-overlay" (click)="prodropdown()" [class.promenu-enable]="proShortcutActive">
+            </div>
+            <!-- header area end here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="cashier-copyright-area">
+    <app-copyright></app-copyright>
+  </div>
+</div>

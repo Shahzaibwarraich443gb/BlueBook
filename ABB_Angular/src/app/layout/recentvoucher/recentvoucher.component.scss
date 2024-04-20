@@ -1,0 +1,188 @@
+@import '../../../custom-palettes.scss';
+
+.cashier-dashboard-transaction-dateR {
+  @apply w-[19%] min-w-[160px] border-r border-solid border-grayBorder;
+  @media (min-width: 1401px) and (max-width: 1600px) {
+    width: 14%;
+    min-width: 115px;
+  }
+  @media (min-width: 1201px) and (max-width: 1400px) {
+    width: 14%;
+    min-width: 100px;
+  }
+  @media (min-width: 992px) and (max-width: 1200px) {
+    width: 15%;
+    min-width: 115px;
+  }
+  @media (max-width: 991px) {
+    width: 14%;
+    min-width: 100px;
+  }
+}
+.cashier-dashboard-transaction-referenceR {
+    @apply w-[24%] min-w-[210px] border-r border-solid border-grayBorder;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 19%;
+        min-width: 160px;
+      }
+      @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 20%;
+        min-width: 140px;
+      }
+      @media (min-width: 992px) and (max-width: 1200px) {
+        width: 19%;
+        min-width: 160px;
+      }
+      @media (max-width: 991px) {
+        width: 20%;
+        min-width: 120px;
+      }
+}
+.cashier-dashboard-transaction-customerR {
+    @apply w-[18%] min-w-[155px] border-r border-solid border-grayBorder;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 20%;
+        min-width: 170px;
+    }
+    @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 22%;
+        min-width: 100px;
+    }
+    @media (min-width: 992px) and (max-width: 1200px) {
+        width: 20%;
+        min-width: 110px;
+    }
+    @media (max-width: 991px) {
+        width: 20%;
+        min-width: 100px;
+    }
+}
+.cashier-dashboard-transaction-duedateR {
+    @apply w-[19%] min-w-[160px] border-r border-solid border-grayBorder;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 20%;
+        min-width: 170px;
+    }
+    @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 22%;
+        min-width: 100px;
+    }
+    @media (min-width: 992px) and (max-width: 1200px) {
+        width: 20%;
+        min-width: 140px;
+    }
+    @media (max-width: 991px) {
+        width: 22%;
+        min-width: 100px;
+    }
+}
+.cashier-dashboard-transaction-modeR {
+    @apply w-[15%] min-w-[130px] border-r border-solid border-grayBorder;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 14%;
+        min-width: 100px;
+    }
+    @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 11%;
+        min-width: 80px;
+    }
+    @media (min-width: 992px) and (max-width: 1200px) {
+        width: 14%;
+        min-width: 100px;
+    }
+    @media (max-width: 991px) {
+        width: 11%;
+        min-width: 70px;
+    }
+}
+.cashier-dashboard-transaction-statusR {
+    @apply w-[19%] min-w-[160px] border-r border-solid border-grayBorder;
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 18.5%;
+        min-width: 150px;
+    }
+    @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 18%;
+        min-width: 100px;
+    }
+    @media (min-width: 992px) and (max-width: 1200px) {
+        width: 18.5%;
+        min-width: 150px;
+    }
+    @media (max-width: 991px) {
+        width: 18%;
+        min-width: 100px;
+    }
+}
+.cashier-dashboard-transaction-priceR {
+    @apply w-[13%] min-w-[110px];
+    @media (min-width: 1401px) and (max-width: 1600px) {
+        width: 18.5%;
+        min-width: 150px;
+    }
+    @media (min-width: 1201px) and (max-width: 1400px) {
+        width: 18%;
+        min-width: 130px;
+    }
+    @media (min-width: 992px) and (max-width: 1200px) {
+        width: 18.5%;
+        min-width: 150px;
+    }
+    @media (max-width: 991px) {
+        width: 10%;
+        min-width: 80px;
+    }
+    @media (max-width: 767px) {
+        width: 12%;
+        min-width: 100px;
+    }
+}
+.cashier-dashboard-transaction {
+    @apply border border-b-0 border-solid border-grayBorder;
+}
+.cashier-dashboard-transaction-row-heading,
+.cashier-dashboard-transaction-row {
+    @apply h-10;
+    @apply flex;
+    @apply items-center;
+    @apply border-b;
+    @apply border-solid;
+    @apply border-grayBorder;
+}
+.cashier-dashboard-transaction-row {
+    @apply h-12;
+}
+.cashier-dashboard-transaction-dateR,
+.cashier-dashboard-transaction-referenceR,
+.cashier-dashboard-transaction-customerR,
+.cashier-dashboard-transaction-modeR,
+.cashier-dashboard-transaction-statusR,
+.cashier-dashboard-transaction-priceR,
+.cashier-dashboard-transaction-duedateR {
+    @apply h-full;
+    @apply flex;
+    @apply flex-col;
+    @apply justify-center;
+    & h5,
+    & span {
+        @apply pl-7;
+        @apply pr-2;
+        @apply xxl:pl-4;
+        @apply maxXl:pl-2.5;
+    }
+    & h5 {
+        @apply text-[15px] text-heading font-semibold;
+    }
+    & span {
+        @apply text-[14px] text-bodyText font-normal;
+    }
+}
+.cashier-dashboard-transaction {
+    @media (max-width: 991px) {
+        width: 670px;
+        min-width: 100%;
+    }
+}
+.cashier-dashboard-transaction-wrapper {
+    @apply maxSm:overflow-x-auto;
+}

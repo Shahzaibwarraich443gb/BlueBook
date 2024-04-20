@@ -1,0 +1,323 @@
+<div class="cashier-content-area px-7">
+    <div class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
+        <!-- <form autocomplete="off" #invoiceForm="ngForm" (ngSubmit)="cleardata()"> -->
+        <span class="close" routerLink="/app/all-sales/sales-transation">X</span>
+        <div class="cashier-table-header-search-area">
+            <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                    <h5 class="text-[15px] text-heading font-semibold">
+                        Customer <span class="starColorRed">*</span>
+                    </h5>
+                    <div class="cashier-input-field-style" style="margin-top: 3px;">
+                        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                            <mat-label class="hidden"></mat-label>
+                            <mat-select placeholder="Select Type" name="customerType"
+                                (selectionChange)="selectCustomerEmail($event.value)"
+                                [(ngModel)]="createCNKey.refCustomerID" [(value)]="Customer.name">
+                                <mat-option *ngFor="let item of customers" [value]="item.id">{{item.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 md:col-span-4 sm:col-span-12">
+                    <div class="cashier-select-field" style="margin-top: 7px;">
+                        <mat-form-field class="example-chip-list invoiceFormField" appearance="fill">
+                            <mat-label>Email <span class="starColorRed">*</span></mat-label>
+                            <mat-chip-list #chipList aria-label="Fruit selection">
+                                <mat-chip *ngFor="let item of emailList" (removed)="removeEmail(item)">
+                                    {{item}}
+                                    <button matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip>
+                                <input placeholder="add new email" [matChipInputFor]="chipList" name="email"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    [(ngModel)]="createCNKey.emails" [matChipInputAddOnBlur]="addOnBlur"
+                                    (matChipInputTokenEnd)="addEmail($event,0)">
+                            </mat-chip-list>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 md:col-span-2 sm:col-span-12" style="margin-top: -10px;">
+                    <section class="example-section">
+                        <mat-checkbox class="example-margin" [(ngModel)]="createCNKey.isSendLater">Send
+                            Email</mat-checkbox>
+                    </section>
+                </div>
+
+
+                <!-- BALANCE -->
+                <div class="lg:col-span-4 md:col-span-6 sm:col-span-12">
+                    <div class="cashier-table-header-search-action-btn text-right maxSm:text-left mt-15">
+                        <h5 class="text-lg text-heading font-bold uppercase">
+                            Amount
+                        </h5>
+                        <h5 class="text-4xl text-heading font-bold uppercase">
+                            <span *ngIf="totalSalePrice === 0; else price">${{ totalAmount }}</span>
+                            <ng-template #price>${{ totalAmount.toFixed(2) }}</ng-template>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+
+                <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+                    <div class="cashier-select-field">
+                        <h5 class="text-[15px] text-heading font-semibold">
+                            Company
+                        </h5>
+                        <div class="cashier-input-field-style" style="display: flex">
+                            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden"></mat-label>
+                                <input type="text" disabled placeholder="" matInput [(ngModel)]="companyName"
+                                    name="invoiceDate" maxlength="50" />
+
+
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!-- INVOICE FIELDS -->
+            <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+
+                <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+                    <div class="cashier-select-field">
+                        <h5 class="text-[15px] text-heading font-semibold">
+                            Credit Note Date<span class="starColorRed">*</span>
+                        </h5>
+                        <div class="cashier-input-field-style" style="display: flex">
+                            <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden"></mat-label>
+                                <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="CreditNoteDate" matInput
+                                    name="invoiceDate" maxlength="50" [matDatepicker]="releasedAtPicker"
+                                    (focus)="releasedAtPicker.open()" />
+                                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #releasedAtPicker>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="lg:col-span-2 md:col-span-3 sm:col-span-12">
+                    <div class="cashier-select-field" style="margin-left: 70rem;">
+                        <h3 class="text-[15px] text-heading font-semibold text-x2"> Amount </h3>
+                        <div class="cashier-input-field-style" style="display: flex; justify-content: flex-start;">
+                            <mat-form-field>
+                                <mat-label></mat-label>
+                                <input type="number" placeholder="" [(ngModel)]="totalAmount" matInput min="0"
+                                    pattern="^\d+(\.\d{1,2})?$" name="totalAmount" maxlength="10"
+                                    [disabled]="isDisabled" (ngModelChange)="changeTotal($event)" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- TABLE -->
+        <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+            <div class="lg:col-span-12 md:col-span-12 sm:col-span-12">
+                <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+                    <div class="lg:col-span-12 md:col-span-12 sm:col-span-12">
+                        <table class="table table-responsive table-bordered table-fixed">
+                            <thead class="table-header-group">
+                                <tr>
+                                    <th scope="col" class="tbl-header align-center">#</th>
+                                    <th scope="col" class="tbl-header" style="width: 20%;">Product / Service</th>
+                                    <th scope="col" class="tbl-header" style="width: 30%">Description</th>
+                                    <th scope="col" class="tbl-header align-right">Qty</th>
+                                    <th scope="col" class="tbl-header align-right">Rate</th>
+                                    <th scope="col" class="tbl-header align-right" style="width: 6.5rem;">Sale Tax</th>
+                                    <th scope="col" class="tbl-header align-right">Discount%</th>
+                                    <th scope="col" class="tbl-header align-right" style="width: 11rem;">Discount Amount
+                                    </th>
+                                    <th scope="col" class="tbl-header align-right">Amount</th>
+                                    <th style="width: 3rem;" scope="col" class="tbl-header align-right"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of items; let i = index">
+                                    <th scope="row" class="align-center">{{ i + 1 }}</th>
+                                    <td>
+                                        <div class="custom-dropdown flex content-center">
+                                            <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                                class="w-full invoiceTblCell" [floatLabel]="'always'">
+                                                <mat-label class="hidden"></mat-label>
+                                                <mat-select placeholder="Select Product" name="selectProduct"
+                                                    [(ngModel)]="item.name"
+                                                    (ngModelChange)="addRowOnProductSelect(item, i, $event)">
+                                                    <mat-option *ngFor="let data of productServiceDto"
+                                                        [value]="data.id">{{data.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " name="descriptions"
+                                                (ngModelChange)="changeValues('description',$event, i)"
+                                                [(ngModel)]="item.description">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" name="quantity"
+                                                (ngModelChange)="changeValues('quantity',$event, i)" maxlength="5"
+                                                min="0" [(ngModel)]="item.quantity" style="text-align: right;">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" name="salePrice"
+                                                (ngModelChange)="changeValues('saleprice',$event, i)" min="0"
+                                                [(ngModel)]="item.salePrice" maxlength="5" style="text-align: right;">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" [(ngModel)]="item.saleTax"
+                                                style="text-align: right;" [disabled]="true" name="saleTax">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" name="discount"
+                                                (ngModelChange)="changeValues('discount',$event, i)" min="0"
+                                                [(ngModel)]="item.discount" style="text-align: right;">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" name="discountAmount"
+                                                (ngModelChange)="changeValues('discountAmount',$event, i)" min="0"
+                                                [(ngModel)]="item.discountAmount" style="text-align: right;">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                            class="w-full invoiceTblCell">
+                                            <input matInput placeholder=" " type="number" name="amount"
+                                                (ngModelChange)="changeValues('amount',$event, i)" min="0"
+                                                [(ngModel)]="item.amount" [disabled]="true" style="text-align: right;">
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="align-center" *ngIf="i !== items.length - 1">
+                                        <mat-icon class="cursor-pointer" (click)="removeRow(item, i)">delete</mat-icon>
+                                    </td>
+                                    <td class="align-center" *ngIf="i === items.length - 1">
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <table class="table table-responsive table-bordered">
+                    <thead class="table-header-group">
+                        <tr>
+                            <th scope="col" class="tbl-header align-center">
+                                <mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox>
+                            </th>
+                            <th scope="col" class="tbl-header">Invoice #</th>
+                            <th scope="col" class="tbl-header" *ngIf="!isDisabled">Product/Service</th>
+                            <th scope="col" class="tbl-header" *ngIf="!isDisabled">Description</th>
+                            <th scope="col" class="tbl-header">Due Date</th>
+                            <th scope="col" class="tbl-header">Orignal Amount</th>
+                            <th scope="col" class="tbl-header">Open Balance</th>
+                            <th scope="col" class="tbl-header" style="width:10rem">Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dataList; let i = index">
+                            <td class="center">
+                                <mat-checkbox [(ngModel)]="item.selected" (change)="selectRow(item,i)"></mat-checkbox>
+                            </td>
+                            <td class="center">{{item.invoiceNo}}</td>
+                            <td class="center" *ngIf="!isDisabled">{{item.product}}</td>
+                            <td class="center" *ngIf="!isDisabled">{{item.description}}</td>
+                            <td class="center">{{item.invoiceDueDate | date:'MM-dd-YYYY'}}</td>
+
+                            <td class="center">{{item.origionalAmount}}</td>
+                            <td class="center">{{item.openBalance}}</td>
+                            <td class="center">
+                                <mat-form-field appearance="none" [hideRequiredMarker]="true"
+                                    class="w-full invoiceTblCell">
+                                    <input matInput type="number" [(ngModel)]="singleAmount[i]" name="amount"
+                                        [disabled]="isDisabled" pattern="^\d+(\.\d{1,2})?$" maxlength="10"
+                                        (input)="updateSingleAmount(i, item)" min="0">
+                                </mat-form-field>
+                                <!-- $ {{ singleAmount.toFixed(2) }} -->
+                            </td>
+                        </tr>
+                        <th colspan="8" *ngIf="dataList.length === 0" style="text-align: center;padding: 20px;">
+                            No record found for selected customer.</th>
+                    </tbody>
+                </table>
+                <!-- NOTES -->
+                <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+                    <div class="lg:col-span-6 md:col-span-12 sm:col-span-12">
+                        <div class="cashier-select-field">
+                            <h5 class="text-[15px] text-heading font-semibold">
+                                Notes
+                            </h5>
+                            <div class="cashier-input-field-style">
+                                <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                                    <mat-label class="hidden"></mat-label>
+                                    <textarea matInput name="note" id="note" maxlength="2000"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-6 md:col-span-12 sm:col-span-12">
+                        <div class="text-right maxSm:text-left">
+                            <div class="default-light-theme mb-7 flex" style="margin-left: 250px;">
+                                <h3 class="text-[12px] text-heading font-semibold text-xl"> Amount To Apply </h3>
+                                <h3 class="text-[15px] text-heading font-semibold text-xl" style="margin-left: 210px;">
+                                    $ {{totalAmount.toFixed(2)}} </h3>
+                            </div>
+                            <div class="default-light-theme mb-7 flex" style="margin-left: 250px;">
+                                <h6 class="text-[12px] text-heading font-semibold text-xl"> Amount To Credit </h6>
+                                <h5 class="text-[15px] text-heading font-semibold text-xl" style="margin-left: 215px;">
+                                    $ {{creditAmount.toFixed(2)}} </h5>
+                            </div>
+                            <div class="default-light-theme mb-7 space-x-2">
+                                <button type="button" mat-raised-button color="warn" class="uppercase">Cancel</button>
+                                <button type="button" mat-raised-button (click)="save()" color="primary"
+                                    class="uppercase">Save & Print</button>
+                                <button type="button" mat-raised-button (click)="save()" color="primary"
+                                    class="uppercase">Save</button>
+                                <button type="button" *ngIf="isDisabled" mat-raised-button (click)="update()"
+                                    color="primary" class="uppercase">Update</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </form> -->
+    </div>
+</div>

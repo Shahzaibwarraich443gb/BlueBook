@@ -1,0 +1,229 @@
+<div class="cashier-content-area" *ngIf="show">
+  <div class="cashier-salereturns-area bg-white custom-shadow rounded-lg mb-5 -mt-3" style="width: 101%;">
+    <div style="background-color: #6F4EF6;">
+      <div class="text-[20px] text-heading font-semibold mb-3 p-2">
+        <strong><span style="color: white; font-size: 20px; height: 10px;">Personal Information</span></strong>
+      </div>
+    </div>
+    <!-- <form autocomplete="off" #invoiceForm="ngForm" (ngSubmit)="cleardata()"> -->
+
+
+    <div class="grid grid-cols-4 gap-4">
+      <div>
+        <h5 class="text-[15px] text-heading font-semibold mb-3">
+          Profile Picture<span class="starColorRed">*</span>
+        </h5>
+
+        <input type="file" #inputEl paceholder="Basic Input" (input)="getUserImg()" accept="image/*" class="hidden" />
+
+        <img [ngStyle]="{'display': imgUploaded ? 'block' : 'none' }" #imageEl
+          style="width: 10rem; height: 10rem; object-fit: contain;" class="mb-2">
+
+        <button type="button" (click)="invokeFileInput()" mat-raised-button color="primary" class="uppercase">Change
+          Photo</button>
+      </div>
+    </div>
+    <div class="cashier-table-header-search-area">
+      <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5" style="margin-top: 20px;">
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Title <span class="starColorRed">*</span>
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <mat-select placeholder="Select Type" name="customerType" [(ngModel)]="PersonalInfo.title">
+                  <mat-option [value]=1>Mr</mat-option>
+                  <mat-option [value]=2>Mrs</mat-option>
+                  <mat-option [value]=3>Miss</mat-option>
+                  <mat-option [value]=4>Ms</mat-option>
+                  <mat-option [value]=5>Mx</mat-option>
+                  <mat-option [value]=6>Sir</mat-option>
+                  <mat-option [value]="7">Dr</mat-option>
+                  <mat-option [value]="8">Lady</mat-option>
+                  <mat-option [value]="9">Lord</mat-option>
+                  <mat-option [value]="10">Manager</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              First Name
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="FirstName" [(ngModel)]="PersonalInfo.firstName"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Middle initial
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="middleName" [(ngModel)]="PersonalInfo.middleName"
+                  maxlength="1" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Last Name
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="LastName" [(ngModel)]="PersonalInfo.lastName"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-x-5 mb-7 pb-0.5">
+
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Suffix
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="Suffix" [(ngModel)]="PersonalInfo.suffix"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Gender <span class="starColorRed">*</span>
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <mat-select placeholder="Select Gender" name="customerGender" [(ngModel)]="PersonalInfo.gender">
+                  <mat-option [value]="1">Male</mat-option>
+                  <mat-option [value]="2">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Date of Birth<span class="starColorRed">*</span>
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="dateofBirth" matInput name="dateofBirth"
+                  maxlength="50" [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()" />
+                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+                </mat-datepicker-toggle>
+                <mat-datepicker #releasedAtPicker>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Employee Code
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="" matInput name="EmployeeCode" [(ngModel)]="PersonalInfo.employeeCode"
+                  maxlength="50" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Hire Date
+            </h5>
+            <div class="cashier-input-field-style estimateContainer" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full estimateContainer" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="hireDate" matInput name="hireDate"
+                  maxlength="50" [matDatepicker]="releasedAtPicker2" (focus)="releasedAtPicker2.open()" />
+                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker2">
+                </mat-datepicker-toggle>
+                <mat-datepicker #releasedAtPicker2>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 md:col-span-3 sm:col-span-12">
+          <div class="cashier-select-field">
+            <h5 class="text-[15px] text-heading font-semibold">
+              Default Session Timeout (Minutes)
+            </h5>
+            <div class="cashier-input-field-style" style="display: flex">
+              <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden"></mat-label>
+                <input type="number" placeholder="" matInput name="defaultSessionTimeout"
+                  [(ngModel)]="PersonalInfo.defaultSessionTimeout" maxlength="3" />
+
+
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 md:col-span-12 sm:col-span-12">
+          <div class="text-right maxSm:text-left">
+            <div class="default-light-theme mb-7 space-x-2" style="margin-top: 30px;">
+              <button type="button" mat-raised-button color="warn" class="uppercase">Cancle</button>
+
+              <button type="submit" mat-raised-button color="primary" (click)="save()" class="uppercase">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

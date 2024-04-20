@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>AccountingBlueBook.Core</AssemblyName>
+    <PackageId>AccountingBlueBook.Core</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <UserSecretsId>AbpCompanyName-AccountingBlueBook-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
+    <RootNamespace>AccountingBlueBook</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\SourceFiles\*.xml;" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Entities\MainEntities\Payments\**" />
+    <EmbeddedResource Remove="Entities\MainEntities\Payments\**" />
+    <None Remove="Entities\MainEntities\Payments\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Net\Emailing\EmailTemplates\default.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Net\Emailing\EmailTemplates\default.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.AutoMapper" Version="8.1.0" />
+    <PackageReference Include="Abp.MailKit" Version="8.2.0" />
+    <PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="8.1.0" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="110.2.0" />
+    <PackageReference Include="Stripe.net" Version="41.20.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="15.1.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,324 @@
+<div>
+  <div class="cashier-header-profile relative pl-5 flex flex-wrap items-center maxMd:pr-0 mb-9">
+    <div class="cashier-header-profile-img w-12 maxSm:mr-0 md:mr-0 cursor-pointer">
+      <a [routerLink]="['/profile']" class="rounded-[50%] overflow-hidden block">
+        <img *ngIf="userImg" src="../../../assets/img/icon/watson.png" class="object-cover" alt="profile not found" />
+
+        <img *ngIf="!userImg" src="../../../assets/img/icon/defaultUserImg.png" class="object-cover"
+          alt="profile not found" />
+      </a>
+    </div>
+    <div class="cashier-header-profile-info pl-2.5 cursor-pointer">
+      <div>
+        <a class="text-[15px] font-bold text-heading cursor-pointer" [routerLink]="['/profile']">{{userName}}
+        </a>
+      </div>
+      <span class="text-[13px] font-normal text-bodyText cursor-pointer">Admin User</span>
+    </div>
+  </div>
+
+  <!-- testing pporpus -->
+  <!-- <div class="cashier-menu px-0.5 menuContainer">
+    <ul metis-menu>
+      <li app-menuitem *ngFor="let item of model; let i = index" [item]="item" [index]="i" [root]="true"></li>
+    </ul>
+  </div> -->
+
+
+
+  <div class="cashier-menu px-0.5 menuContainer">
+    <ul metis-menu>
+      <li>
+        <a [routerLink]="['/']"><app-dashboardicon></app-dashboardicon>Dashboard</a>
+      </li>
+      <li><a [routerLink]="['customers']"
+          (click)="updateBreadcrumb(['Dashboard','Customers'])"><app-paymenticon></app-paymenticon>Customers</a></li>
+
+      <li *ngIf="isGranted('Pages.AllSales')">
+        <a href="javascript:void(0)" class="has-arrow"><app-bankicon></app-bankicon>All Sales</a>
+        <ul>
+          <li *ngIf="isGranted('Pages.AllSales.SalesTransaction')"><a [routerLink]="['all-sales/sales-transation']"
+              (click)="updateBreadcrumb(['All Sales', 'Sales Transation'])">Sales
+              Transation</a></li>
+          <li *ngIf="isGranted('Pages.AllSales.Invoice')"><a [routerLink]="['invoices']"
+              (click)="updateBreadcrumb(['All Sales', 'Invoice'])">Invoice</a></li>
+          <li *ngIf="isGranted('Pages.AllSales.Estimate')"><a [routerLink]="['Estimate']"
+              (click)="updateBreadcrumb(['All Sales', 'Estimate'])">Estimate</a></li>
+          <li *ngIf="isGranted('Pages.AllSales.ReceivedPayment')"><a [routerLink]="['all-sales/received-payment']"
+              (click)="updateBreadcrumb(['All Sales', 'Received Payment'])">Received Payment</a></li>
+          <li *ngIf="isGranted('Pages.AllSales.SalesReceipt')"><a [routerLink]="['all-sales/sales-receipt']"
+              (click)="updateBreadcrumb(['All Sales', 'Sales Receipt'])">Sales
+              Receipt</a></li>
+          <li *ngIf="isGranted('Pages.AllSales.CreditNote')"><a [routerLink]="['all-sales/credit-note']"
+              (click)="updateBreadcrumb(['All Sales', 'Credit Note'])">Credit Note
+            </a></li>
+          <li *ngIf="isGranted('Pages.AllSales.RecurringInvoice')"><a [routerLink]="['Recurringinvoices']"
+              (click)="updateBreadcrumb(['All Sales', 'Recurring invoice'])">Recurring invoice</a></li>
+        </ul>
+
+      </li>
+      <li *ngIf="isGranted('Pages.JournalVoucher')"><a [routerLink]="['all-sales/journal-voucher']"
+          (click)="updateBreadcrumb(['All Sales','Journal Voucher'])"><app-paymenticon></app-paymenticon>Journal
+          Voucher</a></li>
+
+      <li *ngIf="isGranted('Pages.AllExpenses')">
+        <a href="javascript:void(0)" class="has-arrow"><app-bankicon></app-bankicon>All Expenses</a>
+        <ul>
+          <li *ngIf="isGranted('Pages.AllExpense.PurchaseReceipt')"><a [routerLink]="['all-expenses/purchase-receipt']"
+              (click)="updateBreadcrumb(['All Expenses', 'Purchase Receipt'])">Purchase Receipt</a></li>
+          <li *ngIf="isGranted('Pages.AllExpense.PurchaseInvoice')"><a [routerLink]="['all-expenses/purchase-invoice']"
+              (click)="updateBreadcrumb(['All Expenses', 'Purchase Invoice'])">Purchase Invoice</a></li>
+          <li *ngIf="isGranted('Pages.AllExpense.PurchasePayment')"><a [routerLink]="['all-expenses/purchase-payment']"
+              (click)="updateBreadcrumb(['All Expenses', 'Purchase Payment'])">Purchase Payment</a></li>
+          <li *ngIf="isGranted('Pages.AllExpense.Check')"><a [routerLink]="['all-expenses/check']"
+              (click)="updateBreadcrumb(['All Expenses', 'Check'])">Check</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a [routerLink]="['vendor']"
+          (click)="updateBreadcrumb(['Dashboard', 'Vendor'])"><app-paymenticon></app-paymenticon> Vendor</a>
+      </li>
+      <li><a [routerLink]="['chart-of-accounts']"
+          (click)="updateBreadcrumb(['Dashboard','Chart Of Account'])"><app-paymenticon></app-paymenticon>Chart Of
+          Account</a></li>
+
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-bankicon></app-bankicon>Bank</a>
+        <ul>
+          <li><a [routerLink]="['/createbank']" (click)="updateBreadcrumb(['Bank', 'Add Bank'])">Add Bank</a></li>
+          <li><a [routerLink]="['/banklist']" (click)="updateBreadcrumb(['Bank', 'Bank List'])">Bank List</a></li>
+          <li><a [routerLink]="['/balancetransfer']" (click)="updateBreadcrumb(['Bank', 'Create Transfer'])">Create
+              Transfer</a></li>
+          <li><a [routerLink]="['/transferlist']" (click)="updateBreadcrumb(['Bank', 'Transfer List'])">Transfer
+              List</a></li>
+        </ul>
+      </li>
+
+      <li><a href="javascript:void(0)" class="has-arrow"><app-paymenticon></app-paymenticon>Settings</a>
+        <ul>
+          <li><a href="javascript:void(0)" class="has-arrow">Accounts</a>
+            <ul>
+              <!-- <li><a [routerLink]="['chart-of-accounts']">Chart Of Account</a></li> -->
+
+            </ul>
+          </li>
+          <li><a [routerLink]="['Merchnat']" (click)="updateBreadcrumb(['Settings', 'Merchant'])">Merchant</a></li>
+
+
+
+
+
+          <li><a href="javascript:void(0)" class="has-arrow">Look ups</a>
+            <ul>
+              <li><a [routerLink]="['language']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Languages'])">Languages</a></li>
+              <li><a [routerLink]="['entity-type']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Entity Type'])">Entity Type</a></li>
+              <li><a [routerLink]="['contact-person']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Contact Person'])">Contact Person</a></li>
+              <li><a [routerLink]="['company']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Company'])">Company</a></li>
+              <li><a [routerLink]="['job-title']" (click)="updateBreadcrumb(['Settings','Look ups','Job Title'])">Job
+                  Title</a></li>
+              <li><a [routerLink]="['product-category']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Product Category'])">Product Category</a></li>
+              <li><a [routerLink]="['sale-person']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Sale Person'])">Sale Person</a></li>
+              <li><a [routerLink]="['ethnicity']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Ethnicity'])">Ethnicity</a></li>
+              <li><a [routerLink]="['spouse']" (click)="updateBreadcrumb(['Settings','Look ups','Spouse'])">Spouse</a>
+              </li>
+              <li><a [routerLink]="['vendor']" (click)="updateBreadcrumb(['Settings','Look ups','Vendor'])">Vendor</a>
+              </li>
+              <li><a [routerLink]="['source-referal']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Source Referal'])">Source Referal</a></li>
+              <li><a [routerLink]="['vender-type']" (click)="updateBreadcrumb(['Settings','Look ups','Vender Type'])">
+                  Vendor Type</a></li>
+              <li><a [routerLink]="['bank']" (click)="updateBreadcrumb(['Settings','Look ups','Bank'])"> Bank</a></li>
+              <li><a [routerLink]="['customer-type']"
+                  (click)="updateBreadcrumb(['Settings','Look ups','Customer Type'])"> Customer Type</a></li>
+
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="javascript:void(0)" class="has-arrow"><app-peopleicon></app-peopleicon>Products/Services</a>
+        <ul>
+          <li><a [routerLink]="['product-service']"
+              (click)="updateBreadcrumb(['Products/Services','Products/Services'])">Products/Services</a></li>
+        </ul>
+      </li>
+      <li><a href="javascript:void(0)" class="has-arrow"><app-peopleicon></app-peopleicon>Management</a>
+        <ul>
+          <li><a [routerLink]="['payment-method']" (click)="updateBreadcrumb(['Management','Payment Method'])">Payment
+              Method</a></li>
+        </ul>
+      </li>
+      <li><a href="javascript:void(0)" class="has-arrow"><app-paymenticon></app-paymenticon>Payment</a>
+        <ul>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Create Payment</a>
+            <ul>
+              <li><a [routerLink]="['/createpayment']"
+                  (click)="updateBreadcrumb(['Payment', 'Create Payment','Voucher'])">Voucher</a></li>
+              <li><a [routerLink]="['/createpaymentinvoice']"
+                  (click)="updateBreadcrumb(['Payment', 'Create Payment','Invoice'])">Invoice</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Payment List</a>
+            <ul>
+              <li><a [routerLink]="['/paymentlist']"
+                  (click)="updateBreadcrumb(['Payment', 'Payment List','Voucher'])">Voucher</a></li>
+              <li><a [routerLink]="['/paymentlistinvoice']"
+                  (click)="updateBreadcrumb(['Payment', 'Payment List','Invoice'])">Invoice</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-vouchericon></app-vouchericon>Voucher</a>
+        <ul>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Debit</a>
+            <ul>
+              <li><a [routerLink]="['/createdebitvoucher']"
+                  (click)="updateBreadcrumb(['Voucher', 'Debit', 'Create'])">Create</a></li>
+              <li><a [routerLink]="['/debitlist']" (click)="updateBreadcrumb(['Voucher', 'Debit', 'List'])">List</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Credit</a>
+            <ul>
+              <li><a [routerLink]="['/createcreditvoucher']"
+                  (click)="updateBreadcrumb(['Voucher', 'Credit', 'Create'])">Create</a></li>
+              <li><a [routerLink]="['/creditlist']" (click)="updateBreadcrumb(['Voucher', 'Credit', 'List'])">List</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Journal</a>
+            <ul>
+              <li><a [routerLink]="['/createjournal']"
+                  (click)="updateBreadcrumb(['Voucher', 'Journal', 'Create'])">Create</a></li>
+              <li><a [routerLink]="['/journallist']" (click)="updateBreadcrumb(['Voucher', 'Journal', 'List'])">List</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-ledgericon></app-ledgericon>Ledger</a>
+        <ul>
+          <li><a [routerLink]="['/createledger']" (click)="updateBreadcrumb(['Ledger', 'Create'])">Create</a></li>
+          <li><a [routerLink]="['/ledgerlist']" (click)="updateBreadcrumb(['Ledger', 'List'])">List</a></li>
+          <li><a [routerLink]="['/ledgergroup']" (click)="updateBreadcrumb(['Ledger', 'Ledger Group'])">Ledger Group</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-billicon></app-billicon>Bill</a>
+        <ul>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Vendor</a>
+            <ul>
+              <li><a [routerLink]="['/addbill']" (click)="updateBreadcrumb(['Bill', 'Vendor', 'Add Bill'])">Add Bill</a>
+              </li>
+              <li><a [routerLink]="['/managebill']" (click)="updateBreadcrumb(['Bill', 'Vendor', 'Manage Bill'])">Manage
+                  Bill</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="has-arrow">Customer</a>
+            <ul>
+              <li><a [routerLink]="['/customerbill']" (click)="updateBreadcrumb(['Bill', 'Customer', 'Add Bill'])">Add
+                  Bill</a></li>
+              <li><a [routerLink]="['/customermanagebill']"
+                  (click)="updateBreadcrumb(['Bill', 'Customer', 'Manage Bill'])">Manage Bill</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-smsicon></app-smsicon>SMS</a>
+        <ul>
+          <li><a [routerLink]="['/newmessage']" (click)="updateBreadcrumb(['SMS', 'Create Message'])">Create Message</a>
+          </li>
+          <li><a [routerLink]="['/message']" (click)="updateBreadcrumb(['SMS','Message List'])">Message List</a></li>
+          <li><a [routerLink]="['/createemail']" (click)="updateBreadcrumb(['SMS', 'Create Email'])">Create Email</a>
+          </li>
+          <li><a [routerLink]="['/email']" (click)="updateBreadcrumb(['SMS', 'Email List'])">Email List</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-peopleicon></app-peopleicon>People</a>
+        <ul>
+          <li><a [routerLink]="['/vendor']" (click)="updateBreadcrumb(['People', 'Vendor'])">Vendor</a></li>
+          <li><a [routerLink]="['/supplier']" (click)="updateBreadcrumb(['People', 'Supplier'])">Supplier</a></li>
+          <li><a [routerLink]="['/biller']" (click)="updateBreadcrumb(['People', 'Biller'])">Biller</a></li>
+          <li><a [routerLink]="['/customer']" (click)="updateBreadcrumb(['People', 'Customer'])">Customer</a></li>
+        </ul>
+      </li>
+      <li *ngIf="isGranted('Pages.UserManagement')">
+        <a href="javascript:void(0)" class="has-arrow"><app-peopleicon></app-peopleicon>User Management</a>
+        <ul>
+          <li *ngIf="isGranted('Pages.Users')"><a [routerLink]="['users']"
+              (click)="updateBreadcrumb(['User Management', 'Users'])">Users</a></li>
+          <li *ngIf="isGranted('Pages.Roles')"><a [routerLink]="['roles']"
+              (click)="updateBreadcrumb(['User Management', 'Roles'])">Roles</a></li>
+          <li *ngIf="isGranted('Pages.UsersGroup')"><a [routerLink]="['user-groups']"
+              (click)="updateBreadcrumb(['Management','User-Groups'])">User-Groups</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:void(0)" class="has-arrow"><app-reporticon></app-reporticon>Reports</a>
+        <ul>
+          <li><a [routerLink]="['reports/employee-activities']"
+              (click)="updateBreadcrumb(['Reports', 'Audit Log'])">Employee Activities</a>
+          </li>
+          <li><a [routerLink]="['reports/daily-receipt']" (click)="updateBreadcrumb(['Reports', 'Daily Receipt'])">Daily
+              Receipt</a>
+          </li>
+          <li><a [routerLink]="['/app/reports/general-ledger']" (click)="updateBreadcrumb(['Reports', 'General Ledger'])">General Ledger</a></li>
+          <li><a [routerLink]="['/app/reports/customer-ledger']" (click)="updateBreadcrumb(['Reports', 'Customer Ledger'])">Customer Ledger</a></li>
+          <li><a [routerLink]="['/accountsbalance']" (click)="updateBreadcrumb(['Reports', 'Account Balance'])">Account
+              Balance</a></li>
+          <li><a [routerLink]="['/incomereport']" (click)="updateBreadcrumb(['Reports', 'Income'])">Income</a></li>
+          <li><a [routerLink]="['/expensereport']" (click)="updateBreadcrumb(['Reports', 'Expense'])">Expense</a></li>
+          <li><a [routerLink]="['/app/reports/trial-balance']" (click)="updateBreadcrumb(['Reports', 'Trial Balance'])">Trial
+              Balance</a></li>
+          <li><a [routerLink]="['/profitreport']" (click)="updateBreadcrumb(['Reports', 'Income vs Expense'])">Income vs
+              Expense</a></li>
+          <li><a [routerLink]="['/netincomereport']" (click)="updateBreadcrumb(['Reports', 'Profit & Loss'])">Profit &
+              Loss</a></li>
+          <li><a [routerLink]="['/balancesheet']" (click)="updateBreadcrumb(['Reports', 'Balance Sheet'])">Balance
+              Sheet</a></li>
+        </ul>
+      </li>
+      <li>
+        <a [routerLink]="['/company']" (click)="updateBreadcrumb(['Company'])"><app-billicon></app-billicon>Company</a>
+      </li>
+      <li>
+        <a [routerLink]="['/rolepermission']"
+          (click)="updateBreadcrumb(['Administrative Tools'])"><app-toolsicon></app-toolsicon>Administrative Tools</a>
+      </li>
+      <li>
+        <a [routerLink]="['/company']"
+          (click)="updateBreadcrumb(['Source Refferal'])"><app-billicon></app-billicon>Source Refferal</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div
+    class="cashier-logo text-center h-[200px] w-full flex flex-col justify-center items-center bg-[#F6F8FC] rounded-lg mt-[60px]">
+    <a [routerLink]="['/dashboard']" class="inline-block"><img src="../../../assets/img/logo/logo.png"
+        alt="logo not found" /></a>
+  </div>
+</div>

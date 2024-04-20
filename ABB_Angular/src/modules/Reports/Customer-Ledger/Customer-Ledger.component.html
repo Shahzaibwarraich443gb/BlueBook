@@ -1,0 +1,315 @@
+<div class="cashier-content-area px-7">
+    <div id="demo" class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-5 mb-5">
+
+        <span class="close" routerLink="/app/all-sales/sales-transation">X</span>
+        <div class="mt-4">
+
+            <div class="flex items-center h-14 mb-4">
+
+                <div style="margin-top: -0.5rem;">
+                    <label>Customer</label>
+                    <mat-label></mat-label>
+                    <mat-select style="border-bottom: 1px solid #9ca3af;" [(ngModel)]="selectedCustomerId" (ngModelChange)="onCustomerChange()"
+                        name="filersIssueState" required>
+                        <mat-option [value]="0">Select Customer</mat-option>
+                        <mat-option *ngFor="let item of customerArr" [value]="item.id">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="ml-4" style="margin-top: -0.5rem;">
+                    <label>Company</label>
+                    <mat-label></mat-label>
+                    <mat-select style="border-bottom: 1px solid #9ca3af;" [(ngModel)]="selectedCompany"
+                        name="filersIssueState" required>
+                        <mat-option [value]="'all'">Select Company</mat-option>
+                        <mat-option *ngFor="let item of companyArrFiltered" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="cashier-select-field ml-4" style="margin-top: auto;">
+                    <h5 class="text-[15px] text-heading font-semibold">
+                        Start Date
+                    </h5>
+                    <div class="cashier-input-field-style" style="display: flex">
+                        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                            <mat-label class="hidden"></mat-label>
+                            <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="startDate"
+                                (ngModelChange)="onDateChange('start')" matInput name="startDate" maxlength="50"
+                                [matDatepicker]="releasedAtPicker" (focus)="releasedAtPicker.open()" />
+                            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #releasedAtPicker>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="cashier-select-field ml-4" style="margin-top: auto;">
+                    <h5 class="text-[15px] text-heading font-semibold">
+                        End Date
+                    </h5>
+                    <div class="cashier-input-field-style" style="display: flex">
+                        <mat-form-field [hideRequiredMarker]="true" class="w-full" [floatLabel]="'always'">
+                            <mat-label class="hidden"></mat-label>
+                            <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="endDate"
+                                (ngModelChange)="onDateChange('end')" matInput name="endDate" maxlength="50"
+                                [matDatepicker]="releasedAtPicker1" (focus)="releasedAtPicker1.open()" />
+                            <mat-datepicker-toggle matSuffix [for]="releasedAtPicker1">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #releasedAtPicker1>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <button mat-raised-button class="h-8" style="margin-left: 1rem; margin-top: 0.7rem;width: 5rem;"
+                    color="primary" (click)="getLedgerData()">
+                    Search
+                </button>
+                <button mat-raised-button class="bg-green-600 text-white shadow-md"
+                    style="margin-left: 1rem; margin-top: 0.7rem; width: 5rem; height: 2.1rem" (click)="downloadCsv()">
+                    Excel
+                </button>
+                <button mat-raised-button class="bg-pink-600 text-white shadow-md"
+                    style="margin-left: 1rem; margin-top: 0.7rem; width: 5rem; height: 2.1rem" (click)="print()">
+                    Print
+                </button>
+
+
+                <div class="ml-auto" style="margin-top: -0.5rem;">
+                    <label>Headers</label>
+                    <mat-label></mat-label>
+                    <mat-select style="border-bottom: 1px solid #9ca3af;" [(ngModel)]="selectedHeaders"
+                        (ngModelChange)="saveHeaders()" name="filersIssueState" multiple required>
+                        <mat-select-trigger>
+                            Customize Headers
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let item of HeadersArr" [value]="item.prop">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+
+
+            <table id="print-section" class="mat-elevation-z0 reportsTbl" style="width: 100%;" mat-table matSort matSortDirection="desc"
+                [dataSource]="ledgerDS">
+
+                <ng-container matColumnDef="dateAlt">
+                    <th mat-header-cell mat-sort-header="dateAlt" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Date</th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text">
+                            {{data.dateAlt}}
+                        </td>
+                        <td style="font-weight: 600;" *ngIf="data.type == 'Sum'" class="header-text">
+                            
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('dateAlt')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="customerName">
+                    <th mat-header-cell mat-sort-header="customerName" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Customer
+                        Name</th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td style="text-align: left !important;" *ngIf="data.type == 'Data'" class="header-text">
+                            {{data.customerName}}
+                        </td>
+                        <td style="font-weight: 600;" *ngIf="data.type == 'Sum'" class="header-text">
+                            
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('customerName')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="companyName">
+                    <th mat-header-cell mat-sort-header="companyName" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Company Name
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" style="text-align: left !important;" class="header-text">
+                            {{data.companyName}}
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('companyName')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                        <td style="font-weight: 600;" *ngIf="data.type == 'Sum'" class="header-text">
+                            
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="voucherId">
+                    <th mat-header-cell mat-sort-header="voucherId" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Voucher ID
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text">
+                            {{data.voucherId}}
+                        </td>
+                        <td style="font-weight: 600;" *ngIf="data.type == 'Sum'" class="header-text">
+                            
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('voucherId')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell mat-sort-header="description" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Description
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text" style="text-align: left !important;">
+                            {{data.description}} </td>
+                            <td style="font-weight: 600;" *ngIf="data.type == 'Sum'" class="header-text">
+                            
+                            </td>
+                            <td  *ngIf="data.type == 'Header' && checkEntry('description')" colspan="9" class="header-text tblHeaderLedger">
+                                <div>
+                                    <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                    <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                                </div>
+                            </td>
+                    </ng-container>
+                </ng-container>
+
+   
+
+
+                <ng-container matColumnDef="debitAmount">
+                    <th mat-header-cell mat-sort-header="debitAmount" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Debit Amount
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text"> ${{data.debitAmount}} </td>
+                        <td *ngIf="data.type == 'Sum'" style="font-weight: 600;" class="header-text">
+                            <div class="double-underline"> ${{data.debitAmount}} </div>
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('debitAmount')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="creditAmount">
+                    <th mat-header-cell mat-sort-header="creditAmount" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Credit
+                        Amount
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text">
+                            ${{data.creditAmount}} </td>
+                        <td *ngIf="data.type == 'Sum'" style="font-weight: 600;" class="header-text">
+                            <span *ngIf="showTotal" class="totalContainer">Total </span>
+                            <div class="double-underline"> ${{data.creditAmount}}</div>
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('creditAmount')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="balance">
+                    <th mat-header-cell mat-sort-header="balance" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Balance
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text">
+                            ${{data.balance}} </td>
+                        <td *ngIf="data.type == 'Sum'" class="header-text">
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('balance')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="csr">
+                    <th mat-header-cell mat-sort-header="csr" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">CSR/Agent
+                    </th>
+                    <ng-container mat-cell *matCellDef="let data">
+                        <td *ngIf="data.type == 'Data'" class="header-text">
+                            {{data.csr}} </td>
+                        <td *ngIf="data.type == 'Sum'" class="header-text">
+                        </td>
+                        <td  *ngIf="data.type == 'Header' && checkEntry('csr')" colspan="9" class="header-text tblHeaderLedger">
+                            <div>
+                                <div style="display: flex;flex-direction: row;"><span>{{data.customerName}} </span><span *ngIf="data.companyName"> - {{data.companyName}}</span> </div>
+                                <div>{{startDateAlt}} - {{endDateAlt}}</div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="action">
+                    <th mat-header-cell mat-sort-header="action" *matHeaderCellDef
+                        style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Action</th>
+                    <td mat-cell *matCellDef="let data" class="header-text">
+                        <div class="cashier-salereturns-table-actionJ"
+                            style="width: 8rem; display: flex;margin-left: auto; margin-right: auto;">
+                            <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style "
+                                aria-label="Example icon-button with a menu">
+                                Action <mat-icon>arrow_drop_down</mat-icon>
+                            </button>
+                            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                <button mat-menu-item (click)="editPass(data)">
+                                    <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item (click)="deletePass(data)">
+                                    <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+                                    <span>Delete</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="selectedHeaders"></tr>
+                <tr mat-row *matRowDef="let row; columns: selectedHeaders;"></tr>
+            </table>
+            <ng-container *ngIf="ledgerDS == null || ledgerDS.data.length == 0">
+                <div class="noDataContainer">
+                    No data
+                </div>
+            </ng-container>
+            <mat-paginator #ledgerPaginator [pageSizeOptions]="[10,15,20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </div>
+</div>

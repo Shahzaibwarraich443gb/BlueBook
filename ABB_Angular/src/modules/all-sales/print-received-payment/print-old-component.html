@@ -1,0 +1,381 @@
+
+<div #printArea class="print-area" style="margin: 25px;">
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="font-weight:600">{{printData.company}}</p>
+            <p class="uppercase">
+                {{printData.comAddress}}
+            </p>
+            <p class="uppercase">{{printData.comCity}} , {{printData.comState}} {{printData.comPostCode}}</p>
+            <p class="uppercase">{{printData.comCountry}}</p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> {{printData.comPhone}}
+            </p>
+            <p>
+            </p>
+            <div><span style="font-weight:600 !important;">Email:</span> {{printData.comEmail}}</div>
+            <p></p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="color:#53abc6;text-align:left; font-size:24px">Received Payment</p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 style="font-weight:600 !important;">Recipient</h2>
+            <p>
+                {{printData.addedBy}}
+            </p>
+            <p style="width:500px;">
+                test address
+            </p>
+            <p>
+            </p>
+            <p> </p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> +920000000000
+            </p>
+            <p>
+                <span style="font-weight:600 !important;">Email:</span> {{printData.email}}
+            </p>
+
+        </div>
+        <div style="margin-left: 500px;width: 400px;">
+            <table class="meta">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Invoice #</span>
+                        </th>
+                        <td>
+                            <span> {{printData.orignalInvoiceNo}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <td><span> {{printData.addedBy}}</span></td>
+                    </tr>
+                    <tr>
+                        <th><span>Date</span></th>
+                        <td style="width: 200px;">
+                            <span>
+                                {{printData.paymentDate | date}}
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><span>Reference No</span></th>
+                        <td>
+                            <span>
+                                {{printData.refrenceNo}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Amount Received</span></th>
+                        <td>
+                            <span>
+                                $
+                            </span>
+                            <span>
+                                {{printData.total}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="inventory">
+                <thead>
+                    <tr>
+                        <th style="width:25px;">#</th>
+                        <th>Product/Service</th>
+                        <th><span><span> InvoiceNo </span></span></th>
+                        <th><span><span> Invoice Due Date </span></span></th>
+                        <th><span><span> Original Amount </span></span></th>
+                        <th><span><span> Received Amount </span></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>{{printData.product}}</td>
+                        <td>
+                            <span>{{printData.orignalInvoiceNo}}</span>
+                        </td>
+                        <td>
+                            <span data-prefix="">
+                                <span>{{printData.invoiceDateAlt}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span>{{printData.total}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span class="text-left">{{printData.balance}}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div style="width: 65%;">
+            <h5>Notes</h5>
+            <textarea id="Notes" [(ngModel)]="note" name="Notes" readonly="readonly" class="border-gray-dark input-mask form-control"
+                style="border: 2px solid gray;" rows="4" cols="50"></textarea>
+        </div>
+        <div style="margin-top: 15px;width: 35%;">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label style="width: 130px;">Amount Paid:</label></td>
+                        <td><label style="width: 100px;">$ {{printData.total}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label>Balance:</label></td>
+                        <td><label>$ <span class="AmountToCredit">0</span></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+
+<div #printArea class="print-area" style="margin: 25px;">
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="margin-top: 5px !important;" class="uppercase" style="font-weight:600">{{printData.company}}</p>
+            <p style="margin-top: 5px !important;" class="uppercase">
+                {{printData.comAddress}}
+            </p>
+            <p style="margin-top: 5px !important;" class="uppercase">{{printData.comCity}} , {{printData.comState}}
+                {{printData.comPostCode}}</p>
+            <p style="margin-top: 5px !important;" class="uppercase">{{printData.comCountry}}</p>
+            <p style="margin-top: 5px !important;">
+                <span style="font-weight:600 !important;">Phone:</span> {{printData.comPhone}}
+            </p>
+            <p style="margin-top: 5px !important;">
+            </p>
+            <div><span style="font-weight:600 !important;">Email:</span> {{printData.comEmail}}</div>
+            <p style="margin-top: 5px !important;"></p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="margin-top: 5px !important;" class="uppercase"
+                style="color:#53abc6;text-align:left; font-size:24px">Received Payment</p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 style="font-weight:600 !important;">Recipient</h2>
+            <p style="margin-top: 5px !important;">
+                {{printData.addedBy}}
+            </p>
+            <p style="margin-top: 5px !important;" style="width:500px;">
+                test address
+            </p>
+            <p style="margin-top: 5px !important;">
+            </p>
+            <p style="margin-top: 5px !important;"> </p>
+            <p style="margin-top: 5px !important;">
+                <span style="font-weight:600 !important;">Phone:</span> +920000000000
+            </p>
+            <p style="margin-top: 5px !important;">
+                <span style="font-weight:600 !important;">Email:</span> {{printData.email}}
+            </p>
+
+        </div>
+        <div style="margin-left: 500px;width: 400px;">
+            <table style="text-indent: 19px;
+  border-collapse: initial;" class="meta">
+                <tbody style="border: 1px solid">
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;">
+                            <span>Invoice #</span>
+                        </th>
+                        <td style="border: 1px solid;">
+                            <span> {{printData.orignalInvoiceNo}}</span>
+                        </td>
+                    </tr>
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span>Name</span></th>
+                        <td style="border: 1px solid;"><span> {{printData.addedBy}}</span></td>
+                    </tr>
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span>Date</span></th>
+                        <td style="border: 1px solid;width: 200px;">
+                            <span>
+                                {{printData.paymentDate | date}}
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span>Reference No</span></th>
+                        <td style="border: 1px solid;">
+                            <span>
+                                {{printData.refrenceNo}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span>Amount Received</span></th>
+                        <td style="border: 1px solid;">
+                            <span>
+                                $
+                            </span>
+                            <span>
+                                {{printData.total}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <table style="text-indent: 19px;
+  border-collapse: initial;" class="inventory">
+                <thead>
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;" style="width:25px;border: 1px solid;">#</th>
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;">Product/Service</th>
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span><span> InvoiceNo </span></span></th>
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span><span> Invoice Due Date </span></span></th>
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span><span> Original Amount </span></span></th>
+                        <th style="background: #cbe3eb;
+                        width: 170px;
+                        padding: 0px 5px 0px 5px;
+                        border: 2px solid #939393;
+                        color: #53abc6;"><span><span> Received Amount </span></span></th>
+                    </tr>
+                </thead>
+                <tbody style="border: 1px solid">
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <td style="border: 1px solid;">1</td>
+                        <td style="border: 1px solid;">{{printData.product}}</td>
+                        <td style="border: 1px solid;">
+                            <span>{{printData.orignalInvoiceNo}}</span>
+                        </td>
+                        <td style="border: 1px solid;">
+                            <span data-prefix="">
+                                <span>{{printData.invoiceDateAlt}}</span>
+                            </span>
+                        </td>
+                        <td style="border: 1px solid;">
+                            <span data-prefix=""><span>{{printData.total}}</span>
+                            </span>
+                        </td>
+                        <td style="border: 1px solid;">
+                            <span data-prefix=""><span class="text-left">{{printData.balance}}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div style="width: 65%;">
+            <h5>Notes</h5>
+            <textarea id="Notes" name="Notes" readonly="readonly" class="border-gray-dark input-mask form-control"
+                style="border: 2px solid gray;" rows="4" cols="50"></textarea>
+        </div>
+        <div style="margin-top: 15px;width: 35%;">
+            <table style="text-indent: 19px;
+  border-collapse: initial;">
+                <tbody style="border: 1px solid">
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <td style="border: 1px solid;"><label style="width: 130px;">Amount Paid:</label></td>
+                        <td style="border: 1px solid;"><label style="width: 100px;">$ {{printData.total}}</label></td>
+                    </tr>
+                    <tr style="width: 180px;
+  border: 1px solid;
+  text-align: center; border: 1px solid">
+                        <td style="border: 1px solid;"><label>Balance:</label></td>
+                        <td style="border: 1px solid;"><label>$ <span class="AmountToCredit">0</span></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

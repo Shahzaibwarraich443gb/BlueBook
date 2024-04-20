@@ -1,0 +1,143 @@
+<div #printArea class="print-area" style="margin: 25px;">
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="font-weight:600">{{printData.company}}</p>
+            <p class="uppercase">
+                {{printData.comAddress}}
+            </p>
+            <p class="uppercase">{{printData.comCity}} , {{printData.comState}} {{printData.comPostCode}}</p>
+            <p class="uppercase">{{printData.comCountry}}</p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> {{printData.comPhone}}
+            </p>
+            <p>
+            </p>
+            <div><span style="font-weight:600 !important;">Email:</span> {{printData.comEmail}}</div>
+            <p></p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="uppercase" style="color:#53abc6;text-align:left; font-size:24px">Credit Note</p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-7">
+            <h2 style="font-weight:600 !important;">Recipient</h2>
+            <p>
+                {{printData.addedBy}}
+            </p>
+            <p style="width:500px;">
+                test address
+            </p>
+            <p>
+            </p>
+            <p> </p>
+            <p>
+                <span style="font-weight:600 !important;">Phone:</span> +920000000000
+            </p>
+            <p>
+                <span style="font-weight:600 !important;">Email:</span> {{printData.email}}
+            </p>
+
+        </div>
+        <div style="margin-left: 500px;width: 400px;">
+            <table class="meta">
+                <tbody>
+                    <tr>
+                        <th>
+                            <span>Invoice #</span>
+                        </th>
+                        <td>
+                            <span> {{printData.orignalInvoiceNo}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <td><span> {{printData.addedBy}}</span></td>
+                    </tr>
+                    <tr>
+                        <th><span>Date</span></th>
+                        <td style="width: 200px;">
+                            <span>
+                                {{printData.paymentDate | date}}
+                            </span>
+                        </td>
+                    </tr>
+
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="inventory">
+                <thead>
+                    <tr>
+                        <th style="width:25px;">#</th>
+                        <th>Product/Service</th>
+                        <th><span><span> Description </span></span></th>
+                        <th><span><span> quantity </span></span></th>
+                        <th><span><span> Rate </span></span></th>
+                        <th><span><span> Discount </span></span></th>
+                        <th><span><span> Amount </span></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>{{printData.product}}</td>
+                        <td>
+                            <span>{{printData.description}}</span>
+                        </td>
+                        <td>
+                            <span data-prefix="">
+                                <span>{{printData.quantity}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span>{{printData.Rate}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span class="text-left">{{printData.discount}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span data-prefix=""><span class="text-left">{{printData.Amount}}</span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div style="width: 65%;">
+            <h5>Notes</h5>
+            <textarea id="Notes" [(ngModel)]="note" name="Notes" readonly="readonly" class="border-gray-dark input-mask form-control"
+                style="border: 2px solid gray;" rows="4" cols="50"></textarea>
+        </div>
+        <div style="margin-top: 15px;width: 35%;">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label style="width: 130px;">Amount Paid:</label></td>
+                        <td><label style="width: 100px;">$ {{printData.total}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><label>Balance:</label></td>
+                        <td><label>$ <span class="AmountToCredit">0</span></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

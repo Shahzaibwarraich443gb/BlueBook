@@ -1,0 +1,123 @@
+<div class="cashier-content-area px-7">
+  <div style="padding-top: 2.3rem !important;" id="demo" class="cashier-salereturns-area bg-white p-7 custom-shadow rounded-lg pt-8 mb-5">
+    <span class="close" routerLink="/app/check">X</span>
+    <div class="flex mb-4">
+      <button color="primary" routerLink="/app/all-expenses/checkSetup" mat-raised-button>Check Setup</button>
+      <button color="primary" style="margin-left: 1rem;" routerLink="/app/all-expenses/addCheck" mat-raised-button>Add Check</button>
+      <input type="text" style="margin-left: auto" (keyup)="applyFilter($event)" class="searchInput" minlength="20"
+        placeholder="Search" />
+    </div>
+
+    <div class="mb-2">
+
+      <mat-form-field class="personalTaxDatePicker" [hideRequiredMarker]="true">
+        <label>Filter Bank</label>
+        <mat-label></mat-label>
+      <mat-select [(ngModel)]="selectedBank" (ngModelChange)="onBankChange()">
+        <mat-option [value]="0">All</mat-option>
+        <mat-option *ngFor="let data of bankArr" [value]="data.id">{{data.bankName}}</mat-option>
+      </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="mb-2 flex">
+      <mat-checkbox [checked]="showDeleted" 
+        (change)="getCheckIncludingDeleted($event.checked)">
+        Show Deleted
+      </mat-checkbox>
+
+      <div class="ml-auto">
+        <button color="primary" style="margin-left: 1rem;" (click)="printCheck()" mat-raised-button><mat-icon>print</mat-icon> Print Check</button>
+        <button color="primary" style="margin-left: 1rem;" (click)="downloadExcel()" mat-raised-button><mat-icon>cloud_download</mat-icon> Download Excel</button>
+      </div>
+    </div>
+
+
+    <table class="mat-elevation-z0 custTbl" style="width: 100%;" mat-table matSort matSortDirection="desc"
+      [dataSource]="checkDS" (matSortChange)="sortCheckData($event)">
+
+      <ng-container matColumnDef="cBox">
+        <th mat-header-cell mat-sort-header="cBox" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;"></th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text">
+          <mat-checkbox (change)="onCboxChange(data.id)"></mat-checkbox>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="date">
+        <th mat-header-cell mat-sort-header="date" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Date</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text">{{ data.creationTime | date:'shortDate'}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="payee">
+        <th mat-header-cell mat-sort-header="payee" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Payee</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> {{showPayeeName(data.payeeId)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell mat-sort-header="type" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Type</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> {{showPayeeType(data.payeeId)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="checkNo">
+        <th mat-header-cell mat-sort-header="checkNo" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Check No</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> {{data.checkNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bankName">
+        <th mat-header-cell mat-sort-header="bankName" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Bank Name</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> {{data.bank.bankName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell mat-sort-header="amount" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Amount</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> ${{data.totalAmount.toFixed(2)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="memo">
+        <th mat-header-cell mat-sort-header="memo" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;">Memo</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text"> {{showPayeeName(data.payeeId)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell mat-sort-header="action" *matHeaderCellDef
+          style="font-size: 1rem; font-weight: 600; color: black; background-color: #e5e7eb;" class="actionTh">Action</th>
+        <td mat-cell *matCellDef="let data; let i=index" class="header-text">
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="common-action-menu-style "
+            aria-label="Example icon-button with a menu">
+            Action <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item [routerLink]="'/app/all-expenses/addCheck/' + data.id">
+              <img src="../../../../assets/img/icon/action-2.png" alt="icon not found" />
+              <span>Edit</span>
+            </button>
+            <button *ngIf="!data.isDeled" (click)=deleteCheck(data.id) mat-menu-item>
+              <img src="../../../../assets/img/icon/action-6.png" alt="icon not found" />
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <ng-container *ngIf="checkArr.length == 0">
+      <div class="noDataContainer">
+        No data
+      </div>
+    </ng-container>
+    <mat-paginator style="margin-top: 1rem;" #checkPaginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

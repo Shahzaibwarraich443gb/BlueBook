@@ -1,0 +1,29 @@
+
+<div class="col-span-12 mt-4">
+
+  <div class="col-span-12">
+    <div class="cashier-select-field">
+      <h5 class="text-[15px] text-heading font-semibold">
+        Comment
+      </h5>
+      <div class="cashier-input-field-style" style="display: flex">
+        <mat-form-field style="width: 100%;">
+          <mat-label class="hidden"></mat-label>
+          <textarea matInput placeholder="Comment" [(ngModel)]="comment" style="color: #dc2626;">
+      </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-span-12 flex justify-end -mt-8 mb-4">
+    <div class="flex cashier-managesale-top-btn default-light-theme pt-2.5 customerBtnContainer">
+      <button mat-raised-button type="button"(click)="backToListView()" color="accent" icon="pi pi-times">
+        Cancel
+      </button>
+      <button (click)="addCustomerCRMComment()" mat-raised-button color="primary">
+        Save and continue
+      </button>
+    </div>
+  </div>
+</div>
